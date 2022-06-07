@@ -25,16 +25,13 @@ class MessagingService: FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         Log.d(TAG, token)
-
-        val id = Firebase.currentUser().uid
-        val dataToken = Token(token)
-
         Firebase.firestoreInstance()
             .collection("token_fcm")
-            .document(id)
-            .set(dataToken)
+            .add(hashMapOf(
+                "token" to token
+            ))
             .addOnSuccessListener {
-                Log.d(TAG, "Saved ID $id and token $token")
+                Log.d(TAG, "Saved token $token")
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error", e)
