@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "830728538791-ve7mltunhinq073g611peh4gv9qlupuc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.onigiri_restaurant_recommendation",
+            "certificate_hash": "6c2454811b9030c5ba1929fd5f38862395d4404b"
+          }
+        },
+        {
           "client_id": "830728538791-ogh3h7um2hab5otm902700b4doh4loqv.apps.googleusercontent.com",
           "client_type": 3
         }
