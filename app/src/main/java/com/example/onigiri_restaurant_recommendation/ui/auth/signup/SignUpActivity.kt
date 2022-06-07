@@ -8,6 +8,8 @@ import com.example.onigiri_restaurant_recommendation.databinding.ActivitySignUpB
 import com.example.onigiri_restaurant_recommendation.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.ui.auth.login.LoginActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
+import com.example.onigiri_restaurant_recommendation.ui.notification.MessagingService
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class SignUpActivity : AppCompatActivity() {
@@ -49,6 +51,28 @@ class SignUpActivity : AppCompatActivity() {
                             startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
                             finish()
                         }
+
+//                        val id = Firebase.currentUser().uid
+//                        Firebase.fcmInstance().token.addOnCompleteListener ( OnCompleteListener {
+//                            if (!it.isSuccessful) {
+//                                Log.w(TAG, "Fetching FCM token failed", task.exception)
+//                                return@OnCompleteListener
+//                            }
+//
+//                            val id = Firebase.currentUser().uid
+//                            Firebase.firestoreInstance()
+//                                .document(id)
+//                                .collection("token_fcm")
+//                                .add(hashMapOf(
+//                                    "token" to token
+//                                ))
+//                                .addOnSuccessListener {
+//                                    Log.d(MessagingService.TAG, "Saved ID $id and token $token")
+//                                }
+//                                .addOnFailureListener { e ->
+//                                    Log.w(MessagingService.TAG, "Error", e)
+//                                }
+//                        } )
                     }
                 }
         }
