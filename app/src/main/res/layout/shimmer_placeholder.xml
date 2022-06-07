@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    style="@style/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="20dp"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="13dp"
+            android:background="@color/shimmer"
+            android:clipToOutline="true"
+            android:contentDescription="@string/foto_deskripsi" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Restaurant_name"
+                style="@style/list_title"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:background="@color/shimmer"/>
+
+            <TextView
+                android:id="@+id/Address_restaurant"
+                style="@style/secondary_text_caption"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Restaurant_name"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/shimmer"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <ImageView
+                android:id="@+id/start_rate"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/Address_restaurant"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="7dp"
+                android:background="@color/shimmer"/>
+
+            <TextView
+                android:id="@+id/rate_restaurant"
+                style="@style/secondary_text_caption"
+                android:layout_width="20dp"
+                android:background="@color/shimmer"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/start_rate"
+                android:layout_alignBottom="@+id/start_rate"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_toEndOf="@+id/start_rate"/>
+
+            <LinearLayout
+                android:layout_width="56dp"
+                android:layout_height="18dp"
+                android:layout_below="@+id/rate_restaurant"
+                android:layout_marginTop="7dp"
+                android:background="@color/shimmer"
+                android:padding="0dp"/>
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/button_favorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="14dp"
+            android:background="@color/shimmer" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,161 @@
+<resources>
+    <string name="app_name">onigiri-restaurant-recommendation</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favorites</string>
+    <string name="title_result">Results</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_edit_profile">Edit Profile</string>
+
+    <string name="location">Location</string>
+    <string name="your_location">Your Location</string>
+    <string name="category">Categories</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="log_out">Log out</string>
+
+    <!-- Dummy -->
+    <string name="location_name">Jakarta Selatan</string>
+    <string name="address">Jl. M.H. Thamrin No.1, Kb. Melati, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10230</string>
+
+    <!-- Description -->
+    <string name="hint_search">Restaurant, Food</string>
+    <string name="current_location">Your current location</string>
+
+    <!-- Categories -->
+    <string name="sweets">Sweets</string>
+    <string name="rice">Rice</string>
+    <string name="meatball">Meatball</string>
+    <string name="chicken">Chicken</string>
+    <string name="drinks">Drinks</string>
+    <string name="coffee">Coffee</string>
+    <string name="seafood">Seafood</string>
+    <string name="western">Western</string>
+    <string name="noodle">Noodle</string>
+    <string name="chinese">Chinese</string>
+    <string name="indian">Indian</string>
+    <string name="japanese">Japanese</string>
+    <string name="middle_east">Middle East</string>
+    <string name="thai">Thai</string>
+    <string name="more">More</string>
+
+    <string-array name="categeory_name">
+        <item>@string/sweets</item>
+        <item>@string/rice</item>
+        <item>@string/meatball</item>
+        <item>@string/chicken</item>
+        <item>@string/drinks</item>
+        <item>@string/coffee</item>
+        <item>@string/seafood</item>
+        <item>@string/western</item>
+        <item>@string/noodle</item>
+        <item>@string/chinese</item>
+        <item>@string/indian</item>
+        <item>@string/japanese</item>
+        <item>@string/middle_east</item>
+        <item>@string/thai</item>
+    </string-array>
+
+    <string-array name="categeory_icon">
+        <item>@drawable/c_sweets</item>
+        <item>@drawable/c_rice</item>
+        <item>@drawable/c_meatball</item>
+        <item>@drawable/c_chicken</item>
+        <item>@drawable/c_drinks</item>
+        <item>@drawable/c_coffee</item>
+        <item>@drawable/c_seafood</item>
+        <item>@drawable/c_western</item>
+        <item>@drawable/c_noodle</item>
+        <item>@drawable/c_chinese</item>
+        <item>@drawable/c_indian</item>
+        <item>@drawable/c_japanese</item>
+        <item>@drawable/c_middle_east</item>
+        <item>@drawable/c_thai</item>
+    </string-array>
+
+    <!-- Locations -->
+    <string name="north_jakarta">Jakarta Utara</string>
+    <string name="south_jakarta">Jakarta Selatan</string>
+    <string name="east_jakarta">Jakarta Timur</string>
+    <string name="west_jakarta">Jakarta Barat</string>
+    <string name="center_jakarta">Jakarta Utara</string>
+    <string name="kep_seribu">Kepulauan Seribu</string>
+    <string name="bogor">Bogor</string>
+    <string name="depok">Depok</string>
+    <string name="tangerang">Tangerang</string>
+    <string name="bekasi">Bekasi</string>
+
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="log_in_with">---- Log in with ----</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="google_image">google image</string>
+    <string name="login">Login</string>
+    <string name="full_name">Full name</string>
+    <string name="save">Save</string>
+    <string name="discard">Discard</string>
+    <string name="password_confirmation">Password Confirmation</string>
+    <string name="sign_in_with">---- Sign in with ----</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="foto_deskripsi">foto deskripsi</string>
+    <string name="separate">|</string>
+    <string name="review">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs</string>
+    <string name="halal">Halal</string>
+    <string name="name">james bond</string>
+    <string name="restaurant_name">Restoran Murah Meriah</string>
+
+    <string-array name="location">
+        <item>@string/north_jakarta</item>
+        <item>@string/south_jakarta</item>
+        <item>@string/east_jakarta</item>
+        <item>@string/west_jakarta</item>
+        <item>@string/center_jakarta</item>
+        <item>@string/kep_seribu</item>
+        <item>@string/bogor</item>
+        <item>@string/depok</item>
+        <item>@string/tangerang</item>
+        <item>@string/bekasi</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="restaurant_description">Restaurant Description</string>
+    <string name="restaurant_review">Restaurant Review</string>
+    <string name="tab_text_description">Description</string>
+    <string name="tab_text_review">Review</string>
+    <string name="address_restaurant">Jl. Danau Sunter Utara No.41, Sunter Agung, Tanjung Priok, North Jakarta City, Jakarta 14340</string>
+    <string name="description2">Menyediakan makanan rumahan</string>
+    <string name="_2km">2KM</string>
+    <string name="_4_2">4.2</string>
+    <string name="review_caption">Review</string>
+    <string name="rate_and_review">Rate and review</string>
+    <string name="write_your_experience">Write Your Experience</string>
+    <string name="is_this_restaurant_halal">is this restaurant halal</string>
+    <string name="share_your_experience_at_this_place">Share your experience at this place</string>
+
+    <string name="too_short">Password is too short</string>
+    <string name="invalid_email">Email is invalid</string>
+    <string name="must_fill">Field can\'t be empty</string>
+    <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit ?</string>
+    <string name="cencel">Cencel</string>
+    <string name="ok">OK</string>
+    <string name="use_camera">Use Onigiri\'s camera</string>
+    <string name="use_camera_description">Take photos with the Onigiri app to recognize your food.</string>
+    <string name="turn_on">Turn on</string>
+    <string name="adjust_angle">Please align the food to be identified.</string>
+    <string name="error_capture_image">Failed to capture image</string>
+    <string name="detecting">Detecting...</string>
+    <string name="post">POST</string>
+    <string name="non_halal">Non Halal</string>
+    <string name="you_seems_to_be_offline">You seem to be offline</string>
+    <string name="check_your_wifi_connection_or_cellular_data_and_try_again">Check your wifi connection or cellular data and try again</string>
+    <string name="settings">Settings</string>
+    <string name="try_again">Try again</string>
+    <string name="we_cant_find_you_on_the_map">We cant find you on the map</string>
+    <string name="check_your_location">Check your location</string>
+    <string name="TextPersen">%d %%</string>
+
+</resources>

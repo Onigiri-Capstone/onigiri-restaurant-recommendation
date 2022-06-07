@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.signup.SignUpActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="@string/sign_up"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/form_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <com.example.onigiri_restaurant_recommendation.ui.customview.MyEditText
+            style="@style/field_text_input"
+            android:id="@+id/et_name"
+            android:drawableStart="@drawable/ic_person_green"
+            android:hint="@string/full_name"
+            android:paddingHorizontal="15dp"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+
+        <com.example.onigiri_restaurant_recommendation.ui.customview.MyEditText
+            style="@style/field_text_input"
+            android:id="@+id/et_email"
+            android:layout_marginTop="22dp"
+            android:drawableStart="@drawable/ic_email"
+            android:hint="@string/email"
+            android:paddingHorizontal="15dp"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress" />
+
+        <com.example.onigiri_restaurant_recommendation.ui.customview.MyEditText
+            android:id="@+id/et_password"
+            style="@style/field_text_input"
+            android:layout_marginTop="22dp"
+            android:drawableStart="@drawable/ic_lock"
+            android:hint="@string/password"
+            android:paddingHorizontal="15dp"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
+
+        <Button
+            style="@style/button_green"
+            android:id="@+id/btn_signup"
+            android:layout_marginTop="39dp"
+            android:text="@string/sign_up" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/form_field"
+        app:layout_constraintStart_toStartOf="@+id/form_field"
+        app:layout_constraintTop_toBottomOf="@+id/form_field">
+
+        <TextView
+            style="@style/paragraph_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in_with" />
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/google"
+            android:contentDescription="@string/google_image" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            style="@style/paragraph_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_an_account" />
+
+        <TextView
+            android:layout_marginLeft="7dp"
+            style="@style/paragraph_text"
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

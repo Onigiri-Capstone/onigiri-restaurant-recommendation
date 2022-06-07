@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="30dp"
+    android:paddingVertical="30dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    style="@style/AppBottomSheetDialogTheme">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:paddingHorizontal="50dp"
+        android:src="@drawable/locationnotfound"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/youseems"
+        style="@style/list_item_important_text_snippet"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/we_cant_find_you_on_the_map" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView4"
+        style="@style/list_item_important_text_snippet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:text="@string/check_your_location"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_try"
+            style="@style/button_green_border"
+            android:layout_marginEnd="17dp"
+            android:layout_weight="1"
+            android:text="@string/try_again" />
+
+        <Button
+            android:id="@+id/btn_settings"
+            style="@style/button_green"
+            android:layout_marginStart="17dp"
+            android:layout_weight="1"
+            android:text="@string/settings" />
+
+    </LinearLayout>
+</LinearLayout>

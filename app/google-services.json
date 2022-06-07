@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "830728538791",
+    "project_id": "focused-house-350008",
+    "storage_bucket": "focused-house-350008.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830728538791:android:cec63cefb1ba9c02a5e982",
+        "android_client_info": {
+          "package_name": "com.example.onigiri_restaurant_recommendation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830728538791-ogh3h7um2hab5otm902700b4doh4loqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFItHbNgV4mNRrrxW7DeZUf4kyRsbzWew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830728538791-ogh3h7um2hab5otm902700b4doh4loqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
