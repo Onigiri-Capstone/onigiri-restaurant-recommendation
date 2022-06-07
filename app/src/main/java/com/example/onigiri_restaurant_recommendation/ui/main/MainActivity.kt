@@ -19,7 +19,7 @@ import com.example.onigiri_restaurant_recommendation.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var checkNetworkConnection: CheckNetworkConnection
+    private lateinit var checkGPS: CheckGPS
 
     companion object {
         const val LOCATION_RESULT = 200
@@ -39,23 +39,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getUserLocation(this@MainActivity, supportFragmentManager)
+        checkGPS = CheckGPS(this,this, supportFragmentManager)
+        checkGPS.getUserLocation()
 
-        callNetworkConnection()
+        callNetworkConnection(application, this, supportFragmentManager)
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
-    }
-
-    private fun callNetworkConnection() {
-        checkNetworkConnection = CheckNetworkConnection(application)
-        checkNetworkConnection.observe(this) {
-            if(!it) {
-                val noInternetBottomSheet = NoInternetBottomSheet()
-                noInternetBottomSheet.show(supportFragmentManager, NoInternetBottomSheet.TAG)
-            }
-        }
     }
 
     override fun onRequestPermissionsResult(

@@ -8,12 +8,15 @@ import android.net.Network
 import android.net.NetworkRequest
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import com.example.onigiri_restaurant_recommendation.ui.bottomsheet.NoInternetBottomSheet
 
 class CheckNetworkConnection(private val connectivityManager: ConnectivityManager): LiveData<Boolean>() {
 
     constructor(application: Application): this(application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
-    private val networkCallback = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private val networkCallback =
 
     object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
@@ -28,17 +31,28 @@ class CheckNetworkConnection(private val connectivityManager: ConnectivityManage
     }
 
     @SuppressLint("MissingPermission")
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActive() {
         super.onActive()
         val builder = NetworkRequest.Builder()
         connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onInactive() {
         super.onInactive()
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 
+}
+
+
+private lateinit var checkNetworkConnection: CheckNetworkConnection
+
+fun callNetworkConnection(application: Application, lifecycleOwner: LifecycleOwner, fragmentManager: FragmentManager) {
+    checkNetworkConnection = CheckNetworkConnection(application)
+    checkNetworkConnection.observe(lifecycleOwner) {
+        if(!it) {
+            val noInternetBottomSheet = NoInternetBottomSheet()
+            noInternetBottomSheet.show(fragmentManager, NoInternetBottomSheet.TAG)
+        }
+    }
 }
