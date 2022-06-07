@@ -35,4 +35,6 @@ class FavoriteFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

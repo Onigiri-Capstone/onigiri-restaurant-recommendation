@@ -30,7 +30,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.result.ResultActivity"
             android:exported="false" />
@@ -48,19 +54,14 @@
             android:exported="false" />
         <activity
             android:name=".ui.auth.signup.SignUpActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:noHistory="true"
+            android:exported="false"/>
         <activity
             android:name=".ui.auth.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/app_name"/>
         <meta-data
             android:name="preloaded_fonts"

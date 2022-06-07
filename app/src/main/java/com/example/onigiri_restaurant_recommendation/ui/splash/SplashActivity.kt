@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.onigiri_restaurant_recommendation.databinding.ActivitySplashBinding
-import com.example.onigiri_restaurant_recommendation.ui.auth.signup.SignUpActivity
+import com.example.onigiri_restaurant_recommendation.ui.auth.login.LoginActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -23,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                startActivity(Intent(this, SignUpActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
         }, 2000)
