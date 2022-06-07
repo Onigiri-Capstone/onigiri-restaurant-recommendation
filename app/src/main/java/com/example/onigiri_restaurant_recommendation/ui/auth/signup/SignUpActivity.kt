@@ -47,32 +47,9 @@ class SignUpActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 Log.d("profileChangeRequest", "User profile updated.")
                             }
-
                             startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
                             finish()
                         }
-
-//                        val id = Firebase.currentUser().uid
-//                        Firebase.fcmInstance().token.addOnCompleteListener ( OnCompleteListener {
-//                            if (!it.isSuccessful) {
-//                                Log.w(TAG, "Fetching FCM token failed", task.exception)
-//                                return@OnCompleteListener
-//                            }
-//
-//                            val id = Firebase.currentUser().uid
-//                            Firebase.firestoreInstance()
-//                                .document(id)
-//                                .collection("token_fcm")
-//                                .add(hashMapOf(
-//                                    "token" to token
-//                                ))
-//                                .addOnSuccessListener {
-//                                    Log.d(MessagingService.TAG, "Saved ID $id and token $token")
-//                                }
-//                                .addOnFailureListener { e ->
-//                                    Log.w(MessagingService.TAG, "Error", e)
-//                                }
-//                        } )
                     }
                 }
         }
