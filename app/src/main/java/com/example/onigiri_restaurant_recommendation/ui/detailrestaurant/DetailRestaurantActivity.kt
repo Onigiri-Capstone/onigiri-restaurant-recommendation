@@ -1,5 +1,6 @@
 package com.example.onigiri_restaurant_recommendation.ui.detailrestaurant
 
+import android.graphics.Outline
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
@@ -19,43 +20,44 @@ class DetailRestaurantActivity : AppCompatActivity() {
         binding = ActivityDetailRestaurantBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        placeId = intent.getStringExtra(PLACE_ID)!!
-        detailRestaurantViewModel.setDetailRestaurant(placeId)
+//        placeId = intent.getStringExtra(PLACE_ID)!!
+//        detailRestaurantViewModel.setDetailRestaurant(placeId)
 
         setToolbar()
 
-        setDetailRestaurant()
+//        setDetailRestaurant()
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
-        binding.viewPager.adapter = sectionsPagerAdapter
-        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-        binding.swiperefresh.setOnRefreshListener {
-            binding.swiperefresh.isRefreshing = false
-        }
+//        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+//        binding.viewPager.adapter = sectionsPagerAdapter
+//        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+//            tab.text = resources.getString(TAB_TITLES[position])
+//        }.attach()
+//        binding.swiperefresh.setOnRefreshListener {
+//            binding.swiperefresh.isRefreshing = false
+//        }
     }
 
-    private fun setDetailRestaurant() {
-        showProgress(true)
-        detailRestaurantViewModel.restaurant.observe(this) {
-            binding.apply {
-                tvName.text = it.name
-                rateRestaurant.text = it.rating.toString()
+//    private fun setDetailRestaurant() {
+//        showProgress(true)
+//        detailRestaurantViewModel.restaurant.observe(this) {
+//            binding.apply {
+//                tvName.text = it.name
+//                rateRestaurant.text = it.rating.toString()
+//
+//                constraintLayout.isVisible = true
+//                showProgress(false)
+//            }
+//        }
+//    }
 
-                constraintLayout.isVisible = true
-                showProgress(false)
-            }
-        }
-    }
-
-    private fun showProgress(state: Boolean) {
-        binding.progress.isVisible = state
-    }
+//    private fun showProgress(state: Boolean) {
+//        binding.progress.isVisible = state
+//    }
 
     private fun setToolbar() {
-        setSupportActionBar(binding.topAppBar)
+        setSupportActionBar(binding.toolBarLayout)
         supportActionBar?.apply {
+
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
 

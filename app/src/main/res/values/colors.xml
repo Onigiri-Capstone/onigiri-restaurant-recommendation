@@ -13,4 +13,6 @@
     <color name="grey_dark">#5F5F5F</color>
     <color name="grey_light">#C9C9C9</color>
     <color name="shimmer">#DDDDDD</color>
+    <color name="colorDarkSemiTransparent">#C6000000</color>
+    <color name="transparant">#000000ff</color>
 </resources>

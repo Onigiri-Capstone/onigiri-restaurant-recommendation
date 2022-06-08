@@ -157,5 +157,12 @@
     <string name="we_cant_find_you_on_the_map">We cant find you on the map</string>
     <string name="check_your_location">Check your location</string>
     <string name="TextPersen">%d %%</string>
+    <string name="oprating_hour">Operating Hour\n Monday\t\t\t\t\t10:00 AM – 9:00 PM\n Tuesday\t\t\t\t\t10:00 AM – 9:00 PM\n Wednesday\t\t10:00 AM – 9:00 PM\n Thursday\t\t\t\t10:00 AM – 9:00 PM\n Saturday\t\t\t\t\t10:00 AM – 9:00 PM\n Sunday\t\t\t\t\t\t10:00 AM – 9:00 PM</string>
+    <string name="plus_code">QRGF+R5C, RT.4/RW.4, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940, Indonesia</string>
+    <string name="phone">Phone Number : +62 21 57933969</string>
+    <string name="directions">\tDirections</string>
+    <string name="phone_call">\tPhone</string>
+    <string name="favorite">\tFavorite</string>
+    <string name="share">\tShare</string>
 
 </resources>
