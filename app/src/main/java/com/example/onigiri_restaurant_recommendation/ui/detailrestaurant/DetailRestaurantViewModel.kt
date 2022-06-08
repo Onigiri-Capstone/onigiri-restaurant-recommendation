@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.onigiri_restaurant_recommendation.remote.network.ApiConfig
 import com.example.onigiri_restaurant_recommendation.remote.response.ListRestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantDetailResponse
+import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantSearchResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,10 +15,10 @@ import retrofit2.Response
 class DetailRestaurantViewModel() : ViewModel() {
 
     private val _restaurant = MutableLiveData<RestaurantDetailResponse>()
-    val restaurant : LiveData<RestaurantDetailResponse> = _restaurant
+    val restaurant: LiveData<RestaurantDetailResponse> = _restaurant
 
-    fun setDetailRestaurant(placeId: String) {
-        val client = ApiConfig.provideApiService().getDetailRestaurant(placeId)
+    fun setDetailRestaurant(placeId: String, lat: Double, lon: Double) {
+        val client = ApiConfig.provideApiService().getDetailRestaurant(placeId,lat,lon)
         client.enqueue(object : Callback<ListRestaurantDetailResponse> {
             override fun onResponse(
                 call: Call<ListRestaurantDetailResponse>,
@@ -25,8 +26,7 @@ class DetailRestaurantViewModel() : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     _restaurant.postValue(response.body()?.results)
-                }
-                else{
+                } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
@@ -37,7 +37,11 @@ class DetailRestaurantViewModel() : ViewModel() {
         })
     }
 
-    companion object{
+    fun getDetailRestaurant(): LiveData<RestaurantDetailResponse> {
+        return restaurant
+    }
+
+    companion object {
         private const val TAG = "DetailViewModel"
     }
 }

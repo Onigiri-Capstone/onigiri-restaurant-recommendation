@@ -20,6 +20,7 @@ import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlin.math.log
 
 class ResultActivity : AppCompatActivity() {
 
@@ -62,11 +63,12 @@ class ResultActivity : AppCompatActivity() {
     private fun setSearch() {
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                if(query.isNotEmpty() && query.length > 2) {
+
                     showEmpty(false)
                     showLoading(true)
                     resultViewModel.setSearchRestaurant(query, lat, lon)
-                }
+                    Log.e("onQueryTextSubmit: ","textt" )
+
                 return true
             }
 
@@ -81,10 +83,11 @@ class ResultActivity : AppCompatActivity() {
     private fun showRecyclerView() {
         with(binding) {
             rvRestaurant.layoutManager = LinearLayoutManager(this@ResultActivity)
-            resultViewModel.listRestaurant.observe(this@ResultActivity) {
+            resultViewModel.getSearchRestaurant().observe(this@ResultActivity) {
                 showEmpty(it.isEmpty())
                 restaurantAdapter.setData(it)
                 binding.rvRestaurant.adapter = restaurantAdapter
+                Log.e("showRecyclerView: ",it.toString() )
                 showLoading(false)
                 binding.rvRestaurant.isVisible = true
             }

@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:text="@string/try_again" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_settings"
             style="@style/button_green"
             android:layout_marginStart="17dp"

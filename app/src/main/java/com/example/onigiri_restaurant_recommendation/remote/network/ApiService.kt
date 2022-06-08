@@ -14,9 +14,11 @@ interface ApiService {
         @Query("long") long: Double
     ): Call<ListRestaurantSearchResponse>
 
-    @GET("main/details/{id}")
+    @GET("main/details")
     fun getDetailRestaurant(
-        @Path("id") id: String
+        @Query("id") id: String,
+        @Query("lat") lat: Double,
+        @Query("long") long: Double
     ): Call<ListRestaurantDetailResponse>
 
     @POST("users/favorites")
