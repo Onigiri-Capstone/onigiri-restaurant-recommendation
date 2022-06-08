@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.ItemRestaurantBinding
 import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantSearchResponse
@@ -34,6 +36,11 @@ class RestaurantAdapter: RecyclerView.Adapter<RestaurantAdapter.MyViewHolder>() 
                     RestaurantName.text = name
                     AddressRestaurant.text = vicinity
                     rateRestaurant.text = rating.toString()
+
+//                    Glide.with(itemView)
+//                        .load()
+//                        .transform(RoundedCorners(20))
+//                        .into(ivRestaurant)
 
                     itemView.setOnClickListener {
                         val intent = Intent(itemView.context, DetailRestaurantActivity::class.java)
