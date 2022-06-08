@@ -17,7 +17,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_margin="13dp"
-            android:background="@color/shimmer"
+            android:background="@drawable/shimmer"
             android:clipToOutline="true"
             android:contentDescription="@string/foto_deskripsi" />
     </FrameLayout>
@@ -36,54 +36,41 @@
                 android:id="@+id/Restaurant_name"
                 style="@style/list_title"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginTop="13dp"
+                android:background="@drawable/shimmer"
                 android:ellipsize="end"
-                android:maxLines="2"
-                android:background="@color/shimmer"/>
+                android:maxLines="2" />
 
             <TextView
                 android:id="@+id/Address_restaurant"
                 style="@style/secondary_text_caption"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_below="@+id/Restaurant_name"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/shimmer"
+                android:background="@drawable/shimmer"
                 android:ellipsize="end"
                 android:maxLines="1" />
 
             <ImageView
                 android:id="@+id/start_rate"
-                android:layout_width="20dp"
+                android:layout_width="56dp"
                 android:layout_height="20dp"
                 android:layout_below="@+id/Address_restaurant"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="7dp"
-                android:background="@color/shimmer"/>
-
-            <TextView
-                android:id="@+id/rate_restaurant"
-                style="@style/secondary_text_caption"
-                android:layout_width="20dp"
-                android:background="@color/shimmer"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/start_rate"
-                android:layout_alignBottom="@+id/start_rate"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="1dp"
-                android:layout_toEndOf="@+id/start_rate"/>
+                android:background="@drawable/shimmer" />
 
             <LinearLayout
                 android:layout_width="56dp"
                 android:layout_height="18dp"
-                android:layout_below="@+id/rate_restaurant"
+                android:layout_below="@+id/start_rate"
                 android:layout_marginTop="7dp"
-                android:background="@color/shimmer"
-                android:padding="0dp"/>
+                android:background="@drawable/shimmer"
+                android:padding="0dp" />
         </RelativeLayout>
 
         <ImageButton
@@ -93,7 +80,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="14dp"
-            android:background="@color/shimmer" />
+            android:background="@drawable/shimmer" />
     </FrameLayout>
 
 </LinearLayout>
