@@ -164,5 +164,7 @@
     <string name="phone_call">\tPhone</string>
     <string name="favorite">\tFavorite</string>
     <string name="share">\tShare</string>
+    <string name="photo_library">Photo Library</string>
+    <string name="nullValue">-</string>
 
 </resources>
