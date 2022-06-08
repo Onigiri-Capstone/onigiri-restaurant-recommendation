@@ -45,7 +45,6 @@
                 android:src="@drawable/dummy_photo1" />
 
 
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -71,273 +70,294 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
+        android:visibility="visible"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:ignore="ScrollViewCount">
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingTop="30dp"
-                        android:paddingBottom="27dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:paddingHorizontal="@dimen/activity_horizontal_margin">
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+            android:paddingTop="30dp"
+            android:paddingBottom="27dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-                        <TextView
-                            android:id="@+id/tv_name"
-                            style="@style/list_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/restaurant_name" />
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/list_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/restaurant_name" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="center">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
 
-                            <ImageView
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_margin="5dp"
-                                android:contentDescription="@string/foto_deskripsi"
-                                android:src="@drawable/halal" />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="5dp"
+                    android:contentDescription="@string/foto_deskripsi"
+                    android:src="@drawable/halal" />
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="20dp"
-                                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/rate_restaurant"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="6dp"
-                                    android:text="@string/_4_2"
-                                    android:textSize="47sp" />
+                    <TextView
+                        android:id="@+id/rate_restaurant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="@string/_4_2"
+                        android:textSize="47sp" />
 
-                                <RatingBar
-                                    android:id="@+id/id_tv_rating_bar"
-                                    style="@style/Widget.AppCompat.RatingBar.Small"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:numStars="5"
-                                    android:progressBackgroundTint="@color/yellow"
-                                    android:progressTint="@color/yellow"
-                                    android:rating="4.5" />
+                    <RatingBar
+                        android:id="@+id/id_tv_rating_bar"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:progressBackgroundTint="@color/yellow"
+                        android:progressTint="@color/yellow"
+                        android:rating="4.5" />
 
-                            </LinearLayout>
+                </LinearLayout>
 
-                        </LinearLayout>
+            </LinearLayout>
 
-                        <HorizontalScrollView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:scrollbars="none">
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:scrollbars="none">
 
-                            <RadioGroup
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                                <RadioButton
+                    <RadioButton
 
-                                    android:id="@+id/direction"
-                                    style="@style/secondary_text_caption"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:background="@drawable/halal_checkded_selector"
-                                    android:button="@null"
-                                    android:drawableStart="@drawable/selector_drawable_direction"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/directions"
-                                    android:textColor="@drawable/halal_selector_text" />
+                        android:id="@+id/direction"
+                        style="@style/secondary_text_caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:background="@drawable/halal_checkded_selector"
+                        android:button="@null"
+                        android:drawableStart="@drawable/selector_drawable_direction"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/directions"
+                        android:textColor="@drawable/halal_selector_text" />
 
-                                <RadioButton
-                                    android:id="@+id/phone_call"
-                                    style="@style/secondary_text_caption"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="15dp"
-                                    android:background="@drawable/halal_checkded_selector"
-                                    android:button="@null"
-                                    android:drawableStart="@drawable/selector_drawable_phone"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/phone_call"
-                                    android:textColor="@drawable/halal_selector_text" />
-                                <RadioButton
-                                    android:id="@+id/favorite"
-                                    style="@style/secondary_text_caption"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="15dp"
-                                    android:background="@drawable/halal_checkded_selector"
-                                    android:button="@null"
-                                    android:drawableStart="@drawable/selector_drawable_fav"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/favorite"
-                                    android:textColor="@drawable/halal_selector_text" />
+                    <RadioButton
+                        android:id="@+id/phone_call"
+                        style="@style/secondary_text_caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@drawable/halal_checkded_selector"
+                        android:button="@null"
+                        android:drawableStart="@drawable/selector_drawable_phone"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/phone_call"
+                        android:textColor="@drawable/halal_selector_text" />
 
-
-                                <RadioButton
-                                    android:id="@+id/share"
-                                    style="@style/secondary_text_caption"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="15dp"
-                                    android:background="@drawable/halal_checkded_selector"
-                                    android:button="@null"
-                                    android:drawableStart="@drawable/selector_drawable_share"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="@string/favorite"
-                                    android:textColor="@drawable/halal_selector_text" />
-                            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/favorite"
+                        style="@style/secondary_text_caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@drawable/halal_checkded_selector"
+                        android:button="@null"
+                        android:drawableStart="@drawable/selector_drawable_fav"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/favorite"
+                        android:textColor="@drawable/halal_selector_text" />
 
 
-                        </HorizontalScrollView>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="top">
-
-                            <ImageView
-                                android:id="@+id/location_img"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:src="@drawable/ic_location"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/vicinity"
-                                android:layout_width="300dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_toEndOf="@+id/location_img"
-                                android:drawablePadding="9dp"
-                                android:text="@string/address_restaurant"
-                                app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                                app:layout_constraintStart_toEndOf="@+id/location_img"
-                                app:layout_constraintTop_toTopOf="@+id/location_img" />
+                    <RadioButton
+                        android:id="@+id/share"
+                        style="@style/secondary_text_caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@drawable/halal_checkded_selector"
+                        android:button="@null"
+                        android:drawableStart="@drawable/selector_drawable_share"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/favorite"
+                        android:textColor="@drawable/halal_selector_text" />
+                </RadioGroup>
 
 
-                        </LinearLayout>
+            </HorizontalScrollView>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="top">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="top">
 
-                            <ImageView
+                <ImageView
+                    android:id="@+id/location_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:src="@drawable/ic_baseline_access_time_24"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/operatingHour"
-                                android:layout_width="300dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-
-                                android:drawablePadding="9dp"
-                                android:text="@string/oprating_hour"
-                                app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                                app:layout_constraintStart_toEndOf="@+id/location_img"
-                                app:layout_constraintTop_toTopOf="@+id/location_img" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="top">
-
-                            <ImageView
-
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:src="@drawable/pluscode"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/pluscode"
-                                android:layout_width="300dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-
-                                android:drawablePadding="9dp"
-                                android:text="@string/plus_code"
-                                app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                                app:layout_constraintStart_toEndOf="@+id/location_img"
-                                app:layout_constraintTop_toTopOf="@+id/location_img" />
+                <TextView
+                    android:id="@+id/vicinity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/location_img"
+                    android:drawablePadding="9dp"
+                    android:paddingEnd="30dp"
+                    android:text="@string/address_restaurant"
+                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                    app:layout_constraintStart_toEndOf="@+id/location_img"
+                    app:layout_constraintTop_toTopOf="@+id/location_img"
+                    tools:ignore="RtlSymmetry" />
 
 
-                        </LinearLayout>
+            </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="top">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="top">
 
-                            <ImageView
+                <ImageView
 
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:src="@drawable/ic_baseline_phone_24"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_access_time_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                            <TextView
-                                android:id="@+id/phone"
-                                android:layout_width="300dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                <TextView
+                    android:id="@+id/operatingHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:drawablePadding="9dp"
+                    android:paddingEnd="30dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                    app:layout_constraintStart_toEndOf="@+id/location_img"
+                    app:layout_constraintTop_toTopOf="@+id/location_img"
+                    tools:text="@string/oprating_hour" />
 
-                                android:drawablePadding="9dp"
-                                android:text="@string/phone"
-                                app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                                app:layout_constraintStart_toEndOf="@+id/location_img"
-                                app:layout_constraintTop_toTopOf="@+id/location_img" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="top">
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/pluscode"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/pluscode"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:drawablePadding="9dp"
+                    android:text="@string/plus_code"
+                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                    app:layout_constraintStart_toEndOf="@+id/location_img"
+                    app:layout_constraintTop_toTopOf="@+id/location_img" />
 
 
-                        </LinearLayout>
-                        <ProgressBar
-                            android:id="@+id/progress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="top">
+
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_phone_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/layooutphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:drawablePadding="9dp"
+                        android:text="@string/phone"
+                        app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                        app:layout_constraintStart_toEndOf="@+id/location_img"
+                        app:layout_constraintTop_toTopOf="@+id/location_img" />
+
+                    <TextView
+                        android:autoLink="phone"
+                        android:id="@+id/phonenumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:drawablePadding="9dp"
+                        android:text="@string/phone"
+                        app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                        app:layout_constraintStart_toEndOf="@+id/location_img"
+                        app:layout_constraintTop_toTopOf="@+id/location_img" />
 
 
-                    </LinearLayout>
+                </LinearLayout>
 
 
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
 
+        </LinearLayout>
 
 
     </androidx.core.widget.NestedScrollView>
