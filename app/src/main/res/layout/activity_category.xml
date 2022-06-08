@@ -26,41 +26,31 @@
         android:id="@+id/swiperefreshcategory"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <include layout="@layout/view_loading"
-                android:visibility="gone"/>
-
-            <include layout="@layout/view_empty"
-                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_restaurant"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="@dimen/activity_horizontal_margin"
-                tools:listitem="@layout/item_restaurant"
-
-                />
+                tools:listitem="@layout/item_restaurant" />
 
             <ImageView
+                android:id="@+id/notfoundresult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/notfound"
-                android:id="@+id/notfoundresult"
-                android:visibility="invisible"/>
-            <ProgressBar
-                android:id="@+id/progresbarresult"
-                android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
 
-        </LinearLayout>
+            <include android:id="@+id/loading" layout="@layout/view_loading" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
