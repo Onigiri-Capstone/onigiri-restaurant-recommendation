@@ -14,7 +14,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.onigiri_restaurant_recommendation.R
@@ -31,6 +30,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private var lat: Double = 0.0
 
     private var lonRestaurant: Double = 0.0
+    private var phonenumberRestaurant: String = ""
     private var latRestaurant: Double = 0.0
     private var dataRestaurant : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,10 +59,10 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 idTvRatingBar.rating = it.rating
                 vicinity.text = it.formatted_address
                 vicinity.setOnClickListener(this@DetailRestaurantActivity)
-//                Log.e("setDetailRestaurant: ", address(it.adr_address))
                 pluscode.text = it.plus_code.compound_code
                 pluscode.setOnClickListener(this@DetailRestaurantActivity)
                 phonenumber.text =it.formatted_phone_number
+                phonenumberRestaurant = it.formatted_phone_number
                 layooutphone.setOnClickListener(this@DetailRestaurantActivity)
                 operatingHour.text = opratioanlhour(it.opening_hours.weekday_text)
                 direction.setOnClickListener(this@DetailRestaurantActivity)
@@ -75,12 +75,12 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun opratioanlhour(weekdayText: List<String>?): String {
-        var Str = "Operating Hour\n"
+        var str = "Operating Hour\n"
         if (weekdayText != null) {
             for (element in weekdayText)
-                Str = "$Str \n${element}"
+                str = "$str \n${element}"
         }
-        return Str
+        return str
     }
 
     private fun setToolbar() {
@@ -138,11 +138,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
 
     companion object {
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_description,
-            R.string.tab_text_review
-        )
+
         const val PLACE_ID = "place_id"
     }
 
@@ -160,13 +156,14 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, "Plus Code copied to clipboard", Toast.LENGTH_LONG).show()
             }
             R.id.layooutphone -> {
-                val intent = Intent(Intent.ACTION_CALL);
-                intent.data = Uri.parse("tel:${binding.phonenumber}")
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:$phonenumberRestaurant")
                 startActivity(intent)
             }
             R.id.phone_call ->{
-                val intent = Intent(Intent.ACTION_CALL);
-                intent.data = Uri.parse("tel:${binding.phonenumber}")
+                val intent = Intent(Intent.ACTION_DIAL)
+
+                intent.data = Uri.parse("tel:$phonenumberRestaurant")
                 startActivity(intent)
             }
             R.id.direction -> {
