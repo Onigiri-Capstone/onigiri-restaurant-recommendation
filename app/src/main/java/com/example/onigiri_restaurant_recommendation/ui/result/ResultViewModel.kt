@@ -14,13 +14,9 @@ import retrofit2.Response
 class ResultViewModel: ViewModel() {
     private val _listRestaurant = MutableLiveData<List<RestaurantSearchResponse>>()
     val listRestaurant: LiveData<List<RestaurantSearchResponse>> = _listRestaurant
-    var search: String = ""
-    var lat: Double = 0.0
-    var long: Double = 0.0
 
-
-    fun SetSearchRestaurant(search: String, lat: Double, long: Double) {
-        val client = ApiConfig.provideApiService().searchRestaurant(search, lat, long)
+    fun setSearchRestaurant(search: String, lat: Double, long: Double) {
+        val client = ApiConfig.provideApiService().searchRestaurant(search, -6.1753, 106.827)
         client.enqueue(object : Callback<ListRestaurantSearchResponse> {
             override fun onResponse(
                 call: Call<ListRestaurantSearchResponse>,
@@ -40,7 +36,7 @@ class ResultViewModel: ViewModel() {
         })
     }
 
-    fun GetSearchRestaurant(): LiveData<List<RestaurantSearchResponse>> {
+    fun getSearchRestaurant(): LiveData<List<RestaurantSearchResponse>> {
         return listRestaurant
     }
     companion object{

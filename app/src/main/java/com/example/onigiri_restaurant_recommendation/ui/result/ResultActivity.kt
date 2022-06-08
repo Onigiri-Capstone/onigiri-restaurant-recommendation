@@ -4,15 +4,15 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onigiri_restaurant_recommendation.adapter.RestaurantAdapter
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityResultBinding
@@ -24,9 +24,10 @@ import com.google.android.gms.location.LocationServices
 class ResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultBinding
-
-    private val resultViewModelSimple: ResultViewModel by viewModels()
+    private val resultViewModel: ResultViewModel by viewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val restaurantAdapter = RestaurantAdapter()
+
     private var lon: Double = 0.0
     private var lat: Double = 0.0
 
@@ -38,29 +39,13 @@ class ResultActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        getMyLastLocation()
         setToolbar()
         setOnClickListener()
-        setFoodLabel()
-        getMyLastLocation()
+        showRecyclerView()
         setSearch()
+        setFoodLabel()
     }
-
-    private fun setSearch() {
-        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                resultViewModelSimple.SetSearchRestaurant(query, lat, lon)
-                Log.e("onQueryTextSubmit: ", "")
-
-                showRecyclerView()
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
-    }
-
 
     private fun setOnClickListener() {
         with(binding) {
@@ -74,27 +59,35 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun showRecyclerView() {
-        binding.rvRestaurant.visibility = View.INVISIBLE
-        binding.progresbarresult.visibility = View.VISIBLE
-        val restaurntAdapter = RestaurantAdapter()
-        resultViewModelSimple.GetSearchRestaurant().observe(this@ResultActivity) { restaurant ->
-            if (restaurant.isNotEmpty()) {
-                Log.e("data: ", restaurant.size.toString())
-                restaurntAdapter.setData(restaurant)
-                binding.rvRestaurant.visibility = View.VISIBLE
-                binding.notfoundresult.visibility = View.INVISIBLE
-                binding.progresbarresult.visibility = View.INVISIBLE
-            } else {
-                Log.e("showRecyclerView: ", "kosong")
-                binding.notfoundresult.visibility = View.VISIBLE
-                binding.progresbarresult.visibility = View.INVISIBLE
+    private fun setSearch() {
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if(query.isNotEmpty() && query.length > 2) {
+                    showEmpty(false)
+                    showLoading(true)
+                    resultViewModel.setSearchRestaurant(query, lat, lon)
+                }
+                return true
             }
-        }
-        with(binding.rvRestaurant) {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = restaurntAdapter
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                binding.rvRestaurant.isVisible = false
+                showEmpty(false)
+                return false
+            }
+        })
+    }
+
+    private fun showRecyclerView() {
+        with(binding) {
+            rvRestaurant.layoutManager = LinearLayoutManager(this@ResultActivity)
+            resultViewModel.listRestaurant.observe(this@ResultActivity) {
+                showEmpty(it.isEmpty())
+                restaurantAdapter.setData(it)
+                binding.rvRestaurant.adapter = restaurantAdapter
+                showLoading(false)
+                binding.rvRestaurant.isVisible = true
+            }
         }
     }
 
@@ -146,6 +139,14 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
+    private fun showLoading(state: Boolean) {
+        binding.loading.root.isVisible = state
+    }
+
+    private fun showEmpty(state: Boolean) {
+        binding.notfoundresult.isVisible = state
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         startActivity(Intent(this@ResultActivity, MainActivity::class.java))
         return true
@@ -161,10 +162,9 @@ class ResultActivity : AppCompatActivity() {
             binding.search.requestFocus()
         } else {
             binding.search.setQuery(foodname, false)
-            resultViewModelSimple.SetSearchRestaurant(foodname, lat, lon)
+            resultViewModel.setSearchRestaurant(foodname, lat, lon)
             Log.e("onQueryTextSubmit: ", "")
             showRecyclerView()
-
         }
     }
 
