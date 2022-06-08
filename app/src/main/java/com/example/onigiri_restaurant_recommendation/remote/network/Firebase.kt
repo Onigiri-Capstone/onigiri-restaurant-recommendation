@@ -10,8 +10,6 @@ object Firebase {
 
     fun authInstance() = FirebaseAuth.getInstance()
 
-    fun fcmInstance() = FirebaseMessaging.getInstance()
-
     fun firestoreInstance() = FirebaseFirestore.getInstance()
 
 }

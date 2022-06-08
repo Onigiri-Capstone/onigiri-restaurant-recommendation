@@ -23,6 +23,21 @@ class MessagingService: FirebaseMessagingService() {
         private const val NOTIFICATION_CHANNEL_NAME = "Firebase Notification"
     }
 
+    override fun onNewToken(token: String) {
+        Log.d(TAG, token)
+        Firebase.firestoreInstance()
+            .collection("token_fcm")
+            .add(hashMapOf(
+                "token" to token
+            ))
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved token $token")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error", e)
+            }
+    }
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
         Log.d(TAG, "Message data payload: " + remoteMessage.data)
@@ -58,6 +73,8 @@ class MessagingService: FirebaseMessagingService() {
         }
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
-
-
 }
+
+data class Token(
+    val token: String
+)
