@@ -3,14 +3,14 @@ package com.example.onigiri_restaurant_recommendation.ui.category
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onigiri_restaurant_recommendation.adapter.RestaurantAdapter
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityCategoryBinding
@@ -23,7 +23,7 @@ class CategoryActivity() : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lon: Double = 0.0
     private var lat: Double = 0.0
-    private var categoryName: String = ""
+
     private val categoryViewModel: CategoryViewModel by viewModels()
 
     companion object {
@@ -44,9 +44,10 @@ class CategoryActivity() : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getMyLastLocation()
 
-        categoryName?.let { categoryViewModel.SetSearchRestaurant(it, lat, lon) }
+//        categoryName?.let { categoryViewModel.setSearchRestaurant(it, lat, lon) }
+        categoryViewModel.setSearchRestaurant(categoryName, lat, lon)
 
-//        showRecyclerView()
+        showRecyclerView()
     }
 
     private fun setToolbar(categoryName: String?) {
@@ -58,29 +59,18 @@ class CategoryActivity() : AppCompatActivity() {
         }
     }
 
-//    private fun showRecyclerView() {
-//        binding.rvRestaurant.visibility = View.GONE
-//        binding.progresbarresult.visibility = View.VISIBLE
-//        val restaurntAdapter = RestaurantAdapter()
-//        categoryViewModel.GetSearchRestaurant().observe(this@CategoryActivity) { restaurant ->
-//            if (restaurant.isNotEmpty()) {
-//                Log.e("data: ", restaurant.size.toString())
-//                restaurntAdapter.setData(restaurant)
-//                binding.rvRestaurant.visibility = View.VISIBLE
-//                binding.notfoundresult.visibility = View.INVISIBLE
-//                binding.progresbarresult.visibility = View.INVISIBLE
-//            } else {
-//                Log.e("showRecyclerView: ", "kosong")
-//                binding.notfoundresult.visibility = View.VISIBLE
-//                binding.progresbarresult.visibility = View.INVISIBLE
-//            }
-//        }
-//        with(binding.rvRestaurant) {
-//            layoutManager = LinearLayoutManager(context)
-//            setHasFixedSize(true)
-//            adapter = restaurntAdapter
-//        }
-//    }
+    private fun showRecyclerView() {
+        with(binding) {
+            rvRestaurant.layoutManager = LinearLayoutManager(this@CategoryActivity)
+            categoryViewModel.listRestaurant.observe(this@CategoryActivity) {
+                showEmpty(it.isEmpty())
+                val restaurantAdapter = RestaurantAdapter()
+                restaurantAdapter.setData(it)
+                binding.rvRestaurant.adapter = restaurantAdapter
+                showLoading(false)
+            }
+        }
+    }
 
 
     override fun onSupportNavigateUp(): Boolean {
@@ -146,5 +136,13 @@ class CategoryActivity() : AppCompatActivity() {
             "Thai" -> foodcategory = "thailand"
         }
         return foodcategory
+    }
+
+    private fun showLoading(state: Boolean) {
+        binding.loading.root.isVisible = state
+    }
+
+    private fun showEmpty(state: Boolean) {
+        binding.notfoundresult.isVisible = state
     }
 }
