@@ -9,6 +9,7 @@
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.121" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/ic_baseline_directions_24.xml" value="0.2055" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/ic_baseline_phone_24.xml" value="0.121" />
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/ic_baseline_photo_library_24.xml" value="0.1115" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.2055" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/ic_halal.xml" value="0.121" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/plus.xml" value="0.12" />
@@ -20,13 +21,15 @@
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/drawable/title_background.xml" value="0.2055" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout-v24/activity_detail_restaurant.xml" value="0.10885416666666667" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_category.xml" value="0.22644927536231885" />
-        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_detail_restaurant.xml" value="0.536" />
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_detail_restaurant.xml" value="0.264" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_login.xml" value="0.536" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/bottom_sheet_input_review.xml" value="0.16530797101449277" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/bottom_sheet_no_internet.xml" value="0.16799999999999998" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/bottom_sheet_no_location.xml" value="0.10989583333333333" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/fragment_description_restaurant.xml" value="0.10989583333333333" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/fragment_review_detail_restaurant.xml" value="0.10989583333333333" />
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/image_slider_item.xml" value="0.264" />
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/item_restaurant.xml" value="0.4" />
         <entry key="app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.194" />
         <entry key="app/src/main/res/drawable/card_restaurant.xml" value="0.194" />
         <entry key="app/src/main/res/drawable/ic_arrow_down.xml" value="0.194" />

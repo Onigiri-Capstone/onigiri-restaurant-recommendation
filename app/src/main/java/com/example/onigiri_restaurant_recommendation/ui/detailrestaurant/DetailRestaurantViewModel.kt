@@ -7,15 +7,14 @@ import androidx.lifecycle.ViewModel
 import com.example.onigiri_restaurant_recommendation.remote.network.ApiConfig
 import com.example.onigiri_restaurant_recommendation.remote.response.ListRestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantDetailResponse
-import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantSearchResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailRestaurantViewModel() : ViewModel() {
+class DetailRestaurantViewModel : ViewModel() {
 
     private val _restaurant = MutableLiveData<RestaurantDetailResponse>()
-    val restaurant: LiveData<RestaurantDetailResponse> = _restaurant
+    private val restaurant: LiveData<RestaurantDetailResponse> = _restaurant
 
     fun setDetailRestaurant(placeId: String, lat: Double, lon: Double) {
         val client = ApiConfig.provideApiService().getDetailRestaurant(placeId,lat,lon)

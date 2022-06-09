@@ -13,7 +13,7 @@ import retrofit2.Response
 
 class ResultViewModel: ViewModel() {
     private val _listRestaurant = MutableLiveData<List<RestaurantSearchResponse>>()
-    val listRestaurant: LiveData<List<RestaurantSearchResponse>> = _listRestaurant
+    private val listRestaurant: LiveData<List<RestaurantSearchResponse>> = _listRestaurant
 
     fun setSearchRestaurant(search: String, lat: Double, long: Double) {
         val client = ApiConfig.provideApiService().searchRestaurant(search, lat, long)
