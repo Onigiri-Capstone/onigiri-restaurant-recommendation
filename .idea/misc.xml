@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.194" />
         <entry key="app/src/main/res/drawable/card_restaurant.xml" value="0.194" />
         <entry key="app/src/main/res/drawable/ic_arrow_down.xml" value="0.194" />
+        <entry key="app/src/main/res/drawable/pluscode.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/activity_camera.xml" value="0.1859375" />
         <entry key="app/src/main/res/layout/activity_camera_preview.xml" value="0.1859375" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.1859375" />
