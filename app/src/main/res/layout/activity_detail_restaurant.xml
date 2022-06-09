@@ -69,13 +69,26 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingbuttonfav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/description2"
+        android:src="@drawable/ic_favorite"
+        app:tint="@null"
+        app:borderWidth="2dp"
+        app:backgroundTint="@color/green"
+        app:layout_anchor="@id/appBarLayout"
+        app:layout_anchorGravity="bottom|right" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:ignore="ScrollViewCount">
 
@@ -98,7 +111,7 @@
                     style="@style/list_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/restaurant_name" />
+                    tools:text="@string/restaurant_name" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -125,7 +138,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
-                            android:text="@string/_4_2"
+                            tools:text="@string/_4_2"
                             android:textSize="47sp" />
 
                         <RatingBar
@@ -164,7 +177,7 @@
                             android:drawableStart="@drawable/selector_drawable_direction"
                             android:paddingHorizontal="20dp"
                             android:paddingVertical="4dp"
-                            android:text="@string/directions"
+                            tools:text="@string/directions"
                             android:textColor="@drawable/halal_selector_text" />
 
                         <RadioButton
@@ -178,7 +191,7 @@
                             android:drawableStart="@drawable/selector_drawable_phone"
                             android:paddingHorizontal="20dp"
                             android:paddingVertical="4dp"
-                            android:text="@string/phone_call"
+                            tools:text="@string/phone_call"
                             android:textColor="@drawable/halal_selector_text" />
 
                         <RadioButton
@@ -192,7 +205,7 @@
                             android:drawableStart="@drawable/selector_drawable_fav"
                             android:paddingHorizontal="20dp"
                             android:paddingVertical="4dp"
-                            android:text="@string/favorite"
+                            tools:text="@string/favorite"
                             android:textColor="@drawable/halal_selector_text" />
 
 
@@ -207,7 +220,7 @@
                             android:drawableStart="@drawable/selector_drawable_share"
                             android:paddingHorizontal="20dp"
                             android:paddingVertical="4dp"
-                            android:text="@string/favorite"
+                            tools:text="@string/favorite"
                             android:textColor="@drawable/halal_selector_text" />
                     </RadioGroup>
 
@@ -226,10 +239,10 @@
                         android:id="@+id/location_img"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:contentDescription="@string/description2"
                         android:src="@drawable/ic_location"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/description2" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/vicinity"
@@ -238,7 +251,7 @@
                         android:layout_marginStart="10dp"
                         android:drawablePadding="9dp"
                         android:paddingEnd="30dp"
-                        android:text="@string/nullValue"
+                        tools:text="@string/nullValue"
                         app:layout_constraintBottom_toBottomOf="@+id/location_img"
                         app:layout_constraintStart_toEndOf="@+id/location_img"
                         app:layout_constraintTop_toTopOf="@+id/location_img"
@@ -258,10 +271,10 @@
 
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:contentDescription="@string/description2"
                         android:src="@drawable/ic_baseline_access_time_24"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/description2" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/operatingHour"
@@ -270,29 +283,29 @@
                         android:layout_marginStart="10dp"
                         android:drawablePadding="9dp"
                         android:paddingEnd="30dp"
+                        tools:text="@string/nullValue"
                         app:layout_constraintBottom_toBottomOf="@+id/location_img"
                         app:layout_constraintStart_toEndOf="@+id/location_img"
                         app:layout_constraintTop_toTopOf="@+id/location_img"
-                        android:text="@string/nullValue"
                         tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/layoutpluscode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:gravity="top">
+                    android:gravity="top"
+                    android:visibility="gone">
 
                     <ImageView
 
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:contentDescription="@string/description2"
                         android:src="@drawable/pluscode"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/description2" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/pluscode"
@@ -301,7 +314,7 @@
                         android:layout_marginLeft="10dp"
 
                         android:drawablePadding="9dp"
-                        android:text="@string/nullValue"
+                        tools:text="@string/nullValue"
                         app:layout_constraintBottom_toBottomOf="@+id/location_img"
                         app:layout_constraintStart_toEndOf="@+id/location_img"
                         app:layout_constraintTop_toTopOf="@+id/location_img" />
@@ -310,21 +323,21 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/layoutphone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:gravity="top">
+                    android:gravity="top"
+                    android:visibility="gone">
 
                     <ImageView
 
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:contentDescription="@string/description2"
                         android:src="@drawable/ic_baseline_phone_24"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/description2" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:id="@+id/layooutphone"
@@ -338,7 +351,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:drawablePadding="9dp"
-                            android:text="@string/phone"
+                            tools:text="@string/phone"
                             app:layout_constraintBottom_toBottomOf="@+id/location_img"
                             app:layout_constraintStart_toEndOf="@+id/location_img"
                             app:layout_constraintTop_toTopOf="@+id/location_img" />
@@ -350,7 +363,7 @@
                             android:layout_marginStart="10dp"
                             android:autoLink="phone"
                             android:drawablePadding="9dp"
-                            android:text="@string/nullValue"
+                            tools:text="@string/nullValue"
                             app:layout_constraintBottom_toBottomOf="@+id/location_img"
                             app:layout_constraintStart_toEndOf="@+id/location_img"
                             app:layout_constraintTop_toTopOf="@+id/location_img" />
@@ -393,10 +406,10 @@
                 </LinearLayout>
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:layout_marginTop="20dp"
                     android:id="@+id/ViewPager2"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:layout_marginTop="20dp"
                     android:paddingStart="80dp"
                     android:paddingEnd="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -408,8 +421,9 @@
 
             </LinearLayout>
 
-            <include layout="@layout/view_loading_detail"
-                android:visibility="gone"/>
+            <include
+                layout="@layout/view_loading_detail"
+                android:visibility="gone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

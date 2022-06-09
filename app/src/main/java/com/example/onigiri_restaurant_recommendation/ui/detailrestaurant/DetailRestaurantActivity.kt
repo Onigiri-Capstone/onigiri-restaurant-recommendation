@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -25,14 +26,18 @@ import com.bumptech.glide.Glide
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.adapter.ViewPagerImageSlide
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityDetailRestaurantBinding
+import com.example.onigiri_restaurant_recommendation.model.FavoriteRestaurantLocal
 import com.example.onigiri_restaurant_recommendation.model.ImageModel
+import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantDetailResponse
+import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteRestaurantViewModelFactory
+import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import kotlin.math.abs
 
 class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailRestaurantBinding
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var placeId: String
     private lateinit var handler : Handler
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -45,11 +50,17 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private var latRestaurant: Double = 0.0
     private var dataRestaurant: String = ""
     private lateinit var  viewPager2: ViewPager2
+    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailRestaurantBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))
+            .get(FavoriteViewModel::class.java)
+
+
         handler = Handler(Looper.myLooper()!!)
         placeId = intent.getStringExtra(PLACE_ID)!!
         Log.e("onCreate: ", placeId)
@@ -65,6 +76,21 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private fun setDetailRestaurant() {
         detailRestaurantViewModel.getDetailRestaurant().observe(this) {
             binding.apply {
+
+                isFavorite = favoriteViewModel.isFavoriteUserExists(it.place_id)
+                if (isFavorite) {
+                    binding.floatingbuttonfav.setImageResource(R.drawable.ic_favorite_active)
+                }
+                binding.floatingbuttonfav.setOnClickListener { view->
+                    isFavorite = !isFavorite
+                    if (isFavorite) { // like
+                        Log.e("setDetailRestaurant: ", "like" )
+                        insertFavoriteUser(it)
+                    } else { // dislike
+                        Log.e("setDetailRestaurant: ", "dislike" )
+                        deleteFavoriteUser(it)
+                    }
+                }
                 latRestaurant = it.geometry.location.lat
                 lonRestaurant = it.geometry.location.lng
                 Log.e("setDetailRestaurant: ", it.toString())
@@ -109,8 +135,6 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 Log.e("setDetailRestaurant: ", myModelArrayList.size.toString())
 
-//                viewPagerAdapter = ViewPagerImageSlide(myModelArrayList, viewPager2)
-
                 val viewPagerAdapter = ViewPagerImageSlide()
                 viewPagerAdapter.setData(myModelArrayList)
 
@@ -123,15 +147,58 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+    private fun insertFavoriteUser(it: RestaurantDetailResponse) {
+        val favRestaurant =
+            FavoriteRestaurantLocal(
+                place_id = it.place_id,
+                name = it.name,
+                photo_url = it.photo_url[0],
+                rating = it.rating,
+                lat = it.geometry.location.lat,
+                lng = it.geometry.location.lng,
+                vicinity = it.formatted_address
+            )
 
+
+
+        favoriteViewModel.insert(favRestaurant)
+
+
+        binding.floatingbuttonfav.setImageResource(R.drawable.ic_favorite_active)
+        Toast.makeText(
+            this,
+            "${it.name} has added to favorite users",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+    private fun deleteFavoriteUser(it: RestaurantDetailResponse) {
+
+        val favRestaurant =
+            FavoriteRestaurantLocal(
+                place_id = it.place_id,
+                name = it.name,
+                photo_url = it.photo_url[0],
+                rating = it.rating,
+                lat = it.geometry.location.lat,
+                lng = it.geometry.location.lng,
+                vicinity = it.formatted_address
+            )
+
+
+
+        favoriteViewModel.delete(favRestaurant)
+
+
+        binding.floatingbuttonfav.setImageResource(R.drawable.ic_favorite)
+        Toast.makeText(
+            this,
+            "${it.name} has removed from favorite users",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
     private fun setUpTransformer(){
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(40))
-        transformer.addTransformer { page, position ->
-            val r = 1 - abs(position)
-//            page.scaleY = 0.85f + r * 0.14f
-        }
-
         viewPager2.setPageTransformer(transformer)
     }
 
