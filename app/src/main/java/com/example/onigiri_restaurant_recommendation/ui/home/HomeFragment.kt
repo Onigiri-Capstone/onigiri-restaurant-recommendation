@@ -1,13 +1,13 @@
 package com.example.onigiri_restaurant_recommendation.ui.home
 
 import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.FragmentHomeBinding
 import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
@@ -16,6 +16,11 @@ import com.example.onigiri_restaurant_recommendation.ui.home.category.CategoryBo
 import com.example.onigiri_restaurant_recommendation.ui.home.location.LocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.profile.ProfileActivity
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
+import com.example.onigiri_restaurant_recommendation.util.location.checkLocationPermission
+import com.example.onigiri_restaurant_recommendation.util.location.requestLocationPermission
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import java.util.*
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
@@ -23,22 +28,53 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private val binding get() = _binding!!
 
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var geocoder: Geocoder
+    private lateinit var address: String
+
+    companion object {
+        private const val TAG = "HomeFragment"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setOnClickListener()
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        geocoder = Geocoder(requireContext(), Locale.getDefault())
 
+        getLastLocation()
+
+//        callNetworkConnection(requireActivity().application, this, parentFragmentManager)
+
+        setOnClickListener()
+    }
+
+    private fun getLastLocation() {
+        if(!checkLocationPermission(requireContext())) {
+            requestLocationPermission(requireActivity())
+        }
+
+        val lastLocation = fusedLocationProviderClient.lastLocation
+
+        lastLocation.apply {
+            addOnSuccessListener {
+                val geocodeAddress = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                address = geocodeAddress[0].getAddressLine(0)
+            }
+            addOnFailureListener {
+                Log.d(TAG, "getLastLocation: Failed to load location")
+            }
+        }
     }
 
     private fun setOnClickListener() {
@@ -65,10 +101,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         when(view?.id) {
             R.id.btn_camera -> {
                 startActivity(Intent(activity, CameraActivity::class.java))
-                getActivity()?.onBackPressed()
+                activity?.onBackPressed()
             }
             R.id.tv_location -> {
-                val locationBottomSheet = LocationBottomSheet()
+                val locationBottomSheet = LocationBottomSheet().getInstance(address)
                 locationBottomSheet.show(parentFragmentManager, LocationBottomSheet.TAG)
             }
             R.id.tv_input -> {

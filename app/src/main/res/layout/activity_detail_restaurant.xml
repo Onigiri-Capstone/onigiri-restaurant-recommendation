@@ -79,274 +79,227 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:ignore="ScrollViewCount">
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/activity_horizontal_margin"
-            android:paddingTop="30dp"
-            android:paddingBottom="27dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_name"
-                style="@style/list_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/restaurant_name" />
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center">
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                android:paddingTop="30dp"
+                android:paddingBottom="27dp"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_margin="5dp"
-                    android:contentDescription="@string/foto_deskripsi"
-                    android:src="@drawable/halal" />
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/list_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/restaurant_name" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/rate_restaurant"
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="5dp"
+                        android:contentDescription="@string/foto_deskripsi"
+                        android:src="@drawable/halal" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:text="@string/_4_2"
-                        android:textSize="47sp" />
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
 
-                    <RatingBar
-                        android:id="@+id/id_tv_rating_bar"
-                        style="@style/Widget.AppCompat.RatingBar.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:progressBackgroundTint="@color/yellow"
-                        android:progressTint="@color/yellow"
-                        android:rating="4.5" />
+                        <TextView
+                            android:id="@+id/rate_restaurant"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/_4_2"
+                            android:textSize="47sp" />
+
+                        <RatingBar
+                            android:id="@+id/id_tv_rating_bar"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:progressBackgroundTint="@color/yellow"
+                            android:progressTint="@color/yellow"
+                            android:rating="4.5" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:scrollbars="none">
-
-                <RadioGroup
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="20dp"
+                    android:scrollbars="none">
 
-                    <RadioButton
-
-                        android:id="@+id/direction"
-                        style="@style/secondary_text_caption"
+                    <RadioGroup
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:background="@drawable/halal_checkded_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_drawable_direction"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="4dp"
-                        android:text="@string/directions"
-                        android:textColor="@drawable/halal_selector_text" />
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/phone_call"
-                        style="@style/secondary_text_caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="15dp"
-                        android:background="@drawable/halal_checkded_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_drawable_phone"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="4dp"
-                        android:text="@string/phone_call"
-                        android:textColor="@drawable/halal_selector_text" />
+                        <RadioButton
 
-                    <RadioButton
-                        android:id="@+id/favorite"
-                        style="@style/secondary_text_caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="15dp"
-                        android:background="@drawable/halal_checkded_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_drawable_fav"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="4dp"
-                        android:text="@string/favorite"
-                        android:textColor="@drawable/halal_selector_text" />
+                            android:id="@+id/direction"
+                            style="@style/secondary_text_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:background="@drawable/halal_checkded_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/selector_drawable_direction"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/directions"
+                            android:textColor="@drawable/halal_selector_text" />
 
+                        <RadioButton
+                            android:id="@+id/phone_call"
+                            style="@style/secondary_text_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="15dp"
+                            android:background="@drawable/halal_checkded_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/selector_drawable_phone"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/phone_call"
+                            android:textColor="@drawable/halal_selector_text" />
 
-                    <RadioButton
-                        android:id="@+id/share"
-                        style="@style/secondary_text_caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="15dp"
-                        android:background="@drawable/halal_checkded_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_drawable_share"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="4dp"
-                        android:text="@string/favorite"
-                        android:textColor="@drawable/halal_selector_text" />
-                </RadioGroup>
+                        <RadioButton
+                            android:id="@+id/favorite"
+                            style="@style/secondary_text_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="15dp"
+                            android:background="@drawable/halal_checkded_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/selector_drawable_fav"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/favorite"
+                            android:textColor="@drawable/halal_selector_text" />
 
 
-            </HorizontalScrollView>
-
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutaddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="top"
-                tools:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:id="@+id/location_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_location"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/description2" />
-
-                <TextView
-                    android:id="@+id/vicinity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:drawablePadding="9dp"
-                    android:paddingEnd="30dp"
-                    android:text="@string/nullValue"
-                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                    app:layout_constraintStart_toEndOf="@+id/location_img"
-                    app:layout_constraintTop_toTopOf="@+id/location_img"
-                    tools:ignore="RtlSymmetry" />
+                        <RadioButton
+                            android:id="@+id/share"
+                            style="@style/secondary_text_caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="15dp"
+                            android:background="@drawable/halal_checkded_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/selector_drawable_share"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/favorite"
+                            android:textColor="@drawable/halal_selector_text" />
+                    </RadioGroup>
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutopratinghours"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="top">
-
-                <ImageView
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_access_time_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/description2" />
-
-                <TextView
-                    android:id="@+id/operatingHour"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:drawablePadding="9dp"
-                    android:paddingEnd="30dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                    app:layout_constraintStart_toEndOf="@+id/location_img"
-                    app:layout_constraintTop_toTopOf="@+id/location_img"
-                    android:text="@string/nullValue"
-                    tools:ignore="RtlSymmetry" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutpluscode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="top">
-
-                <ImageView
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/pluscode"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/description2" />
-
-                <TextView
-                    android:id="@+id/pluscode"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-
-                    android:drawablePadding="9dp"
-                    android:text="@string/nullValue"
-                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                    app:layout_constraintStart_toEndOf="@+id/location_img"
-                    app:layout_constraintTop_toTopOf="@+id/location_img" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutphone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="top">
-
-                <ImageView
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_phone_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/description2" />
+                </HorizontalScrollView>
 
                 <LinearLayout
-                    android:id="@+id/layooutphone"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/layoutaddress"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="20dp"
+                    android:gravity="top"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/location_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_location"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/description2" />
 
                     <TextView
-                        android:id="@+id/phone"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/vicinity"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:drawablePadding="9dp"
-                        android:text="@string/phone"
+                        android:paddingEnd="30dp"
+                        android:text="@string/nullValue"
                         app:layout_constraintBottom_toBottomOf="@+id/location_img"
                         app:layout_constraintStart_toEndOf="@+id/location_img"
-                        app:layout_constraintTop_toTopOf="@+id/location_img" />
+                        app:layout_constraintTop_toTopOf="@+id/location_img"
+                        tools:ignore="RtlSymmetry" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutopratinghours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="top">
+
+                    <ImageView
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_access_time_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/description2" />
 
                     <TextView
-                        android:id="@+id/phonenumber"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/operatingHour"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:autoLink="phone"
+                        android:drawablePadding="9dp"
+                        android:paddingEnd="30dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                        app:layout_constraintStart_toEndOf="@+id/location_img"
+                        app:layout_constraintTop_toTopOf="@+id/location_img"
+                        android:text="@string/nullValue"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layoutpluscode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="top">
+
+                    <ImageView
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/pluscode"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/description2" />
+
+                    <TextView
+                        android:id="@+id/pluscode"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+
                         android:drawablePadding="9dp"
                         android:text="@string/nullValue"
                         app:layout_constraintBottom_toBottomOf="@+id/location_img"
@@ -356,65 +309,110 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layoutphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="top">
 
-            </LinearLayout>
+                    <ImageView
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="top">
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_phone_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/description2" />
 
-                <ImageView
+                    <LinearLayout
+                        android:id="@+id/layooutphone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_photo_library_24"
+                        <TextView
+                            android:id="@+id/phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:drawablePadding="9dp"
+                            android:text="@string/phone"
+                            app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                            app:layout_constraintStart_toEndOf="@+id/location_img"
+                            app:layout_constraintTop_toTopOf="@+id/location_img" />
+
+                        <TextView
+                            android:id="@+id/phonenumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:autoLink="phone"
+                            android:drawablePadding="9dp"
+                            android:text="@string/nullValue"
+                            app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                            app:layout_constraintStart_toEndOf="@+id/location_img"
+                            app:layout_constraintTop_toTopOf="@+id/location_img" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="top">
+
+                    <ImageView
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_photo_library_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toEndOf="@+id/location_img"
+                        android:drawablePadding="9dp"
+                        android:paddingEnd="30dp"
+                        android:text="@string/photo_library"
+                        app:layout_constraintBottom_toBottomOf="@+id/location_img"
+                        app:layout_constraintStart_toEndOf="@+id/location_img"
+                        app:layout_constraintTop_toTopOf="@+id/location_img"
+                        tools:ignore="RtlSymmetry" />
+
+
+                </LinearLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/ViewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:paddingStart="80dp"
+                    android:paddingEnd="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toEndOf="@+id/location_img"
-                    android:drawablePadding="9dp"
-                    android:paddingEnd="30dp"
-                    android:text="@string/photo_library"
-                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                    app:layout_constraintStart_toEndOf="@+id/location_img"
-                    app:layout_constraintTop_toTopOf="@+id/location_img"
-                    tools:ignore="RtlSymmetry" />
-
 
             </LinearLayout>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:layout_marginTop="20dp"
-                android:id="@+id/ViewPager2"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:paddingStart="80dp"
-                android:paddingEnd="80dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <include layout="@layout/view_loading_detail"
+                android:visibility="gone"/>
 
-            <ProgressBar
-                android:id="@+id/progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
