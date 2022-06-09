@@ -1,5 +1,4 @@
 package com.example.onigiri_restaurant_recommendation.adapter
-
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
@@ -37,10 +36,10 @@ class RestaurantAdapter: RecyclerView.Adapter<RestaurantAdapter.MyViewHolder>() 
                     AddressRestaurant.text = vicinity
                     rateRestaurant.text = rating.toString()
 
-//                    Glide.with(itemView)
-//                        .load()
-//                        .transform(RoundedCorners(20))
-//                        .into(ivRestaurant)
+                    Glide.with(itemView)
+                        .load(photo_url)
+                        .transform(RoundedCorners(20))
+                        .into(ivRestaurant)
 
                     itemView.setOnClickListener {
                         val intent = Intent(itemView.context, DetailRestaurantActivity::class.java)

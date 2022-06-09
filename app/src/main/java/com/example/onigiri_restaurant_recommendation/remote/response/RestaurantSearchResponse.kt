@@ -13,6 +13,7 @@ data class RestaurantSearchResponse (
     val name: String,
     val opening_hours: ListOpeningHoursReponse,
     val photos: List<ListPhotosResponse>,
+    val photo_url: String,
     val place_id: String,
     val plus_code: ListPlusCodeResponse,
     val price_level: Int,

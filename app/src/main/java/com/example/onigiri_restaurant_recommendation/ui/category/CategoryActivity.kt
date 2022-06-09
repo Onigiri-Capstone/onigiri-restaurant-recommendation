@@ -17,7 +17,7 @@ import com.example.onigiri_restaurant_recommendation.databinding.ActivityCategor
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
-class CategoryActivity() : AppCompatActivity() {
+class CategoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCategoryBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -60,6 +60,7 @@ class CategoryActivity() : AppCompatActivity() {
     }
 
     private fun showRecyclerView() {
+        showLoading(true)
         with(binding) {
             rvRestaurant.layoutManager = LinearLayoutManager(this@CategoryActivity)
             categoryViewModel.listRestaurant.observe(this@CategoryActivity) {
