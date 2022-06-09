@@ -38,12 +38,11 @@
             >
 
             <ImageView
-                android:id="@+id/img_restaurant"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/dummy_photo1" />
+                android:scaleType="fitXY"
+                android:src="@drawable/dummy_photo1" />
 
 
             <View
@@ -211,8 +210,6 @@
             </HorizontalScrollView>
 
             <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutaddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -234,7 +231,7 @@
                     android:layout_toEndOf="@+id/location_img"
                     android:drawablePadding="9dp"
                     android:paddingEnd="30dp"
-                    android:text="@string/nullValue"
+                    android:text="@string/address_restaurant"
                     app:layout_constraintBottom_toBottomOf="@+id/location_img"
                     app:layout_constraintStart_toEndOf="@+id/location_img"
                     app:layout_constraintTop_toTopOf="@+id/location_img"
@@ -244,8 +241,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutopratinghours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -269,12 +264,11 @@
                     app:layout_constraintBottom_toBottomOf="@+id/location_img"
                     app:layout_constraintStart_toEndOf="@+id/location_img"
                     app:layout_constraintTop_toTopOf="@+id/location_img"
-                    android:text="@string/nullValue"/>
+                    tools:text="@string/oprating_hour" />
+
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutpluscode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -295,7 +289,7 @@
                     android:layout_marginLeft="10dp"
 
                     android:drawablePadding="9dp"
-                    android:text="@string/nullValue"
+                    android:text="@string/plus_code"
                     app:layout_constraintBottom_toBottomOf="@+id/location_img"
                     app:layout_constraintStart_toEndOf="@+id/location_img"
                     app:layout_constraintTop_toTopOf="@+id/location_img" />
@@ -304,8 +298,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutphone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -337,13 +329,13 @@
                         app:layout_constraintTop_toTopOf="@+id/location_img" />
 
                     <TextView
+                        android:autoLink="phone"
                         android:id="@+id/phonenumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:autoLink="phone"
                         android:drawablePadding="9dp"
-                        android:text="@string/nullValue"
+                        android:text="@string/phone"
                         app:layout_constraintBottom_toBottomOf="@+id/location_img"
                         app:layout_constraintStart_toEndOf="@+id/location_img"
                         app:layout_constraintTop_toTopOf="@+id/location_img" />
@@ -353,46 +345,6 @@
 
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="top">
-
-                <ImageView
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_photo_library_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toEndOf="@+id/location_img"
-                    android:drawablePadding="9dp"
-                    android:paddingEnd="30dp"
-                    android:text="@string/photo_library"
-                    app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                    app:layout_constraintStart_toEndOf="@+id/location_img"
-                    app:layout_constraintTop_toTopOf="@+id/location_img"
-                    tools:ignore="RtlSymmetry" />
-
-
-            </LinearLayout>
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/idViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_gravity="center|top"
-                android:foregroundGravity="center|top"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp" />
 
             <ProgressBar
                 android:id="@+id/progress"
@@ -406,6 +358,7 @@
 
 
         </LinearLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 
