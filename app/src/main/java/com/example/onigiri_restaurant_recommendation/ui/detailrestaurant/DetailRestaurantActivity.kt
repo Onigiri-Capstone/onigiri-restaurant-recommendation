@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -15,6 +17,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.adapter.ViewPagerImageSlide
@@ -22,29 +28,34 @@ import com.example.onigiri_restaurant_recommendation.databinding.ActivityDetailR
 import com.example.onigiri_restaurant_recommendation.model.ImageModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlin.math.abs
 
 class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailRestaurantBinding
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
     private lateinit var placeId: String
+    private lateinit var handler : Handler
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lon: Double = 0.0
     private var lat: Double = 0.0
-    private lateinit var viewPagerAdapter: ViewPagerImageSlide
+
     private lateinit var myModelArrayList: ArrayList<ImageModel>
     private var lonRestaurant: Double = 0.0
     private var phonenumberRestaurant: String = ""
     private var latRestaurant: Double = 0.0
     private var dataRestaurant: String = ""
+    private lateinit var  viewPager2: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailRestaurantBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        handler = Handler(Looper.myLooper()!!)
         placeId = intent.getStringExtra(PLACE_ID)!!
         Log.e("onCreate: ", placeId)
         detailRestaurantViewModel.setDetailRestaurant(placeId, lat, lon)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        viewPager2 = binding.ViewPager2
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){})
         setToolbar()
         setDetailRestaurant()
         getMyLastLocation()
@@ -89,19 +100,40 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 share.setOnClickListener(this@DetailRestaurantActivity)
                 favorite.setOnClickListener(this@DetailRestaurantActivity)
                 phoneCall.setOnClickListener(this@DetailRestaurantActivity)
-
+                setUpTransformer()
 
                 myModelArrayList = ArrayList()
                 for (posisition in 1 until it.photo_url.size){
                     myModelArrayList.add(ImageModel(it.photo_url[posisition]) )
                 }
                 Log.e("setDetailRestaurant: ", myModelArrayList.size.toString())
-                viewPagerAdapter = ViewPagerImageSlide(this@DetailRestaurantActivity, myModelArrayList)
-                idViewPager.adapter = viewPagerAdapter
+
+//                viewPagerAdapter = ViewPagerImageSlide(myModelArrayList, viewPager2)
+
+                val viewPagerAdapter = ViewPagerImageSlide()
+                viewPagerAdapter.setData(myModelArrayList)
+
+                viewPager2.adapter = viewPagerAdapter
+                viewPager2.offscreenPageLimit = 3
+                viewPager2.clipToPadding = false
+                viewPager2.clipChildren = false
+                viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
                 nestedlist.visibility = View.VISIBLE
             }
         }
     }
+
+    private fun setUpTransformer(){
+        val transformer = CompositePageTransformer()
+        transformer.addTransformer(MarginPageTransformer(40))
+        transformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+//            page.scaleY = 0.85f + r * 0.14f
+        }
+
+        viewPager2.setPageTransformer(transformer)
+    }
+
 
     private fun opratioanlhour(weekdayText: List<String>?): String {
         var str = "Operating Hour\n"

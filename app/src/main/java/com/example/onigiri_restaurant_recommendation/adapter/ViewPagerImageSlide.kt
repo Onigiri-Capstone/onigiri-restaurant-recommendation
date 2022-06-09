@@ -7,50 +7,50 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.onigiri_restaurant_recommendation.R
+import com.example.onigiri_restaurant_recommendation.databinding.ImageSliderItemBinding
+import com.example.onigiri_restaurant_recommendation.databinding.ItemRestaurantBinding
 import com.example.onigiri_restaurant_recommendation.model.ImageModel
+import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantSearchResponse
 import java.util.*
 
-class ViewPagerImageSlide(private val context: Context, private val myModeArrayList: ArrayList<ImageModel>) : PagerAdapter() {
+class ViewPagerImageSlide:RecyclerView.Adapter<ViewPagerImageSlide.ImageViewHolder>(){
+    private var image = ArrayList<ImageModel>()
 
-    override fun getCount(): Int {
-        Log.e("getCount: ",  myModeArrayList.size.toString())
-        return myModeArrayList.size
+    fun setData(newListData: List<ImageModel>?) {
+        if (newListData == null) return
+        image.clear()
+        image.addAll(newListData)
+        notifyDataSetChanged()
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
-    }
+    class ImageViewHolder(private val binding: ImageSliderItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(image: ImageModel) {
+            Glide.with(itemView)
+                .load(image.image)
+                .transform(RoundedCorners(20))
+                .into(binding.imageViewSlider)
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val mLayoutInflater =
-            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val itemView: View = mLayoutInflater.inflate(R.layout.image_slider_item, container, false)
-
-
-        val model = myModeArrayList[position]
-        val image = model.image
-        val imageView: ImageView = itemView.findViewById<View>(R.id.idIVImage) as ImageView
-
-
-        Glide.with(itemView)
-            .load(image)
-            .transform(RoundedCorners(20))
-            .into(imageView)
-
-        itemView.setOnClickListener {
-            Toast.makeText(context, "Item Clicked", Toast.LENGTH_LONG).show()
         }
-        Objects.requireNonNull(container).addView(itemView)
-
-        return itemView
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-
-        container.removeView(`object` as View)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerImageSlide.ImageViewHolder {
+        val view = ImageSliderItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ImageViewHolder(view)
     }
+
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        holder.bind(image[position])
+    }
+
+    override fun getItemCount(): Int {
+        return image.size
+    }
+
 }
