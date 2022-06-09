@@ -20,6 +20,7 @@ import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlin.math.log
 
 class ResultActivity : AppCompatActivity() {
 
