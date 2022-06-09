@@ -12,7 +12,6 @@ data class RestaurantSearchResponse (
     val icon_mask_base_uri: String,
     val name: String,
     val opening_hours: ListOpeningHoursReponse,
-    val photo_url: String,
     val photos: List<ListPhotosResponse>,
     val place_id: String,
     val plus_code: ListPlusCodeResponse,

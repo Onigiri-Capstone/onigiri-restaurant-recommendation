@@ -19,7 +19,6 @@ data class RestaurantDetailResponse(
     val name: String,
     val opening_hours: ListOpeningHoursReponse,
     val url: String,
-    val photo_url: List<String>,
     val photos: List<ListPhotosResponse>,
     val place_id: String,
     val plus_code: ListPlusCodeResponse,
