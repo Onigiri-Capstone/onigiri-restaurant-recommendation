@@ -19,6 +19,15 @@ class LocationBottomSheet: BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "LocationBottomSheet"
+        const val ADDRESS = "address"
+    }
+
+    fun getInstance(data: String): LocationBottomSheet {
+        val args = Bundle()
+        args.putString(ADDRESS, data)
+        val fragment = LocationBottomSheet()
+        fragment.arguments = args
+        return fragment
     }
 
     override fun onCreateView(
@@ -33,7 +42,11 @@ class LocationBottomSheet: BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tvAddress.text = arguments?.getString(ADDRESS)
+
         list.addAll(listLocations)
+
         getLocation()
     }
 
