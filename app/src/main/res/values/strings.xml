@@ -6,14 +6,6 @@
     <string name="title_profile">Profile</string>
     <string name="title_edit_profile">Edit Profile</string>
 
-    <string name="gps_status_enabled">"GPS is Enabled"</string>
-    <string name="gps_status_disabled">"GPS is Disabled"</string>
-    <string name="permission_status_granted">Location Permission is Granted</string>
-    <string name="permission_status_denied">Location Permission is Denied</string>
-    <string name="permission_status_blocked">Location Permission is Blocked</string>
-    <string name="gps_required_title">GPS Required</string>
-    <string name="gps_required_body">Enable GPS otherwise location tracking won\'t work</string>
-
     <string name="location">Location</string>
     <string name="your_location">Your Location</string>
     <string name="category">Categories</string>
@@ -172,5 +164,7 @@
     <string name="phone_call">\tPhone</string>
     <string name="favorite">\tFavorite</string>
     <string name="share">\tShare</string>
+    <string name="photo_library">Photo Library</string>
+    <string name="nullValue">-</string>
 
 </resources>
