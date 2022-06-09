@@ -45,6 +45,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private var latRestaurant: Double = 0.0
     private var dataRestaurant: String = ""
     private lateinit var  viewPager2: ViewPager2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailRestaurantBinding.inflate(layoutInflater)
