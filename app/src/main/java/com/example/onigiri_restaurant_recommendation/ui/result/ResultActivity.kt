@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.onigiri_restaurant_recommendation.ui.result
 
 import android.Manifest
@@ -13,14 +15,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onigiri_restaurant_recommendation.adapter.RestaurantAdapter
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityResultBinding
 import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
+import com.example.onigiri_restaurant_recommendation.ui.main.MainViewModel
+import com.example.onigiri_restaurant_recommendation.util.location.LocationUtil
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import kotlin.math.log
 
 class ResultActivity : AppCompatActivity() {
 
@@ -46,6 +50,11 @@ class ResultActivity : AppCompatActivity() {
         showRecyclerView()
         setSearch()
         setFoodLabel()
+
+        val mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        val locationUtil = LocationUtil(this, this, supportFragmentManager, mainViewModel)
+        locationUtil.subscribeToLocationPermissionListener()
+        locationUtil.subscribeToGpsListener()
     }
 
     private fun setOnClickListener() {

@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.FragmentHomeBinding
 import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
@@ -16,6 +14,7 @@ import com.example.onigiri_restaurant_recommendation.ui.home.category.CategoryBo
 import com.example.onigiri_restaurant_recommendation.ui.home.location.LocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.profile.ProfileActivity
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
+import com.example.onigiri_restaurant_recommendation.util.callNetworkConnection
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
@@ -29,13 +28,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        callNetworkConnection(requireActivity().application, this, parentFragmentManager)
 
         setOnClickListener()
 
@@ -65,7 +65,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         when(view?.id) {
             R.id.btn_camera -> {
                 startActivity(Intent(activity, CameraActivity::class.java))
-                getActivity()?.onBackPressed()
+                activity?.onBackPressed()
             }
             R.id.tv_location -> {
                 val locationBottomSheet = LocationBottomSheet()
