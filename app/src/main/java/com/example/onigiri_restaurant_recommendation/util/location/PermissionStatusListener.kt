@@ -30,18 +30,3 @@ sealed class PermissionStatus {
     data class Denied(val message: Int = R.string.permission_status_denied) : PermissionStatus()
 }
 
-val REQUIRED_LOCATION_PERMISSIONS
-        = arrayOf(
-    Manifest.permission.ACCESS_FINE_LOCATION,
-    Manifest.permission.ACCESS_COARSE_LOCATION
-)
-
-const val PERMISSION_REQUEST_ACCESS_LOCATION = 100
-
-fun requestLocationPermission(activity: Activity) {
-    ActivityCompat.requestPermissions(
-        activity,
-        REQUIRED_LOCATION_PERMISSIONS,
-        PERMISSION_REQUEST_ACCESS_LOCATION
-    )
-}

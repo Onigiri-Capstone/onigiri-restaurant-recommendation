@@ -1,6 +1,11 @@
 package com.example.onigiri_restaurant_recommendation.util.location
 
+import android.Manifest
 import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -44,4 +49,29 @@ class LocationUtil(
             }
         }
     }
+}
+
+val REQUIRED_LOCATION_PERMISSIONS
+        = arrayOf(
+    Manifest.permission.ACCESS_FINE_LOCATION,
+    Manifest.permission.ACCESS_COARSE_LOCATION
+)
+
+const val PERMISSION_REQUEST_ACCESS_LOCATION = 100
+
+fun checkLocationPermission(context: Context): Boolean {
+    return REQUIRED_LOCATION_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            context,
+            it
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+}
+
+fun requestLocationPermission(activity: Activity) {
+    ActivityCompat.requestPermissions(
+        activity,
+        REQUIRED_LOCATION_PERMISSIONS,
+        PERMISSION_REQUEST_ACCESS_LOCATION
+    )
 }
