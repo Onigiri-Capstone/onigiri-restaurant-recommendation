@@ -16,8 +16,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.onigiri_restaurant_recommendation.R
+import com.example.onigiri_restaurant_recommendation.adapter.ViewPagerImageSlide
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityDetailRestaurantBinding
+import com.example.onigiri_restaurant_recommendation.model.ImageModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -28,11 +31,12 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lon: Double = 0.0
     private var lat: Double = 0.0
-
+    private lateinit var viewPagerAdapter: ViewPagerImageSlide
+    private lateinit var myModelArrayList: ArrayList<ImageModel>
     private var lonRestaurant: Double = 0.0
     private var phonenumberRestaurant: String = ""
     private var latRestaurant: Double = 0.0
-    private var dataRestaurant : String = ""
+    private var dataRestaurant: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailRestaurantBinding.inflate(layoutInflater)
@@ -55,21 +59,47 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e("setDetailRestaurant: ", it.toString())
                 dataRestaurant = "${it.name} ${it.formatted_address} ${it.url} "
                 tvName.text = it.name
+                Glide.with(applicationContext)
+                    .load(it.photo_url[0])
+                    .into(imgRestaurant)
+
                 rateRestaurant.text = it.rating.toString()
                 idTvRatingBar.rating = it.rating
-                vicinity.text = it.formatted_address
-                vicinity.setOnClickListener(this@DetailRestaurantActivity)
-                pluscode.text = it.plus_code.compound_code
+                if(it.formatted_address.isNotEmpty()){
+                    layoutaddress.visibility = View.VISIBLE
+                    vicinity.text = it?.formatted_address
+                    vicinity.setOnClickListener(this@DetailRestaurantActivity)
+                }
+
+                layoutpluscode.visibility = View.VISIBLE
+                pluscode.text = it?.plus_code?.compound_code
                 pluscode.setOnClickListener(this@DetailRestaurantActivity)
-                phonenumber.text =it.formatted_phone_number
-                phonenumberRestaurant = it.formatted_phone_number
+                if (!it.opening_hours.weekday_text.isNullOrEmpty()){
+                    layoutopratinghours.visibility = View.VISIBLE
+                    operatingHour.text = opratioanlhour(it?.opening_hours?.weekday_text)
+                }
+                if(it.formatted_phone_number != ""){
+                    layoutphone.visibility = View.VISIBLE
+                    phonenumber.text = it?.formatted_phone_number
+                    phonenumberRestaurant = it.formatted_phone_number
+                }
+
                 layooutphone.setOnClickListener(this@DetailRestaurantActivity)
-                operatingHour.text = opratioanlhour(it.opening_hours.weekday_text)
+
                 direction.setOnClickListener(this@DetailRestaurantActivity)
                 share.setOnClickListener(this@DetailRestaurantActivity)
                 favorite.setOnClickListener(this@DetailRestaurantActivity)
                 phoneCall.setOnClickListener(this@DetailRestaurantActivity)
-                nestedlist.visibility= View.VISIBLE
+
+
+                myModelArrayList = ArrayList()
+                for (posisition in 1 until it.photo_url.size){
+                    myModelArrayList.add(ImageModel(it.photo_url[posisition]) )
+                }
+                Log.e("setDetailRestaurant: ", myModelArrayList.size.toString())
+                viewPagerAdapter = ViewPagerImageSlide(this@DetailRestaurantActivity, myModelArrayList)
+                idViewPager.adapter = viewPagerAdapter
+                nestedlist.visibility = View.VISIBLE
             }
         }
     }
@@ -144,7 +174,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        when(v?.id){
+        when (v?.id) {
             R.id.vicinity -> {
                 val clipData = ClipData.newPlainText("text", binding.vicinity.text)
                 clipboardManager.setPrimaryClip(clipData)
@@ -160,14 +190,15 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 intent.data = Uri.parse("tel:$phonenumberRestaurant")
                 startActivity(intent)
             }
-            R.id.phone_call ->{
+            R.id.phone_call -> {
                 val intent = Intent(Intent.ACTION_DIAL)
 
                 intent.data = Uri.parse("tel:$phonenumberRestaurant")
                 startActivity(intent)
             }
             R.id.direction -> {
-                val uri = Uri.parse("http://maps.google.com/maps?saddr=$lat,$lon &daddr=$latRestaurant,${lonRestaurant}Restaurant &dirflg=d")
+                val uri =
+                    Uri.parse("http://maps.google.com/maps?saddr=$lat,$lon &daddr=$latRestaurant,${lonRestaurant}Restaurant &dirflg=d")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

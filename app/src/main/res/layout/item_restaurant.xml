@@ -3,6 +3,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,6 +22,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:id="@+id/iv_restaurant"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -28,7 +30,8 @@
                 android:background="@drawable/photorestaurant"
                 android:clipToOutline="true"
                 android:contentDescription="@string/foto_deskripsi"
-                android:src="@drawable/dummy_photo" />
+                tools:src="@drawable/dummy_photo"
+                tools:targetApi="s" />
 
 
             <ImageView
@@ -71,7 +74,7 @@
                     android:layout_marginTop="5dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="Raflesia Hills No.50 Jalan Patimura Pahlawan terhebat abad ini" />
+                    tools:text="Raflesia Hills No.50 Jalan Patimura Pahlawan terhebat abad ini" />
 
 
                 <TextView
@@ -83,10 +86,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="7dp"
                     android:layout_marginBottom="1dp"
-                    android:drawableStart="@drawable/ic_star_rate"
                     android:drawablePadding="3dp"
                     android:gravity="center_vertical"
-                    android:text="4.2" />
+                    tools:text="4.2"
+                    card_view:drawableStartCompat="@drawable/ic_star_rate" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -96,17 +99,17 @@
                     android:background="@drawable/rounded_ditance"
                     android:padding="0dp">
 
-                    <TextView
-                        android:id="@+id/distance"
-                        style="@style/secondary_text_caption"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:baselineAligned="false"
-                        android:gravity="center"
-                        android:layout_marginHorizontal="8dp"
-                        android:text="2 KM"
-                        android:textColor="@color/white" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/distance"-->
+<!--                        style="@style/secondary_text_caption"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:baselineAligned="false"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_marginHorizontal="8dp"-->
+<!--                        android:text="2 KM"-->
+<!--                        android:textColor="@color/white" />-->
                 </LinearLayout>
             </RelativeLayout>
 
@@ -116,7 +119,8 @@
                 android:layout_height="30dp"
                 android:layout_gravity="bottom|end"
                 android:layout_marginBottom="14dp"
-                android:background="@drawable/ic_favorite" />
+                android:background="@drawable/ic_favorite"
+                android:contentDescription="@string/description2" />
         </FrameLayout>
 
     </LinearLayout>
