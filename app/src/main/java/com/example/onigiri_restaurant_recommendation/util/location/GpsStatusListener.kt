@@ -60,9 +60,8 @@ sealed class GpsStatus {
     data class Disabled(val message: Int = R.string.gps_status_disabled) : GpsStatus()
 }
 
-val noLocationBottomSheet = NoLocationBottomSheet()
-
 fun showGpsPermission(fragmentManager: FragmentManager) {
+    val noLocationBottomSheet = NoLocationBottomSheet()
     noLocationBottomSheet.show(fragmentManager, NoLocationBottomSheet.TAG)
 }
 
