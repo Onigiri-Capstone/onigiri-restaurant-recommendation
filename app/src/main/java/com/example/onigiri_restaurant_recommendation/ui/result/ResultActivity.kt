@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onigiri_restaurant_recommendation.adapter.RestaurantAdapter
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityResultBinding
+import com.example.onigiri_restaurant_recommendation.ui.bottomsheet.NoLocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainViewModel
@@ -50,21 +51,12 @@ class ResultActivity : AppCompatActivity() {
         showRecyclerView()
         setSearch()
         setFoodLabel()
-
-        val mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        val locationUtil = LocationUtil(this, this, supportFragmentManager, mainViewModel)
-        locationUtil.subscribeToLocationPermissionListener()
-        locationUtil.subscribeToGpsListener()
     }
 
     private fun setOnClickListener() {
         with(binding) {
             btnCamera.setOnClickListener {
                 startActivity(Intent(this@ResultActivity, CameraActivity::class.java))
-            }
-            swiperefreshresult.setOnRefreshListener {
-                binding.swiperefreshresult.isRefreshing = false
-                showRecyclerView()
             }
         }
     }
@@ -129,11 +121,8 @@ class ResultActivity : AppCompatActivity() {
                     lat = location.latitude
                     Log.e("getMyLastLocation: ", "$lon $lat")
                 } else {
-                    Toast.makeText(
-                        this@ResultActivity,
-                        "Location is not found. Try Again",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val noLocationBottomSheet = NoLocationBottomSheet()
+                    noLocationBottomSheet.show(supportFragmentManager, NoLocationBottomSheet.TAG)
                 }
             }
         } else {

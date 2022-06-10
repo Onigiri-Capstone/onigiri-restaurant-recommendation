@@ -1,39 +1,74 @@
 package com.example.onigiri_restaurant_recommendation.ui.home
 
+import android.Manifest
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
+import android.content.IntentSender
+import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.FragmentHomeBinding
+import com.example.onigiri_restaurant_recommendation.ui.bottomsheet.NoLocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
 import com.example.onigiri_restaurant_recommendation.ui.category.CategoryActivity
 import com.example.onigiri_restaurant_recommendation.ui.home.category.CategoryBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.home.location.LocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.profile.ProfileActivity
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
-import com.example.onigiri_restaurant_recommendation.util.location.checkLocationPermission
-import com.example.onigiri_restaurant_recommendation.util.location.requestLocationPermission
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentHomeBinding? = null
 
     private val binding get() = _binding!!
-
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var geocoder: Geocoder
-    private lateinit var address: String
+    private var address: String = "Location not found"
+
+    private val homeViewModel: HomeViewModel by viewModels()
+
+    private var lat: Double = 0.0
+    private var long: Double = 0.0
 
     companion object {
         private const val TAG = "HomeFragment"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+        if(!checkLocationPermission(requireContext())) {
+            requestLocationPermissionLauncher.launch(
+                REQUIRED_LOCATION_PERMISSIONS
+            )
+        }
     }
 
     override fun onCreateView(
@@ -49,36 +84,21 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        geocoder = Geocoder(requireContext(), Locale.getDefault())
+        createLocationRequest()
+        createLocationCallback()
 
-        getLastLocation()
-
-//        callNetworkConnection(requireActivity().application, this, parentFragmentManager)
+        homeViewModel.location.observe(viewLifecycleOwner) {
+            showGPSControl(it == null)
+            lat = it.lat
+            long = it.long
+        }
 
         setOnClickListener()
     }
 
-    private fun getLastLocation() {
-        if(!checkLocationPermission(requireContext())) {
-            requestLocationPermission(requireActivity())
-        }
-
-        val lastLocation = fusedLocationProviderClient.lastLocation
-
-        lastLocation.apply {
-            addOnSuccessListener {
-                val geocodeAddress = geocoder.getFromLocation(it.latitude, it.longitude, 1)
-                address = geocodeAddress[0].getAddressLine(0)
-            }
-            addOnFailureListener {
-                Log.d(TAG, "getLastLocation: Failed to load location")
-            }
-        }
-    }
-
     private fun setOnClickListener() {
         with(binding) {
+            btnGps.setOnClickListener(this@HomeFragment)
             tvLocation.setOnClickListener(this@HomeFragment)
             tvInput.setOnClickListener(this@HomeFragment)
             btnMore.setOnClickListener(this@HomeFragment)
@@ -99,6 +119,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when(view?.id) {
+            R.id.btn_gps -> {
+                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            }
             R.id.btn_camera -> {
                 startActivity(Intent(activity, CameraActivity::class.java))
                 activity?.onBackPressed()
@@ -166,4 +189,146 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onDestroyView()
         _binding = null
     }
+
+    // ---------------------------------------LOCATION ---------------------------------------------
+
+
+    val REQUIRED_LOCATION_PERMISSIONS
+            = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
+
+    fun checkLocationPermission(context: Context): Boolean {
+        return REQUIRED_LOCATION_PERMISSIONS.all {
+            ContextCompat.checkSelfPermission(
+                context,
+                it
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    fun isLocationEnabled(): Boolean {
+        val locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return  locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
+    private val requestLocationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    getLastLocation()
+                }
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    getLastLocation()
+                }
+                else -> {
+                    val noLocationBottomSheet = NoLocationBottomSheet()
+                    noLocationBottomSheet.show(parentFragmentManager, NoLocationBottomSheet.TAG)
+                }
+            }
+        }
+
+    private fun getLastLocation() {
+        if (checkLocationPermission(requireContext())){
+            if(isLocationEnabled()){
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        showGPSControl(false)
+                        location.apply {
+//                            lat = latitude
+//                            long = longitude
+                            homeViewModel.setLocation(latitude, long)
+                        }
+                        Log.d(TAG, "Location is not null")
+//                        address = geocoder.getFromLocation(location.latitude, location.longitude, 1)[0].getAddressLine(0)
+                    } else {
+                        Log.d(TAG, "Location not found, create location callback")
+                        startLocationUpdates()
+                    }
+                }
+            } else {
+                createLocationRequest()
+            }
+
+        }
+    }
+
+    private fun createLocationRequest() {
+        locationRequest = LocationRequest.create().apply {
+            interval = TimeUnit.SECONDS.toMillis(1)
+            maxWaitTime = TimeUnit.SECONDS.toMillis(1)
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+        val client = LocationServices.getSettingsClient(requireContext())
+        client.checkLocationSettings(builder.build())
+            .addOnSuccessListener {
+                getLastLocation()
+            }
+            .addOnFailureListener { exception ->
+                if (exception is ResolvableApiException) {
+                    try {
+                        resolutionLauncher.launch(
+                            IntentSenderRequest.Builder(exception.resolution).build()
+                        )
+                    } catch (sendEx: IntentSender.SendIntentException) {
+                        Toast.makeText(requireContext(), sendEx.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+    }
+
+    private val resolutionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartIntentSenderForResult()
+        ) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    Log.i(TAG, "onActivityResult: All location settings are satisfied.")
+                    getLastLocation()
+                }
+                RESULT_CANCELED ->
+                    showGPSControl(true)
+            }
+        }
+
+    private fun createLocationCallback() {
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                val latitude = locationResult.locations[0].latitude
+                val longtitude = locationResult.locations[0].longitude
+//                lat = latitude
+//                long = longtitude
+                homeViewModel.setLocation(latitude, longtitude)
+                Log.d(TAG, "onLocationResult: $latitude, $longtitude")
+                stopLocationUpdates()
+            }
+        }
+    }
+
+    private fun startLocationUpdates() {
+        try {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
+        } catch (exception: SecurityException) {
+            Log.e(TAG, "Error : " + exception.message)
+        }
+    }
+
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    private fun showGPSControl(boolean: Boolean) {
+        binding.location.isVisible = boolean
+    }
+
 }

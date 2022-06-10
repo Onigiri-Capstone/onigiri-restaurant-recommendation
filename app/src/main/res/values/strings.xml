@@ -11,8 +11,8 @@
     <string name="permission_status_granted">Location Permission is Granted</string>
     <string name="permission_status_denied">Location Permission is Denied</string>
     <string name="permission_status_blocked">Location Permission is Blocked</string>
-    <string name="gps_required_title">GPS Required</string>
-    <string name="gps_required_body">Enable GPS otherwise location tracking won\'t work</string>
+    <string name="gps_required_title">Location Not Found</string>
+    <string name="gps_required_body">Enable GPS and resfresh.</string>
 
     <string name="location">Location</string>
     <string name="your_location">Your Location</string>
@@ -163,7 +163,7 @@
     <string name="settings">Settings</string>
     <string name="try_again">Try again</string>
     <string name="we_cant_find_you_on_the_map">We cant find you on the map</string>
-    <string name="check_your_location">Check your location</string>
+    <string name="check_your_location">Check your location settings and refresh the app.</string>
     <string name="TextPersen">%d %%</string>
     <string name="oprating_hour">Operating Hour\n Monday\t\t\t\t\t10:00 AM – 9:00 PM\n Tuesday\t\t\t\t\t10:00 AM – 9:00 PM\n Wednesday\t\t10:00 AM – 9:00 PM\n Thursday\t\t\t\t10:00 AM – 9:00 PM\n Saturday\t\t\t\t\t10:00 AM – 9:00 PM\n Sunday\t\t\t\t\t\t10:00 AM – 9:00 PM</string>
     <string name="plus_code">QRGF+R5C, RT.4/RW.4, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940, Indonesia</string>

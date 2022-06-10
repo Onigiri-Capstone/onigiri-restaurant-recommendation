@@ -25,11 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         callNetworkConnection(application, this, supportFragmentManager)
 
-        val mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        val locationUtil = LocationUtil(this, this, supportFragmentManager, mainViewModel)
-        locationUtil.subscribeToLocationPermissionListener()
-        locationUtil.subscribeToGpsListener()
-
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
