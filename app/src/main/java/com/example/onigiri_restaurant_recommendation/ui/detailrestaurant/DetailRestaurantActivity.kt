@@ -31,6 +31,7 @@ import com.example.onigiri_restaurant_recommendation.model.ImageModel
 import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteRestaurantViewModelFactory
 import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteViewModel
+import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -39,6 +40,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
     private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var placeId: String
+    private lateinit var searchtext: String
     private lateinit var handler : Handler
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lon: Double = 0.0
@@ -49,7 +51,9 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private var phonenumberRestaurant: String = ""
     private var latRestaurant: Double = 0.0
     private var dataRestaurant: String = ""
+
     private lateinit var  viewPager2: ViewPager2
+
     private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +67,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
         handler = Handler(Looper.myLooper()!!)
         placeId = intent.getStringExtra(PLACE_ID)!!
+        searchtext = intent.getStringExtra(SEARCH_NAME)!!
         Log.e("onCreate: ", placeId)
         detailRestaurantViewModel.setDetailRestaurant(placeId, lat, lon)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -96,6 +101,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e("setDetailRestaurant: ", it.toString())
                 dataRestaurant = "${it.name} ${it.formatted_address} ${it.url} "
                 tvName.text = it.name
+
                 Glide.with(applicationContext)
                     .load(it.photo_url[0])
                     .into(imgRestaurant)
@@ -196,6 +202,8 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+
     private fun setUpTransformer(){
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(40))
@@ -224,6 +232,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+
         return true
     }
 
@@ -269,6 +278,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
 
         const val PLACE_ID = "place_id"
+        const val SEARCH_NAME = ""
     }
 
     override fun onClick(v: View?) {
