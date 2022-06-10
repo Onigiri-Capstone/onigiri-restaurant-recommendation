@@ -23,9 +23,7 @@ class ResultViewModel: ViewModel() {
                 response: Response<ListRestaurantSearchResponse>
             ) {
                 if (response.isSuccessful) {
-                    Log.e(TAG, "respon:${response.body()?.results.toString()} " )
                     _listRestaurant.value = response.body()?.results
-
                 }
                 else{
                     Log.e(TAG, "onFailure: ${response.message()}")
