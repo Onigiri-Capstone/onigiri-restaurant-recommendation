@@ -22,11 +22,18 @@
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_category.xml" value="0.22644927536231885" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_detail_restaurant.xml" value="0.536" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_login.xml" value="0.536" />
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/activity_result.xml" value="0.10989583333333333" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/bottom_sheet_input_review.xml" value="0.16530797101449277" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/bottom_sheet_no_internet.xml" value="0.16799999999999998" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/bottom_sheet_no_location.xml" value="0.10989583333333333" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/fragment_description_restaurant.xml" value="0.10989583333333333" />
         <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/fragment_review_detail_restaurant.xml" value="0.10989583333333333" />
+<<<<<<< HEAD
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/image_slider_item.xml" value="0.10989583333333333" />
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/item_restaurant.xml" value="0.10989583333333333" />
+        <entry key="..\:/coastone insyaklklah/onigiri-restaurant-recommendation/app/src/main/res/layout/shimmer_placeholder.xml" value="0.264" />
+=======
+>>>>>>> af199c8faedcd28ec31eed18b4b12f34c9b1777c
         <entry key="app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.194" />
         <entry key="app/src/main/res/drawable/card_restaurant.xml" value="0.194" />
         <entry key="app/src/main/res/drawable/ic_arrow_down.xml" value="0.194" />

@@ -1,5 +1,8 @@
 package com.example.onigiri_restaurant_recommendation.remote.network
 
+import com.example.onigiri_restaurant_recommendation.model.FavoriteModel
+import com.example.onigiri_restaurant_recommendation.remote.response.FavoritePostAndDelResponse
+import com.example.onigiri_restaurant_recommendation.remote.response.ListFavoriteUser
 import com.example.onigiri_restaurant_recommendation.remote.response.ListRestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.remote.response.ListRestaurantSearchResponse
 import retrofit2.Call
@@ -21,21 +24,22 @@ interface ApiService {
         @Query("long") long: Double
     ): Call<ListRestaurantDetailResponse>
 
+    @Headers("Content-Type: application/json")
     @POST("users/favorites")
     fun setFavoriteRestaurant(
-        @Body user_id: String,
-        @Body restaurant_id: String
-    )
+        @Body userData: FavoriteModel
+    ): Call<FavoritePostAndDelResponse>
 
     @GET("users/favorites")
-    suspend fun getFavoriteRestaurant(
+    fun getFavoriteRestaurant(
         @Query("id") id: String
-    )
+    ): Call<ListFavoriteUser>
 
+    @Headers("Content-Type: application/json")
     @DELETE("users/favorites")
     fun deleteFavoriteRestaurant(
-        @Body id: String
-    )
+        @Body userData: FavoriteModel
+    ): Call<FavoritePostAndDelResponse>
 
     //    @GET("main/nearby")
 //    suspend fun searchRestaurant(
