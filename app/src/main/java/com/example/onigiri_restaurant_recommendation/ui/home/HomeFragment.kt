@@ -193,13 +193,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
     // ---------------------------------------LOCATION ---------------------------------------------
 
 
-    val REQUIRED_LOCATION_PERMISSIONS
+    private val REQUIRED_LOCATION_PERMISSIONS
             = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    fun checkLocationPermission(context: Context): Boolean {
+    private fun checkLocationPermission(context: Context): Boolean {
         return REQUIRED_LOCATION_PERMISSIONS.all {
             ContextCompat.checkSelfPermission(
                 context,
@@ -208,7 +208,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    fun isLocationEnabled(): Boolean {
+    private fun isLocationEnabled(): Boolean {
         val locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return  locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
@@ -238,12 +238,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     if (location != null) {
                         showGPSControl(false)
                         location.apply {
-//                            lat = latitude
-//                            long = longitude
-                            homeViewModel.setLocation(latitude, long)
+                            homeViewModel.setLocation(latitude, longitude)
+                            address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
                         }
                         Log.d(TAG, "Location is not null")
-//                        address = geocoder.getFromLocation(location.latitude, location.longitude, 1)[0].getAddressLine(0)
                     } else {
                         Log.d(TAG, "Location not found, create location callback")
                         startLocationUpdates()
@@ -252,7 +250,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
             } else {
                 createLocationRequest()
             }
-
         }
     }
 
@@ -301,11 +298,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 val latitude = locationResult.locations[0].latitude
-                val longtitude = locationResult.locations[0].longitude
-//                lat = latitude
-//                long = longtitude
-                homeViewModel.setLocation(latitude, longtitude)
-                Log.d(TAG, "onLocationResult: $latitude, $longtitude")
+                val longitude = locationResult.locations[0].longitude
+                address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
+                homeViewModel.setLocation(latitude, longitude)
+                Log.d(TAG, "onLocationResult: $latitude, $longitude")
                 stopLocationUpdates()
             }
         }

@@ -236,13 +236,6 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
         return true
     }
 
-    override fun onBackPressed() {
-        val intent = Intent(this@DetailRestaurantActivity,ResultActivity::class.java)
-        intent.putExtra(ResultActivity.FOOD_NAME,searchtext)
-        startActivity(intent)
-    }
-
-
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
