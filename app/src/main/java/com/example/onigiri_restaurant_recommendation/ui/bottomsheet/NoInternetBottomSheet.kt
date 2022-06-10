@@ -15,10 +15,6 @@ class NoInternetBottomSheet: BottomSheetDialogFragment() {
         const val TAG = "NoInternetBottomSheet"
     }
 
-    init {
-        isCancelable = false
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,4 +32,5 @@ class NoInternetBottomSheet: BottomSheetDialogFragment() {
             dismiss()
         }
     }
+
 }

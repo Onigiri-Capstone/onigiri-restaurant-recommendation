@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.BottomSheetLocationBinding
 import com.example.onigiri_restaurant_recommendation.model.Location
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.chip.Chip
 
 class LocationBottomSheet: BottomSheetDialogFragment() {
     private var _binding: BottomSheetLocationBinding? = null
@@ -45,33 +43,33 @@ class LocationBottomSheet: BottomSheetDialogFragment() {
 
         binding.tvAddress.text = arguments?.getString(ADDRESS)
 
-        list.addAll(listLocations)
+//        list.addAll(listLocations)
 
-        getLocation()
+//        getLocation()
     }
 
-    private val listLocations: ArrayList<Location>
-        get() {
-            val name = resources.getStringArray(R.array.location)
-            val listLocation = ArrayList<Location>()
-            for (i in name.indices) {
-                val location = Location(name[i])
-                listLocation.add(location)
-            }
-            return listLocation
-        }
+//    private val listLocations: ArrayList<Location>
+//        get() {
+//            val name = resources.getStringArray(R.array.location)
+//            val listLocation = ArrayList<Location>()
+//            for (i in name.indices) {
+//                val location = Location(name[i])
+//                listLocation.add(location)
+//            }
+//            return listLocation
+//        }
 
-    private fun getLocation() {
-        for(i in 0 until list.size) {
-            val chip = Chip(context)
-            chip.text = list[i].name
-
-            chip.setOnClickListener {
-                Toast.makeText(context, "${list[i].name} is chosen", Toast.LENGTH_SHORT).show()
-                this.dismiss()
-            }
-
-            binding.chipGroup.addView(chip)
-        }
-    }
+//    private fun getLocation() {
+//        for(i in 0 until list.size) {
+//            val chip = Chip(context)
+//            chip.text = list[i].name
+//
+//            chip.setOnClickListener {
+//                Toast.makeText(context, "${list[i].name} is chosen", Toast.LENGTH_SHORT).show()
+//                this.dismiss()
+//            }
+//
+//            binding.chipGroup.addView(chip)
+//        }
+//    }
 }

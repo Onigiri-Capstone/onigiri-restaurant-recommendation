@@ -1,5 +1,6 @@
 package com.example.onigiri_restaurant_recommendation.ui.bottomsheet
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.onigiri_restaurant_recommendation.databinding.BottomSheetNoLocationBinding
+import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class NoLocationBottomSheet: BottomSheetDialogFragment() {
@@ -15,10 +17,6 @@ class NoLocationBottomSheet: BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "NoLocationBottomSheet"
-    }
-
-    init {
-        isCancelable = false
     }
 
     override fun onCreateView(
@@ -31,15 +29,8 @@ class NoLocationBottomSheet: BottomSheetDialogFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.btnSettings.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-        }
-
-        binding.btnTry.setOnClickListener {
-            dismiss()
-        }
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        startActivity(Intent(requireActivity(), MainActivity::class.java))
     }
 }
