@@ -3,6 +3,7 @@
 package com.example.onigiri_restaurant_recommendation.ui.result
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -15,11 +16,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onigiri_restaurant_recommendation.adapter.RestaurantAdapter
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityResultBinding
+import com.example.onigiri_restaurant_recommendation.model.FavoriteRestaurantLocal
 import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
+import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteRestaurantViewModelFactory
+import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteViewModel
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainViewModel
 import com.example.onigiri_restaurant_recommendation.util.location.LocationUtil
@@ -32,29 +37,44 @@ class ResultActivity : AppCompatActivity() {
     private val resultViewModel: ResultViewModel by viewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val restaurantAdapter = RestaurantAdapter()
-
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private var lon: Double = 0.0
     private var lat: Double = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setFoodLabel()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))[FavoriteViewModel::class.java]
+        favoriteViewModel.getAllFavoriteRestaurant()
+            .observe(this@ResultActivity) {
+                restaurantAdapter.setDataRestaurantFav(it)
 
+            }
         getMyLastLocation()
         setToolbar()
         setOnClickListener()
         showRecyclerView()
         setSearch()
-        setFoodLabel()
 
-        val mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        //Delete
+        restaurantAdapter.delFavButton().observe(this) {
+            deleteFavoriteUser(it)
+        }
+        //Insert
+        restaurantAdapter.addFavButton().observe(this) {
+            insertFavoriteUser(it)
+        }
+
+        val mainViewModel = ViewModelProviders.of(this)[MainViewModel::class.java]
         val locationUtil = LocationUtil(this, this, supportFragmentManager, mainViewModel)
         locationUtil.subscribeToLocationPermissionListener()
         locationUtil.subscribeToGpsListener()
+
     }
 
     private fun setOnClickListener() {
@@ -73,10 +93,11 @@ class ResultActivity : AppCompatActivity() {
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
 
-                    showEmpty(false)
-                    showLoading(true)
-                    resultViewModel.setSearchRestaurant(query, lat, lon)
-                    Log.e("onQueryTextSubmit: ","textt" )
+                showEmpty(false)
+                showLoading(true)
+                restaurantAdapter.searchRestaurant(query)
+                resultViewModel.setSearchRestaurant(query, lat, lon)
+                Log.e("onQueryTextSubmit: ", query)
 
                 return true
             }
@@ -89,18 +110,25 @@ class ResultActivity : AppCompatActivity() {
         })
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun showRecyclerView() {
         with(binding) {
+
+
             rvRestaurant.layoutManager = LinearLayoutManager(this@ResultActivity)
             resultViewModel.getSearchRestaurant().observe(this@ResultActivity) {
                 showEmpty(it.isEmpty())
                 restaurantAdapter.setData(it)
+
                 binding.rvRestaurant.adapter = restaurantAdapter
-                Log.e("showRecyclerView: ",it.toString() )
+
+                Log.e("showRecyclerView: ", it.toString())
                 showLoading(false)
                 binding.rvRestaurant.isVisible = true
             }
         }
+
+        restaurantAdapter.notifyDataSetChanged()
     }
 
     private val requestPermissionLauncher =
@@ -168,16 +196,41 @@ class ResultActivity : AppCompatActivity() {
         startActivity(Intent(this@ResultActivity, MainActivity::class.java))
     }
 
-    private fun setFoodLabel() {
-        val foodname = intent?.getStringExtra(FOOD_NAME)
-        if (foodname.isNullOrEmpty()) {
+    private fun setFoodLabel(): Boolean {
+        val restaurantName = intent?.getStringExtra(FOOD_NAME)
+        if (restaurantName.isNullOrEmpty()) {
             binding.search.requestFocus()
         } else {
-            binding.search.setQuery(foodname, false)
-            resultViewModel.setSearchRestaurant(foodname, lat, lon)
-            Log.e("onQueryTextSubmit: ", "")
+
+            binding.search.setQuery(restaurantName, true)
+
+            resultViewModel.setSearchRestaurant(restaurantName, lat, lon)
+            Log.e("onQueryTextSubmit: ", restaurantName)
+
             showRecyclerView()
         }
+        return true
+    }
+
+    private fun insertFavoriteUser(it: FavoriteRestaurantLocal) {
+
+        favoriteViewModel.insert(it)
+
+        Toast.makeText(
+            this,
+            "${it.name} has added to favorite users",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun deleteFavoriteUser(it: FavoriteRestaurantLocal) {
+        favoriteViewModel.delete(it)
+
+        Toast.makeText(
+            this,
+            "${it.name} has removed from favorite users",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     companion object {

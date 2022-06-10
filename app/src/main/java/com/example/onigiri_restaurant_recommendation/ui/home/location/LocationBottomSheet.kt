@@ -45,33 +45,33 @@ class LocationBottomSheet: BottomSheetDialogFragment() {
 
         binding.tvAddress.text = arguments?.getString(ADDRESS)
 
-        list.addAll(listLocations)
+//        list.addAll(listLocations)
 
-        getLocation()
+//        getLocation()
     }
 
-    private val listLocations: ArrayList<Location>
-        get() {
-            val name = resources.getStringArray(R.array.location)
-            val listLocation = ArrayList<Location>()
-            for (i in name.indices) {
-                val location = Location(name[i])
-                listLocation.add(location)
-            }
-            return listLocation
-        }
+//    private val listLocations: ArrayList<Location>
+//        get() {
+//            val name = resources.getStringArray(R.array.location)
+//            val listLocation = ArrayList<Location>()
+//            for (i in name.indices) {
+//                val location = Location(name[i])
+//                listLocation.add(location)
+//            }
+//            return listLocation
+//        }
 
-    private fun getLocation() {
-        for(i in 0 until list.size) {
-            val chip = Chip(context)
-            chip.text = list[i].name
-
-            chip.setOnClickListener {
-                Toast.makeText(context, "${list[i].name} is chosen", Toast.LENGTH_SHORT).show()
-                this.dismiss()
-            }
-
-            binding.chipGroup.addView(chip)
-        }
-    }
+//    private fun getLocation() {
+//        for(i in 0 until list.size) {
+//            val chip = Chip(context)
+//            chip.text = list[i].name
+//
+//            chip.setOnClickListener {
+//                Toast.makeText(context, "${list[i].name} is chosen", Toast.LENGTH_SHORT).show()
+//                this.dismiss()
+//            }
+//
+//            binding.chipGroup.addView(chip)
+//        }
+//    }
 }
