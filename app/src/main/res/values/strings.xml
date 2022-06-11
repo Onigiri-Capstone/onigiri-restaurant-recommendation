@@ -174,5 +174,10 @@
     <string name="share">\tShare</string>
     <string name="nullValue">-</string>
     <string name="photo_library">Photo Library</string>
+    <string name="text_survey">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="submit">SUBMIT</string>
 
 </resources>

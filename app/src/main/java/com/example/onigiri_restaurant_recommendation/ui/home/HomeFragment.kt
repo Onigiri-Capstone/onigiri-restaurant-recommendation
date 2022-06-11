@@ -33,6 +33,7 @@ import com.example.onigiri_restaurant_recommendation.ui.home.category.CategoryBo
 import com.example.onigiri_restaurant_recommendation.ui.home.location.LocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.profile.ProfileActivity
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
+import com.example.onigiri_restaurant_recommendation.ui.survey.SurveyActivity
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import java.util.*
@@ -131,7 +132,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 locationBottomSheet.show(parentFragmentManager, LocationBottomSheet.TAG)
             }
             R.id.tv_input -> {
-                startActivity(Intent(activity, ResultActivity::class.java))
+              startActivity(Intent(activity, ResultActivity::class.java))
+
             }
             R.id.btn_more -> {
                 val categoryBottomSheet = CategoryBottomSheet()
