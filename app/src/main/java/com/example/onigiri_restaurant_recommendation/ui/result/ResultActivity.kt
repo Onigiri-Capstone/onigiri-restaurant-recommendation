@@ -55,14 +55,18 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setFoodLabel()
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))[FavoriteViewModel::class.java]
         favoriteViewModel.getAllFavoriteRestaurant()
             .observe(this@ResultActivity) {
                 restaurantAdapter.setDataRestaurantFav(it)
 
             }
+
         createLocationRequest()
         createLocationCallback()
 
@@ -103,17 +107,18 @@ class ResultActivity : AppCompatActivity() {
     private fun setSearch() {
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-
                 showEmpty(false)
                 showLoading(true)
                 restaurantAdapter.searchRestaurant(query)
                 resultViewModel.setSearchRestaurant(query, lat, lon)
                 Log.e("onQueryTextSubmit: ", query)
+
                 if(query.length > 1) {
                     showEmpty(false)
                     showLoading(true)
                     resultViewModel.setSearchRestaurant(query, lat, lon)
                 }
+
                 return true
             }
 
@@ -128,8 +133,6 @@ class ResultActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun showRecyclerView() {
         with(binding) {
-
-
             rvRestaurant.layoutManager = LinearLayoutManager(this@ResultActivity)
             resultViewModel.getSearchRestaurant().observe(this@ResultActivity) {
                 showEmpty(it.isEmpty())

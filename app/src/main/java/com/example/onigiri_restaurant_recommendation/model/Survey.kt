@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class survey(
+data class Survey(
     var id: Int,
     var text: CharSequence,
     var checked: Boolean
