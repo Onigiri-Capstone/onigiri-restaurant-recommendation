@@ -92,14 +92,15 @@
             tools:listitem="@layout/item_restaurant" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/notfound"
             android:id="@+id/notfoundresult"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/notfound"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include android:id="@+id/loading" layout="@layout/view_loading"
             android:visibility="gone"/>

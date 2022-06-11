@@ -5,10 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.onigiri_restaurant_recommendation.adapter.RestaurantAdapter
+import com.example.onigiri_restaurant_recommendation.adapter.FavoriteAdapter
 import com.example.onigiri_restaurant_recommendation.data.remote.response.*
 import com.example.onigiri_restaurant_recommendation.databinding.FragmentFavoriteBinding
 
@@ -17,18 +18,20 @@ class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private lateinit var favoriteViewModel: FavoriteViewModel
     private val binding get() = _binding!!
-    private lateinit var restaurantAdapter: RestaurantAdapter
+    private lateinit var favoriteAdapter: FavoriteAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        restaurantAdapter = RestaurantAdapter()
+        favoriteAdapter = FavoriteAdapter()
         val application = requireActivity().application
         favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))[FavoriteViewModel::class.java]
         favoriteViewModel.getAllFavoriteRestaurant()
             .observe(viewLifecycleOwner) {
+                binding.empty.isVisible = it.isEmpty()
+
                 val list = arrayListOf<RestaurantSearchResponse>()
                 for (i in it.indices) {
                     Log.d("TAG", "favoriteUserList loop: ${it[i]}")
@@ -36,7 +39,7 @@ class FavoriteFragment : Fragment() {
                         place_id = it[i].place_id,
                         name = it[i].name,
                         photo_url = it[i].photo_url,
-                        rating = it[i].rating.toDouble(),
+                        rating = "%.1f".format(it[i].rating.toDouble()).toDouble(),
                         photos = listOf(),
                         geometry = ListGeometryResponse(
                             ListLocationResponse(it[i].lat, it[i].lng),
@@ -54,12 +57,14 @@ class FavoriteFragment : Fragment() {
                 }
                 Log.d("TAG", " list.add :$list ")
 
-                restaurantAdapter.setData(list)
+                favoriteAdapter.setData(list)
                 binding.apply {
                     rvRestaurant.layoutManager = LinearLayoutManager(requireContext())
-                    rvRestaurant.adapter = restaurantAdapter
+                    rvRestaurant.adapter = favoriteAdapter
                     rvRestaurant.setHasFixedSize(true)
                 }
+
+                binding.loading.root.isVisible = false
 
             }
         return binding.root

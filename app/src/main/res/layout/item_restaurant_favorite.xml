@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    style="@style/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="20dp"
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="20dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/iv_restaurant"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="13dp"
+                android:background="@drawable/photorestaurant"
+                android:clipToOutline="true"
+                android:contentDescription="@string/foto_deskripsi"
+                android:src="@drawable/dummy_photo" />
+
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_margin="5dp"
+                android:contentDescription="@string/foto_deskripsi"
+                android:src="@drawable/halal" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="13dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Restaurant_name"
+                    style="@style/list_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/restaurant_name" />
+
+                <TextView
+                    android:id="@+id/Address_restaurant"
+                    style="@style/secondary_text_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Restaurant_name"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Raflesia Hills No.50 Jalan Patimura Pahlawan terhebat abad ini" />
+
+
+                <TextView
+                    android:id="@+id/rate_restaurant"
+                    style="@style/secondary_text_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Address_restaurant"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="1dp"
+                    android:drawablePadding="3dp"
+                    android:gravity="center_vertical"
+                    android:text="4.2"
+                    card_view:drawableStartCompat="@drawable/ic_star_rate" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

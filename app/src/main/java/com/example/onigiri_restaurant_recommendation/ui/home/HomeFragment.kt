@@ -24,7 +24,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onigiri_restaurant_recommendation.R
+import com.example.onigiri_restaurant_recommendation.adapter.RecommendationAdapter
+import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.databinding.FragmentHomeBinding
 import com.example.onigiri_restaurant_recommendation.ui.bottomsheet.NoLocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.camera.CameraActivity
@@ -33,9 +36,9 @@ import com.example.onigiri_restaurant_recommendation.ui.home.category.CategoryBo
 import com.example.onigiri_restaurant_recommendation.ui.home.location.LocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.profile.ProfileActivity
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
-import com.example.onigiri_restaurant_recommendation.ui.survey.SurveyActivity
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
+import com.google.firebase.firestore.DocumentSnapshot
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -49,7 +52,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var geocoder: Geocoder
     private var address: String = "Location not found"
+    private lateinit var documentUser: DocumentSnapshot
 
+    val recommendationAdapter = RecommendationAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
 
     private var lat: Double = 0.0
@@ -95,6 +100,76 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
 
         setOnClickListener()
+        getUserFavorite()
+    }
+
+    private fun showRecyclerView() {
+        val first = documentUser.get(generateRandomFavorite()).toString()
+        var second = ""
+        var search = true
+
+        while(search) {
+            val temp = documentUser.get(generateRandomFavorite()).toString()
+            if (first != temp) {
+                second = temp
+                search = false
+            }
+        }
+
+        homeViewModel.getRecommendation(lat, long, first, second)
+        Log.d(TAG, "Favorite $first and $second")
+        with(binding) {
+            rvRestaurant.layoutManager = LinearLayoutManager(root.context)
+            homeViewModel.listRestaurant.observe(viewLifecycleOwner) {
+                if(it.isEmpty()) {
+                    Log.d(TAG, "List empty")
+                    showEmpty(true)
+                } else {
+                    showEmpty(false)
+                }
+                Log.d(TAG, it.toString())
+                recommendationAdapter.setData(it)
+                binding.rvRestaurant.adapter = recommendationAdapter
+                showLoading(false)
+            }
+        }
+    }
+
+    private fun getUserFavorite() {
+        Firebase.apply {
+            firestoreInstance().collection("user_favorite")
+                .document(currentUser().uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        documentUser = document
+                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                        showRecyclerView()
+                    } else {
+                        Log.d(TAG, "No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "get failed with ", exception)
+                }
+        }
+    }
+
+    private fun generateRandomFavorite(): String {
+        val favorite = when((1..3).random()) {
+            1 -> "first"
+            2 -> "second"
+            else -> "third"
+        }
+        return favorite
+    }
+
+    private fun showLoading(state: Boolean) {
+        binding.loading.root.isVisible = state
+    }
+
+    private fun showEmpty(state: Boolean) {
+        binding.empty.isVisible = state
     }
 
     private fun setOnClickListener() {
@@ -112,9 +187,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
             btnCoffee.setOnClickListener(this@HomeFragment)
             btnSeafood.setOnClickListener(this@HomeFragment)
             ivProfile.setOnClickListener(this@HomeFragment)
-            swiperefreshhome.setOnRefreshListener {
-                swiperefreshhome.isRefreshing = false
-            }
         }
     }
 
