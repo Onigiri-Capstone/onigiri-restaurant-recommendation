@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.survey.SurveyActivity">
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/page_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingHorizontal="20dp"
+        android:text="@string/text_survey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/id_rice"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/rice"
+
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <CheckBox
+        android:id="@+id/id_sweets"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/sweets"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_rice"
+        app:layout_constraintEnd_toStartOf="@+id/id_rice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id_rice" />
+
+    <CheckBox
+        android:id="@+id/id_meatball"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/meatball"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_rice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_rice"
+        app:layout_constraintTop_toTopOf="@+id/id_rice" />
+
+    <CheckBox
+        android:id="@+id/id_chicken"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+
+        android:text="@string/chicken"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_rice" />
+
+    <CheckBox
+        android:id="@+id/id_drinks"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/drinks"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_chicken"
+        app:layout_constraintEnd_toStartOf="@+id/id_chicken"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id_chicken"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/id_coffee"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/meatball"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_chicken"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_chicken"
+        app:layout_constraintTop_toTopOf="@+id/id_chicken"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <CheckBox
+        android:id="@+id/id_seafood"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/seafood"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_chicken" />
+
+    <CheckBox
+        android:id="@+id/id_western"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/western"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_seafood"
+        app:layout_constraintEnd_toStartOf="@+id/id_seafood"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id_seafood" />
+
+    <CheckBox
+        android:id="@+id/id_noodle"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/noodle"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_seafood"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_seafood"
+        app:layout_constraintTop_toTopOf="@+id/id_seafood" />
+
+
+    <CheckBox
+        android:id="@+id/id_chinese"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/chinese"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_seafood" />
+
+    <CheckBox
+        android:id="@+id/id_indian"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/indian"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_chinese"
+        app:layout_constraintEnd_toStartOf="@+id/id_chinese"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id_chinese" />
+
+    <CheckBox
+        android:id="@+id/id_japanese"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+        android:text="@string/japanese"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+
+        app:layout_constraintBottom_toBottomOf="@+id/id_chinese"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_chinese"
+        app:layout_constraintTop_toTopOf="@+id/id_chinese"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/id_middle_east"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+
+        android:text="@string/middle_east"
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintBottom_toBottomOf="@+id/id_thai"
+        app:layout_constraintEnd_toStartOf="@+id/id_thai"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id_thai" />
+
+    <CheckBox
+        android:id="@+id/id_thai"
+        style="@style/secondary_text_caption"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_radiobutton_survey"
+        android:button="@null"
+
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="4dp"
+
+        android:text="@string/thai"
+
+        android:textColor="@drawable/selector_radiobutton_survey_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_chinese" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+      android:layout_marginHorizontal="30dp"
+        android:id="@+id/btn_try"
+        style="@style/button_green"
+        android:layout_width="0dp"
+        android:layout_marginBottom="40dp"
+        android:layout_weight="1"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
