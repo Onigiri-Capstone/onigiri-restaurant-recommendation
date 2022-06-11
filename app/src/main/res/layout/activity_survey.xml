@@ -274,7 +274,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
       android:layout_marginHorizontal="30dp"
-        android:id="@+id/btn_try"
+        android:id="@+id/btn_submit"
         style="@style/button_green"
         android:layout_width="0dp"
         android:layout_marginBottom="40dp"

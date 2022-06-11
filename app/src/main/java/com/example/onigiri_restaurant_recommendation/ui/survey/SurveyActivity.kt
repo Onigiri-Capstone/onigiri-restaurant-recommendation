@@ -1,23 +1,106 @@
 package com.example.onigiri_restaurant_recommendation.ui.survey
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.CheckBox
+import android.widget.Toast
 import com.example.onigiri_restaurant_recommendation.R
+import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.databinding.ActivitySurveyBinding
+import com.example.onigiri_restaurant_recommendation.model.FavoriteFood
+import com.example.onigiri_restaurant_recommendation.model.TokenFcm
+import com.example.onigiri_restaurant_recommendation.model.User
+import com.example.onigiri_restaurant_recommendation.ui.auth.signup.SignUpActivity
+import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
+import com.example.onigiri_restaurant_recommendation.ui.notification.MessagingService
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class SurveyActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySurveyBinding
     private lateinit var checkbox: CheckBox
     private var checkString = arrayListOf<String>()
     private var checkId = arrayListOf<Int>()
+    private lateinit var user: User
+
+    companion object {
+        private const val TAG = "SurveyActivity"
+        const val DATA_USER = "data_user"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySurveyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        user = intent.getParcelableExtra<User>(DATA_USER) as User
+
         setCheckBox()
+
+        binding.btnSubmit.setOnClickListener {
+            submitData()
+        }
+    }
+
+    private fun submitData() {
+        Firebase.authInstance().createUserWithEmailAndPassword(user.email, user.password)
+            .addOnCompleteListener(this@SurveyActivity) { task ->
+                if (task.isSuccessful) {
+                    addTokenFcm()
+                    updateUserProfile()
+                    addUserFavoriteFood(checkString[0], checkString[1], checkString[2])
+
+                    startActivity(Intent(this@SurveyActivity, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(this@SurveyActivity, "Failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun addTokenFcm() {
+        val token = MessagingService().getToken()
+
+        Firebase.firestoreInstance()
+            .collection("token_fcm")
+            .document(Firebase.currentUser().uid)
+            .set(TokenFcm(token, Firebase.currentUser().uid))
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved token $token")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error", e)
+            }
+    }
+
+    private fun updateUserProfile() {
+        Firebase.currentUser().updateProfile(
+            userProfileChangeRequest {
+                displayName = user.name
+            }
+        ).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Log.d("profileChangeRequest", "User profile updated.")
+            }
+        }
+    }
+
+    private fun addUserFavoriteFood(first: String, second: String, third: String){
+        Firebase.firestoreInstance()
+            .collection("user_favorite")
+            .document(Firebase.currentUser().uid)
+            .set(FavoriteFood(first, second, third))
+            .addOnSuccessListener {
+                Log.d(TAG, "addUserFavoriteFood: Data added")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error addUserFavoriteFood()", e)
+            }
+    }
+
+    private fun updateUserData() {
+
     }
 
     private fun setCheckBox() {

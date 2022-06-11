@@ -8,9 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.databinding.ActivitySignUpBinding
 import com.example.onigiri_restaurant_recommendation.model.TokenFcm
+import com.example.onigiri_restaurant_recommendation.model.User
 import com.example.onigiri_restaurant_recommendation.ui.auth.login.LoginActivity
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
 import com.example.onigiri_restaurant_recommendation.ui.notification.MessagingService
+import com.example.onigiri_restaurant_recommendation.ui.survey.SurveyActivity
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class SignUpActivity : AppCompatActivity() {
@@ -40,38 +42,12 @@ class SignUpActivity : AppCompatActivity() {
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
 
-            Firebase.authInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this@SignUpActivity) { task ->
-                    if (task.isSuccessful) {
-                        val token = MessagingService().getToken()
+            val user = User(name, email, password)
 
-                        Firebase.firestoreInstance()
-                            .collection("token_fcm")
-                            .document(Firebase.currentUser().uid)
-                            .set(TokenFcm(token, Firebase.currentUser().uid))
-                            .addOnSuccessListener {
-                                Log.d(TAG, "Saved token $token")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.w(TAG, "Error", e)
-                            }
-
-                        Firebase.currentUser().updateProfile(
-                            userProfileChangeRequest {
-                                displayName = name
-                            }
-                        ).addOnCompleteListener {
-                            if (task.isSuccessful) {
-                                Log.d("profileChangeRequest", "User profile updated.")
-                            }
-                        }
-
-                        startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-                        finish()
-                    } else {
-                        Toast.makeText(this@SignUpActivity, "Failed", Toast.LENGTH_SHORT).show()
-                    }
-                }
+            startActivity(
+                Intent(this@SignUpActivity, SurveyActivity::class.java)
+                    .putExtra(SurveyActivity.DATA_USER, user)
+            )
         }
     }
 }
