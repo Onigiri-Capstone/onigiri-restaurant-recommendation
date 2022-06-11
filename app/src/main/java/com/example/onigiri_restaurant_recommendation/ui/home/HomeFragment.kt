@@ -132,8 +132,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 locationBottomSheet.show(parentFragmentManager, LocationBottomSheet.TAG)
             }
             R.id.tv_input -> {
-//                startActivity(Intent(activity, ResultActivity::class.java))
-                startActivity(Intent(activity, SurveyActivity::class.java))
+              startActivity(Intent(activity, ResultActivity::class.java))
+
             }
             R.id.btn_more -> {
                 val categoryBottomSheet = CategoryBottomSheet()
