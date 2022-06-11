@@ -8,16 +8,27 @@
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/foto_deskripsi" />
 
     <LinearLayout
         android:id="@+id/permission_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:visibility="gone"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +65,9 @@
         style="@style/list_item_important_text_snippet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="@string/adjust_angle"
         android:textColor="@color/white"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_capture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -65,12 +76,24 @@
         android:id="@+id/btn_capture"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="?actionBarSize"
         android:background="@null"
+        android:contentDescription="@string/foto_deskripsi"
         android:scaleType="fitCenter"
         android:src="@drawable/btn_capture"
-        android:layout_marginBottom="?actionBarSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageButton
+        android:id="@+id/btn_galery"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/background_insert__image"
+        android:contentDescription="@string/foto_deskripsi"
+        android:src="@drawable/ic_baseline_photo_24"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_capture"
+        app:layout_constraintEnd_toStartOf="@+id/btn_capture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_capture" />
 </androidx.constraintlayout.widget.ConstraintLayout>
