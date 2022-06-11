@@ -1,4 +1,4 @@
-package com.example.onigiri_restaurant_recommendation.remote.network
+package com.example.onigiri_restaurant_recommendation.data.remote.network
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -11,5 +11,7 @@ object Firebase {
     fun authInstance() = FirebaseAuth.getInstance()
 
     fun firestoreInstance() = FirebaseFirestore.getInstance()
+
+    fun firebaseMessaging() = FirebaseMessaging.getInstance()
 
 }

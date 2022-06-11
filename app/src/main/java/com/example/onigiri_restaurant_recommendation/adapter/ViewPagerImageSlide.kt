@@ -1,23 +1,12 @@
 package com.example.onigiri_restaurant_recommendation.adapter
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.ImageSliderItemBinding
-import com.example.onigiri_restaurant_recommendation.databinding.ItemRestaurantBinding
 import com.example.onigiri_restaurant_recommendation.model.ImageModel
-import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantSearchResponse
-import java.util.*
 
 class ViewPagerImageSlide:RecyclerView.Adapter<ViewPagerImageSlide.ImageViewHolder>(){
     private var image = ArrayList<ImageModel>()

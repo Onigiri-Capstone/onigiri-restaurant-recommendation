@@ -1,4 +1,4 @@
-package com.example.onigiri_restaurant_recommendation.model
+package com.example.onigiri_restaurant_recommendation.data.local.entity
 
 import com.google.gson.annotations.SerializedName
 

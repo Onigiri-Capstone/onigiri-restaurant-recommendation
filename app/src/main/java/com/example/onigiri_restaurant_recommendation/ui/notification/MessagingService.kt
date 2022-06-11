@@ -9,8 +9,10 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.onigiri_restaurant_recommendation.R
-import com.example.onigiri_restaurant_recommendation.remote.network.Firebase
+import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
+import com.example.onigiri_restaurant_recommendation.model.TokenFcm
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -23,19 +25,49 @@ class MessagingService: FirebaseMessagingService() {
         private const val NOTIFICATION_CHANNEL_NAME = "Firebase Notification"
     }
 
+    private var token = ""
+
+    fun getToken(): String {
+        Firebase.firebaseMessaging().token.addOnCompleteListener(OnCompleteListener {
+            if(!it.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", it.exception)
+                return@OnCompleteListener
+            }
+            val token = it.result
+            this.token = token
+        })
+        return this.token
+    }
+
     override fun onNewToken(token: String) {
-        Log.d(TAG, token)
+        this.token = token
+
         Firebase.firestoreInstance()
             .collection("token_fcm")
-            .add(hashMapOf(
-                "token" to token
-            ))
-            .addOnSuccessListener {
-                Log.d(TAG, "Saved token $token")
+            .whereEqualTo("user_id", Firebase.currentUser().uid)
+            .get()
+            .addOnSuccessListener { documents ->
+                Firebase.firestoreInstance()
+                    .collection("token_fcm")
+                    .document(Firebase.currentUser().uid)
+                    .update("token", token)
+                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
             }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error", e)
+            .addOnFailureListener { exception ->
+                Firebase.firestoreInstance()
+                    .collection("token_fcm")
+                    .document(Firebase.currentUser().uid)
+                    .set(TokenFcm(token, Firebase.currentUser().uid))
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Saved token $token")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error", e)
+                    }
             }
+
+        Log.d(TAG, token)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -74,7 +106,3 @@ class MessagingService: FirebaseMessagingService() {
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 }
-
-data class Token(
-    val token: String
-)

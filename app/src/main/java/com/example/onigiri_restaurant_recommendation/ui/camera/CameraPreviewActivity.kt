@@ -61,8 +61,15 @@ class CameraPreviewActivity : AppCompatActivity() {
                     }
                 }
             }
+            val foodLabel = foodname.split("_")
+            var label = ""
+
+            for (i  in foodLabel) {
+                label = i + " "
+            }
+
             val intent = Intent(this@CameraPreviewActivity, ResultActivity::class.java)
-            intent.putExtra(ResultActivity.FOOD_NAME,foodname)
+            intent.putExtra(ResultActivity.FOOD_NAME, label)
             startActivity(intent)
             finish()
         }
@@ -79,7 +86,7 @@ class CameraPreviewActivity : AppCompatActivity() {
         val label = application.assets.open(name_file).bufferedReader().use { it.readText() }
         val labels = label.split("\n")
         val model = Model1654305306.newInstance(this)
-        var bitmapscale = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
+        val bitmapscale = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
 //        imageView.setImageBitmap(bitmapscale)
         // Creates inputs for reference.
         val inputFeature0 =
@@ -96,7 +103,7 @@ class CameraPreviewActivity : AppCompatActivity() {
         val outputs = model.process(inputFeature0)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
-        var max = getMax(outputFeature0.floatArray, outputFeature0.floatArray.size)
+        val max = getMax(outputFeature0.floatArray, outputFeature0.floatArray.size)
         Log.e("outputGenerator: ", "-----------------------")
         Log.e("outputGenerator: ", outputFeature0.floatArray.toList().toString())
         Log.e("outputGenerator: ", max.toString())
@@ -110,8 +117,8 @@ class CameraPreviewActivity : AppCompatActivity() {
     }
 
     fun getMax(arr: FloatArray, size: Int): Int {
-        var ind = 0;
-        var min = 0.0f;
+        var ind = 0
+        var min = 0.0f
 
         for (i in 0 until size) {
 
@@ -120,7 +127,7 @@ class CameraPreviewActivity : AppCompatActivity() {
                 Log.e("getMax: ", arr[i].toString())
 
                 min = arr[i]
-                ind = i;
+                ind = i
             }
         }
         return ind

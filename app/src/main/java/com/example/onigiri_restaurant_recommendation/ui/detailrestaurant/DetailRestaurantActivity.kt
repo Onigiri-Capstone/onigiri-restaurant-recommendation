@@ -18,17 +18,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.adapter.ViewPagerImageSlide
+import com.example.onigiri_restaurant_recommendation.data.local.entity.FavoriteRestaurantLocal
+import com.example.onigiri_restaurant_recommendation.data.remote.response.RestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityDetailRestaurantBinding
-import com.example.onigiri_restaurant_recommendation.model.FavoriteRestaurantLocal
 import com.example.onigiri_restaurant_recommendation.model.ImageModel
-import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteRestaurantViewModelFactory
 import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -39,6 +37,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
     private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var placeId: String
+    private lateinit var searchtext: String
     private lateinit var handler : Handler
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lon: Double = 0.0
@@ -49,7 +48,9 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private var phonenumberRestaurant: String = ""
     private var latRestaurant: Double = 0.0
     private var dataRestaurant: String = ""
-    private lateinit var  viewPager2: ViewPager2
+
+//    private lateinit var  viewPager2: ViewPager2
+
     private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,17 +58,17 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityDetailRestaurantBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))
-            .get(FavoriteViewModel::class.java)
+        favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))[FavoriteViewModel::class.java]
 
 
         handler = Handler(Looper.myLooper()!!)
         placeId = intent.getStringExtra(PLACE_ID)!!
+        searchtext = intent.getStringExtra(SEARCH_NAME)!!
         Log.e("onCreate: ", placeId)
         detailRestaurantViewModel.setDetailRestaurant(placeId, lat, lon)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        viewPager2 = binding.ViewPager2
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){})
+//        viewPager2 = binding.ViewPager2
+//        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){})
         setToolbar()
         setDetailRestaurant()
         getMyLastLocation()
@@ -96,6 +97,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e("setDetailRestaurant: ", it.toString())
                 dataRestaurant = "${it.name} ${it.formatted_address} ${it.url} "
                 tvName.text = it.name
+
                 Glide.with(applicationContext)
                     .load(it.photo_url[0])
                     .into(imgRestaurant)
@@ -125,7 +127,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
                 direction.setOnClickListener(this@DetailRestaurantActivity)
                 share.setOnClickListener(this@DetailRestaurantActivity)
-                favorite.setOnClickListener(this@DetailRestaurantActivity)
+//                favorite.setOnClickListener(this@DetailRestaurantActivity)
                 phoneCall.setOnClickListener(this@DetailRestaurantActivity)
                 setUpTransformer()
 
@@ -138,11 +140,11 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 val viewPagerAdapter = ViewPagerImageSlide()
                 viewPagerAdapter.setData(myModelArrayList)
 
-                viewPager2.adapter = viewPagerAdapter
-                viewPager2.offscreenPageLimit = 3
-                viewPager2.clipToPadding = false
-                viewPager2.clipChildren = false
-                viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+//                viewPager2.adapter = viewPagerAdapter
+//                viewPager2.offscreenPageLimit = 3
+//                viewPager2.clipToPadding = false
+//                viewPager2.clipChildren = false
+//                viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
                 nestedlist.visibility = View.VISIBLE
             }
         }
@@ -196,10 +198,12 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+
     private fun setUpTransformer(){
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(40))
-        viewPager2.setPageTransformer(transformer)
+//        viewPager2.setPageTransformer(transformer)
     }
 
 
@@ -224,6 +228,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+
         return true
     }
 
@@ -269,6 +274,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
 
         const val PLACE_ID = "place_id"
+        const val SEARCH_NAME = ""
     }
 
     override fun onClick(v: View?) {

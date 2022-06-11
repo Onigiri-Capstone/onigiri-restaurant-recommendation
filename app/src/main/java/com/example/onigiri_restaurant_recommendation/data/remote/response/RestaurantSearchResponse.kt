@@ -1,7 +1,8 @@
-package com.example.onigiri_restaurant_recommendation.remote.response
+package com.example.onigiri_restaurant_recommendation.data.remote.response
 
 data class ListRestaurantSearchResponse(
-    val results: List<RestaurantSearchResponse>
+    val results: List<RestaurantSearchResponse>,
+    val token: String?
 )
 
 data class RestaurantSearchResponse (
@@ -9,7 +10,7 @@ data class RestaurantSearchResponse (
     val geometry: ListGeometryResponse,
     val icon: String ="",
     val icon_background_color: String ="",
-    val icon_mask_base_uri: String="" ,
+    val icon_mask_base_uri: String="",
     val name: String="",
     val opening_hours: ListOpeningHoursReponse,
     val photos: List<ListPhotosResponse>,
@@ -22,7 +23,8 @@ data class RestaurantSearchResponse (
     val scope: String="",
     val types: List<String>,
     val user_ratings_total: Int=0,
-    val vicinity: String=""
+    val vicinity: String="",
+    val range: Double=0.0
 )
 
 data class ListGeometryResponse(
