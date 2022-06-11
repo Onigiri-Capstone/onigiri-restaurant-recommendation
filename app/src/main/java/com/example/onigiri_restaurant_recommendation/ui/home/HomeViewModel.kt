@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.onigiri_restaurant_recommendation.model.Location
-import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantSearchResponse
+import com.example.onigiri_restaurant_recommendation.data.remote.response.RestaurantSearchResponse
 
 class HomeViewModel : ViewModel() {
     private val _location = MutableLiveData<Location>()

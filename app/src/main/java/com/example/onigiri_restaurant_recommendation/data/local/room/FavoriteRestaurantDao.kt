@@ -1,8 +1,8 @@
-package com.example.onigiri_restaurant_recommendation.remote.local
+package com.example.onigiri_restaurant_recommendation.data.local.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.onigiri_restaurant_recommendation.model.FavoriteRestaurantLocal
+import com.example.onigiri_restaurant_recommendation.data.local.entity.FavoriteRestaurantLocal
 
 @Dao
 interface FavoriteRestaurantDao {
@@ -19,6 +19,6 @@ interface FavoriteRestaurantDao {
     @Query("SELECT * FROM favorite_restaurant WHERE place_id = :place_id LIMIT 1")
     suspend fun getFavoriteRestaurant(place_id: String): FavoriteRestaurantLocal
 
-    @Query("SELECT * FROM favorite_restaurant ORDER BY place_id ASC")
+    @Query("SELECT * FROM favorite_restaurant")
     fun getAllFavoriteRestaurant(): LiveData<List<FavoriteRestaurantLocal>>
 }

@@ -1,4 +1,4 @@
-package com.example.onigiri_restaurant_recommendation.remote.network
+package com.example.onigiri_restaurant_recommendation.data.remote.network
 
 import androidx.viewbinding.BuildConfig
 import okhttp3.OkHttpClient

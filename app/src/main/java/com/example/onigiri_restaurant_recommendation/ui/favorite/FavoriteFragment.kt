@@ -6,13 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onigiri_restaurant_recommendation.adapter.RestaurantAdapter
+import com.example.onigiri_restaurant_recommendation.data.remote.response.*
 import com.example.onigiri_restaurant_recommendation.databinding.FragmentFavoriteBinding
-import com.example.onigiri_restaurant_recommendation.model.FavoriteRestaurantLocal
-import com.example.onigiri_restaurant_recommendation.remote.response.*
 
 class FavoriteFragment : Fragment() {
 
@@ -28,12 +26,11 @@ class FavoriteFragment : Fragment() {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         restaurantAdapter = RestaurantAdapter()
         val application = requireActivity().application
-        favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))
-            .get(FavoriteViewModel::class.java)
+        favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))[FavoriteViewModel::class.java]
         favoriteViewModel.getAllFavoriteRestaurant()
-            .observe(viewLifecycleOwner, Observer {
+            .observe(viewLifecycleOwner) {
                 val list = arrayListOf<RestaurantSearchResponse>()
-                for (i in 0 until it.size) {
+                for (i in it.indices) {
                     Log.d("TAG", "favoriteUserList loop: ${it[i]}")
                     val user = RestaurantSearchResponse(
                         place_id = it[i].place_id,
@@ -51,21 +48,21 @@ class FavoriteFragment : Fragment() {
                         vicinity = it[i].vicinity,
                         plus_code = ListPlusCodeResponse("", ""),
                         types = listOf(),
-                        opening_hours =ListOpeningHoursReponse(true, listOf(), listOf())
+                        opening_hours = ListOpeningHoursReponse(true, listOf(), listOf())
                     )
                     list.add(user)
                 }
                 Log.d("TAG", " list.add :$list ")
 
                 restaurantAdapter.setData(list)
-                binding?.apply {
+                binding.apply {
                     rvRestaurant.layoutManager = LinearLayoutManager(requireContext())
                     rvRestaurant.adapter = restaurantAdapter
                     rvRestaurant.setHasFixedSize(true)
                 }
 
-            })
-            return binding.root
+            }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

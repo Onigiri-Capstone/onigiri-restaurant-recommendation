@@ -1,4 +1,4 @@
-package com.example.onigiri_restaurant_recommendation.remote.response
+package com.example.onigiri_restaurant_recommendation.data.remote.response
 
 data class ListRestaurantDetailResponse(
     val results: RestaurantDetailResponse,
@@ -26,6 +26,7 @@ data class RestaurantDetailResponse(
     val price_level: Int,
     val rating: Float,
     val reference: String,
+    val range: Double = 0.0
 )
 
 data class ListAddressComponentsResponse(

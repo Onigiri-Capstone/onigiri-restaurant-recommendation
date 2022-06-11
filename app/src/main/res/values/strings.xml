@@ -148,7 +148,7 @@
     <string name="invalid_email">Email is invalid</string>
     <string name="must_fill">Field can\'t be empty</string>
     <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit ?</string>
-    <string name="cencel">Cencel</string>
+    <string name="cencel">Cancel</string>
     <string name="ok">OK</string>
     <string name="use_camera">Use Onigiri\'s camera</string>
     <string name="use_camera_description">Take photos with the Onigiri app to recognize your food.</string>
