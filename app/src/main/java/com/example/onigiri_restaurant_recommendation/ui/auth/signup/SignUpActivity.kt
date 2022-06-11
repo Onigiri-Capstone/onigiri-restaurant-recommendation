@@ -2,18 +2,11 @@ package com.example.onigiri_restaurant_recommendation.ui.auth.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.databinding.ActivitySignUpBinding
-import com.example.onigiri_restaurant_recommendation.model.TokenFcm
 import com.example.onigiri_restaurant_recommendation.model.User
 import com.example.onigiri_restaurant_recommendation.ui.auth.login.LoginActivity
-import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
-import com.example.onigiri_restaurant_recommendation.ui.notification.MessagingService
 import com.example.onigiri_restaurant_recommendation.ui.survey.SurveyActivity
-import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class SignUpActivity : AppCompatActivity() {
 

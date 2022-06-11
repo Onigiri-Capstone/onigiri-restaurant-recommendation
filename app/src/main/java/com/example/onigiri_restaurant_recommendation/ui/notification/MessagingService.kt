@@ -12,6 +12,7 @@ import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.model.TokenFcm
 import com.example.onigiri_restaurant_recommendation.ui.main.MainActivity
+import com.example.onigiri_restaurant_recommendation.ui.survey.SurveyActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -41,32 +42,19 @@ class MessagingService: FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         this.token = token
-
         Firebase.firestoreInstance()
             .collection("token_fcm")
-            .whereEqualTo("user_id", Firebase.currentUser().uid)
-            .get()
-            .addOnSuccessListener { documents ->
-                Firebase.firestoreInstance()
-                    .collection("token_fcm")
-                    .document(Firebase.currentUser().uid)
-                    .update("token", token)
-                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
-                    .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
+            .add(
+                hashMapOf(
+                    "token" to token
+                )
+            )
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved token $token")
             }
-            .addOnFailureListener { exception ->
-                Firebase.firestoreInstance()
-                    .collection("token_fcm")
-                    .document(Firebase.currentUser().uid)
-                    .set(TokenFcm(token, Firebase.currentUser().uid))
-                    .addOnSuccessListener {
-                        Log.d(TAG, "Saved token $token")
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w(TAG, "Error", e)
-                    }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error", e)
             }
-
         Log.d(TAG, token)
     }
 

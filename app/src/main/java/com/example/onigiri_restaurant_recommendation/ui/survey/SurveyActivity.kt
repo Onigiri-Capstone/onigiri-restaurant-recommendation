@@ -64,8 +64,11 @@ class SurveyActivity : AppCompatActivity() {
 
         Firebase.firestoreInstance()
             .collection("token_fcm")
-            .document(Firebase.currentUser().uid)
-            .set(TokenFcm(token, Firebase.currentUser().uid))
+            .add(
+                hashMapOf(
+                    "token" to token
+                )
+            )
             .addOnSuccessListener {
                 Log.d(TAG, "Saved token $token")
             }
@@ -97,10 +100,6 @@ class SurveyActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error addUserFavoriteFood()", e)
             }
-    }
-
-    private fun updateUserData() {
-
     }
 
     private fun setCheckBox() {

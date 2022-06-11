@@ -140,7 +140,7 @@ class ResultActivity : AppCompatActivity() {
 
                 binding.rvRestaurant.adapter = restaurantAdapter
 
-                Log.e("showRecyclerView: ", it.toString())
+                Log.d(TAG, it.toString())
                 showLoading(false)
                 binding.rvRestaurant.isVisible = true
             }

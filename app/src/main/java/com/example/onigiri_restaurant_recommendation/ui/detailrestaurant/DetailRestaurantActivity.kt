@@ -63,7 +63,13 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
         handler = Handler(Looper.myLooper()!!)
         placeId = intent.getStringExtra(PLACE_ID)!!
-        searchtext = intent.getStringExtra(SEARCH_NAME)!!
+
+        searchtext = if(intent.getStringExtra(SEARCH_NAME) == null) {
+            ""
+        } else {
+            intent.getStringExtra(SEARCH_NAME)!!
+        }
+
         Log.e("onCreate: ", placeId)
         detailRestaurantViewModel.setDetailRestaurant(placeId, lat, lon)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
