@@ -1,10 +1,10 @@
-package com.example.onigiri_restaurant_recommendation.remote.local
+package com.example.onigiri_restaurant_recommendation.data.local.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.onigiri_restaurant_recommendation.model.FavoriteRestaurantLocal
+import com.example.onigiri_restaurant_recommendation.data.local.entity.FavoriteRestaurantLocal
 
 @Database(entities = [FavoriteRestaurantLocal::class], version = 1)
 abstract class FavoriteRestaurantDatabase : RoomDatabase() {

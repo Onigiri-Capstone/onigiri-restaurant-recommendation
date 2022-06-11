@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.onigiri_restaurant_recommendation.remote.network.ApiConfig
-import com.example.onigiri_restaurant_recommendation.remote.response.ListRestaurantSearchResponse
-import com.example.onigiri_restaurant_recommendation.remote.response.RestaurantSearchResponse
+import com.example.onigiri_restaurant_recommendation.data.remote.network.ApiConfig
+import com.example.onigiri_restaurant_recommendation.data.remote.response.ListRestaurantSearchResponse
+import com.example.onigiri_restaurant_recommendation.data.remote.response.RestaurantSearchResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

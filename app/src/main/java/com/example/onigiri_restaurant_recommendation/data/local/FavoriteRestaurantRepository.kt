@@ -1,11 +1,12 @@
-package com.example.onigiri_restaurant_recommendation.remote.local
+package com.example.onigiri_restaurant_recommendation.data.local
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.onigiri_restaurant_recommendation.model.FavoriteRestaurantLocal
+import com.example.onigiri_restaurant_recommendation.data.local.room.FavoriteRestaurantDao
+import com.example.onigiri_restaurant_recommendation.data.local.room.FavoriteRestaurantDatabase
+import com.example.onigiri_restaurant_recommendation.data.local.entity.FavoriteRestaurantLocal
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-
 
 class FavoriteRestaurantRepository(application: Application) {
     private val favoriteRestaurantDao: FavoriteRestaurantDao =

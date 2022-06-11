@@ -1,4 +1,4 @@
-package com.example.onigiri_restaurant_recommendation.model
+package com.example.onigiri_restaurant_recommendation.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -27,4 +27,7 @@ data class FavoriteRestaurantLocal(
 
     @ColumnInfo(name = "vicinity")
     val vicinity: String = "",
+
+    @ColumnInfo(name = "distance")
+    val distance: Double = 0.0
 )

@@ -3,7 +3,6 @@ package com.example.onigiri_restaurant_recommendation.ui.bottomsheet
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

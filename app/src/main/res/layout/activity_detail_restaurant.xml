@@ -88,7 +88,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:visibility="gone"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:ignore="ScrollViewCount">
 
@@ -193,21 +192,6 @@
                             android:paddingVertical="4dp"
                             tools:text="@string/phone_call"
                             android:textColor="@drawable/halal_selector_text" />
-
-                        <RadioButton
-                            android:id="@+id/favorite"
-                            style="@style/secondary_text_caption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginStart="15dp"
-                            android:background="@drawable/halal_checkded_selector"
-                            android:button="@null"
-                            android:drawableStart="@drawable/selector_drawable_fav"
-                            android:paddingHorizontal="20dp"
-                            android:paddingVertical="4dp"
-                            tools:text="@string/favorite"
-                            android:textColor="@drawable/halal_selector_text" />
-
 
                         <RadioButton
                             android:id="@+id/share"
@@ -374,49 +358,20 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="top">
+                ?
 
-                    <ImageView
-
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_baseline_photo_library_24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toEndOf="@+id/location_img"
-                        android:drawablePadding="9dp"
-                        android:paddingEnd="30dp"
-                        android:text="@string/photo_library"
-                        app:layout_constraintBottom_toBottomOf="@+id/location_img"
-                        app:layout_constraintStart_toEndOf="@+id/location_img"
-                        app:layout_constraintTop_toTopOf="@+id/location_img"
-                        tools:ignore="RtlSymmetry" />
-
-
-                </LinearLayout>
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/ViewPager2"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="20dp"
-                    android:paddingStart="80dp"
-                    android:paddingEnd="80dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <androidx.viewpager2.widget.ViewPager2-->
+<!--                    android:id="@+id/ViewPager2"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="300dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:paddingStart="80dp"-->
+<!--                    android:paddingEnd="80dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.5"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
             </LinearLayout>

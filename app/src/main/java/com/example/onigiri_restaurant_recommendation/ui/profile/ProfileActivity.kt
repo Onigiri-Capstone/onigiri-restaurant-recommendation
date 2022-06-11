@@ -9,7 +9,7 @@ import android.widget.Button
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityProfileBinding
 import com.example.onigiri_restaurant_recommendation.databinding.DialogQuitBinding
-import com.example.onigiri_restaurant_recommendation.remote.network.Firebase
+import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.ui.auth.login.LoginActivity
 
 class ProfileActivity : AppCompatActivity() {
