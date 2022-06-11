@@ -55,7 +55,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private lateinit var documentUser: DocumentSnapshot
 
     val recommendationAdapter = RecommendationAdapter()
-    private val homeViewModel: HomeViewModel by viewModels()
+//    private val homeViewModel: HomeViewModel by viewModels()
 
     private var lat: Double = 0.0
     private var long: Double = 0.0
@@ -90,17 +90,17 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createLocationRequest()
-        createLocationCallback()
+//        createLocationRequest()
+//        createLocationCallback()
 
-        homeViewModel.location.observe(viewLifecycleOwner) {
-            showGPSControl(it == null)
-            lat = it.lat
-            long = it.long
-        }
+//        homeViewModel.location.observe(viewLifecycleOwner) {
+//            showGPSControl(it == null)
+//            lat = it.lat
+//            long = it.long
+//        }
 
         setOnClickListener()
-        getUserFavorite()
+//        getUserFavorite()
     }
 
     private fun showRecyclerView() {
@@ -116,23 +116,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         }
 
-        homeViewModel.getRecommendation(lat, long, first, second)
-        Log.d(TAG, "Favorite $first and $second")
-        with(binding) {
-            rvRestaurant.layoutManager = LinearLayoutManager(root.context)
-            homeViewModel.listRestaurant.observe(viewLifecycleOwner) {
-                if(it.isEmpty()) {
-                    Log.d(TAG, "List empty")
-                    showEmpty(true)
-                } else {
-                    showEmpty(false)
-                }
-                Log.d(TAG, it.toString())
-                recommendationAdapter.setData(it)
-                binding.rvRestaurant.adapter = recommendationAdapter
-                showLoading(false)
-            }
-        }
+//        homeViewModel.getRecommendation(lat, long, first, second)
+//        Log.d(TAG, "Favorite $first and $second")
+//        with(binding) {
+//            rvRestaurant.layoutManager = LinearLayoutManager(root.context)
+//            homeViewModel.listRestaurant.observe(viewLifecycleOwner) {
+//                if(it.isEmpty()) {
+//                    Log.d(TAG, "List empty")
+//                    showEmpty(true)
+//                } else {
+//                    showEmpty(false)
+//                }
+//                Log.d(TAG, it.toString())
+//                recommendationAdapter.setData(it)
+//                binding.rvRestaurant.adapter = recommendationAdapter
+//                showLoading(false)
+//            }
+//        }
     }
 
     private fun getUserFavorite() {
@@ -204,7 +204,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 locationBottomSheet.show(parentFragmentManager, LocationBottomSheet.TAG)
             }
             R.id.tv_input -> {
-              startActivity(Intent(activity, ResultActivity::class.java))
+                startActivity(Intent(activity, ResultActivity::class.java))
 
             }
             R.id.btn_more -> {
@@ -312,7 +312,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     if (location != null) {
                         showGPSControl(false)
                         location.apply {
-                            homeViewModel.setLocation(latitude, longitude)
+//                            homeViewModel.setLocation(latitude, longitude)
                             address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
                         }
                         Log.d(TAG, "Location is not null")
@@ -374,7 +374,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val latitude = locationResult.locations[0].latitude
                 val longitude = locationResult.locations[0].longitude
                 address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
-                homeViewModel.setLocation(latitude, longitude)
+//                homeViewModel.setLocation(latitude, longitude)
                 Log.d(TAG, "onLocationResult: $latitude, $longitude")
                 stopLocationUpdates()
             }

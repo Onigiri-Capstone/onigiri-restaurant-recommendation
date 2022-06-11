@@ -44,7 +44,7 @@ class CameraPreviewActivity : AppCompatActivity() {
         }
 
 
-            binding.ivFood.setImageBitmap(picture)
+            binding.ivFood.setImageBitmap( Bitmap.createScaledBitmap(picture, 224, 224, true))
 
         binding.btnCancel.setOnClickListener {
             startActivity(Intent(this@CameraPreviewActivity, CameraActivity::class.java))
