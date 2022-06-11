@@ -18,7 +18,7 @@ data class RestaurantSearchResponse (
     val place_id: String="",
     val plus_code: ListPlusCodeResponse,
     val price_level: Int=0,
-    val rating: Double=0.0,
+    val rating: Float=0.0f,
     val reference: String="",
     val scope: String="",
     val types: List<String>,

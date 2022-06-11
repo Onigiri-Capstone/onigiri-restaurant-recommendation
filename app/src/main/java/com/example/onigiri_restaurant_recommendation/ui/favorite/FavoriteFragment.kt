@@ -36,7 +36,7 @@ class FavoriteFragment : Fragment() {
                         place_id = it[i].place_id,
                         name = it[i].name,
                         photo_url = it[i].photo_url,
-                        rating = it[i].rating.toDouble(),
+                        rating = it[i].rating,
                         photos = listOf(),
                         geometry = ListGeometryResponse(
                             ListLocationResponse(it[i].lat, it[i].lng),

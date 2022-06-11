@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityCameraPreviewBinding
 import com.example.onigiri_restaurant_recommendation.ml.Model1654305306
+import com.example.onigiri_restaurant_recommendation.model.BitmapClass
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,16 +28,23 @@ import java.io.File
 class CameraPreviewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCameraPreviewBinding
-
+    private lateinit var picture: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraPreviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val myFile = intent.getSerializableExtra("picture") as File
-        val picture = rotateBitmap(BitmapFactory.decodeFile(myFile.path))
+        val myFile = intent.getSerializableExtra("picture") as File?
+        val myFILE = intent.getParcelableExtra<BitmapClass>(EXTRA_BITMAP) as BitmapClass?
+        if (myFile != null) {
+            picture = rotateBitmap(BitmapFactory.decodeFile(myFile.path))
+        }
+        else if(myFILE != null){
+            picture = rotateBitmap(myFILE.bitmap)
+        }
 
-        binding.ivFood.setImageBitmap(picture)
+
+            binding.ivFood.setImageBitmap(picture)
 
         binding.btnCancel.setOnClickListener {
             startActivity(Intent(this@CameraPreviewActivity, CameraActivity::class.java))
@@ -64,7 +72,7 @@ class CameraPreviewActivity : AppCompatActivity() {
             val foodLabel = foodname.split("_")
             var label = ""
 
-            for (i  in foodLabel) {
+            for (i in foodLabel) {
                 label = i + " "
             }
 
@@ -136,6 +144,10 @@ class CameraPreviewActivity : AppCompatActivity() {
     fun rotateBitmap(bitmap: Bitmap): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(90f)
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width ,bitmap.height, matrix,  true)
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+
+    companion object {
+        const val EXTRA_BITMAP = ""
     }
 }

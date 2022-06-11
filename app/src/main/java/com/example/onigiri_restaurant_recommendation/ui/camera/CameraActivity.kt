@@ -47,6 +47,9 @@ class CameraActivity : AppCompatActivity() {
         checkCameraPermission()
 
         binding.btnCapture.setOnClickListener { takePhoto() }
+        binding.btnGalery.setOnClickListener {
+            startActivity(Intent(this@CameraActivity, GaleryActivity::class.java))
+        }
     }
 
     private fun checkCameraPermission() {
@@ -144,6 +147,7 @@ class CameraActivity : AppCompatActivity() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val intent = Intent(this@CameraActivity, CameraPreviewActivity::class.java)
+                    Log.e("onImageSaved: ",photoFile.path )
                     intent.putExtra("picture", photoFile)
                     startActivity(intent)
                 }
