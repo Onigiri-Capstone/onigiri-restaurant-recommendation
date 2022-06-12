@@ -62,13 +62,8 @@ class CategoryActivity : AppCompatActivity() {
             lat = it.lat
             lon = it.long
             Log.d(TAG, "Location: $lat, $lon")
+            foodCategory(intent.getStringExtra(CATEGORY_NAME))
         }
-
-        getLastLocation()
-
-        foodCategory(intent.getStringExtra(CATEGORY_NAME))
-
-        showRecyclerView()
     }
 
     private fun setToolbar(categoryName: String?) {
@@ -119,6 +114,8 @@ class CategoryActivity : AppCompatActivity() {
             "Thai" -> foodcategory = "thailand"
         }
         categoryViewModel.setSearchRestaurant(foodcategory, lat, lon)
+        Log.d(TAG, "masukin $lat $lon")
+        showRecyclerView()
     }
 
     private fun showLoading(state: Boolean) {
