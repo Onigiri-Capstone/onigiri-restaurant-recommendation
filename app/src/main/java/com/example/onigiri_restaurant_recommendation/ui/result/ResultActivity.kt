@@ -286,7 +286,7 @@ class ResultActivity : AppCompatActivity() {
                             IntentSenderRequest.Builder(exception.resolution).build()
                         )
                     } catch (sendEx: IntentSender.SendIntentException) {
-                        Toast.makeText(this@ResultActivity, sendEx.message, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this@ResultActivity, sendEx.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
