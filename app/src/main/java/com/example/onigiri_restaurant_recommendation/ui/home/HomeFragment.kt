@@ -313,7 +313,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         showGPSControl(false)
                         location.apply {
                             homeViewModel.setLocation(latitude, longitude)
-                            address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
+                            try {
+                                address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
+                            } catch (e: Throwable) {
+                                Log.d(TAG, "getLastLocation(): address failed to fetch")
+                            }
                         }
                         Log.d(TAG, "Location is not null")
                     } else {
@@ -373,7 +377,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
             override fun onLocationResult(locationResult: LocationResult) {
                 val latitude = locationResult.locations[0].latitude
                 val longitude = locationResult.locations[0].longitude
-                address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
+                try {
+                    address = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0)
+                } catch (e: Throwable) {
+                    Log.d(TAG, "createLocationCallback(): address failed to fetch")
+                }
                 homeViewModel.setLocation(latitude, longitude)
                 Log.d(TAG, "onLocationResult: $latitude, $longitude")
                 stopLocationUpdates()

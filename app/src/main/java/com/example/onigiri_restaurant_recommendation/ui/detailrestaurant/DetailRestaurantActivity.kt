@@ -1,4 +1,5 @@
 package com.example.onigiri_restaurant_recommendation.ui.detailrestaurant
+
 import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -32,6 +33,7 @@ import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteViewMod
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
+
 class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailRestaurantBinding
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
@@ -59,7 +61,6 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))[FavoriteViewModel::class.java]
-
 
         handler = Handler(Looper.myLooper()!!)
         placeId = intent.getStringExtra(PLACE_ID)!!
