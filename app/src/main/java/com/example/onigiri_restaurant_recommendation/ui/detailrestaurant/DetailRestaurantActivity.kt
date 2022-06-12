@@ -99,8 +99,8 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                         deleteFavoriteUser(it)
                     }
                 }
-                latRestaurant = it.geometry.location.lat
-                lonRestaurant = it.geometry.location.lng
+                latRestaurant = it.geometry?.location?.lat!!
+                lonRestaurant = it.geometry.location.lng!!
                 Log.e("setDetailRestaurant: ", it.toString())
                 dataRestaurant = "${it.name} ${it.formatted_address} ${it.url} "
                 tvName.text = it.name
@@ -169,8 +169,8 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 name = it.name,
                 photo_url = photo,
                 rating = it.rating,
-                lat = it.geometry.location.lat,
-                lng = it.geometry.location.lng,
+                lat = it.geometry?.location?.lat,
+                lng = it.geometry?.location?.lng,
                 vicinity = it.formatted_address
             )
 
@@ -194,8 +194,8 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 name = it.name,
                 photo_url = it.photo_url[0],
                 rating = it.rating,
-                lat = it.geometry.location.lat,
-                lng = it.geometry.location.lng,
+                lat = it.geometry?.location?.lat,
+                lng = it.geometry?.location?.lng,
                 vicinity = it.formatted_address
             )
 

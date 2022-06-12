@@ -2,12 +2,15 @@ package com.example.onigiri_restaurant_recommendation.ui.camera
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -18,12 +21,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityCameraBinding
+import com.example.onigiri_restaurant_recommendation.model.BitmapClass
 import com.example.onigiri_restaurant_recommendation.util.checkPermission
 import com.example.onigiri_restaurant_recommendation.util.createFile
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class CameraActivity : AppCompatActivity() {
+    private lateinit var bitmap: Bitmap
 
     private lateinit var binding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
@@ -47,9 +52,7 @@ class CameraActivity : AppCompatActivity() {
         checkCameraPermission()
 
         binding.btnCapture.setOnClickListener { takePhoto() }
-        binding.btnGalery.setOnClickListener {
-            startActivity(Intent(this@CameraActivity, GaleryActivity::class.java))
-        }
+        binding.btnGalery.setOnClickListener { startGallery() }
     }
 
     private fun checkCameraPermission() {
@@ -147,7 +150,7 @@ class CameraActivity : AppCompatActivity() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val intent = Intent(this@CameraActivity, CameraPreviewActivity::class.java)
-                    Log.e("onImageSaved: ",photoFile.path )
+                    Log.e("onImageSaved: ", photoFile.path)
                     intent.putExtra("picture", photoFile)
                     startActivity(intent)
                 }
@@ -163,5 +166,30 @@ class CameraActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+
+            //data image
+            bitmap =
+                BitmapFactory.decodeStream(contentResolver.openInputStream(selectedImg))
+            bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
+            val intent = Intent(this@CameraActivity, CameraPreviewActivity::class.java)
+            intent.putExtra(CameraPreviewActivity.EXTRA_BITMAP, BitmapClass(bitmap))
+            startActivity(intent)
+
+        }
+    }
+
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
     }
 }

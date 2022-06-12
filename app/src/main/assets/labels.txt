@@ -32,7 +32,7 @@ sushi
 tamagoyaki
 tempura
 tiramisu
-tofu
+tahu
 tteokbokki
 udon
 yakitori

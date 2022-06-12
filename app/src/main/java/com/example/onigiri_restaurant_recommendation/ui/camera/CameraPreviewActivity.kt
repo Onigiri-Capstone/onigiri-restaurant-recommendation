@@ -69,12 +69,12 @@ class CameraPreviewActivity : AppCompatActivity() {
                     }
                 }
             }
-            val foodLabel = foodname.split("_")
-            var label = ""
-
-            for (i in foodLabel) {
-                label = i + " "
-            }
+            val foodLabel = foodname.replace("_"," ")
+            var label = foodLabel
+//
+//            for (i in foodLabel) {
+//                label = i + " "
+//            }
 
             val intent = Intent(this@CameraPreviewActivity, ResultActivity::class.java)
             intent.putExtra(ResultActivity.FOOD_NAME, label)
@@ -117,7 +117,7 @@ class CameraPreviewActivity : AppCompatActivity() {
         Log.e("outputGenerator: ", max.toString())
         Log.e("outputGenerator: ", outputFeature0.floatArray.size.toString())
         Log.e("outputGenerator: ", outputFeature0.dataType.toString())
-        Log.e("outputGenerator: ", outputFeature0.dataType.toString())
+        Log.e("outputGenerator: ", labels[max])
 //        tvOutput.text = labels[max]
         model.close()
 
