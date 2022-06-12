@@ -69,15 +69,9 @@ class CameraPreviewActivity : AppCompatActivity() {
                     }
                 }
             }
-            val foodLabel = foodname.replace("_"," ")
-            var label = ""
-//
-            for (i in foodLabel) {
-                label = i + " "
-            }
 
             val intent = Intent(this@CameraPreviewActivity, ResultActivity::class.java)
-            intent.putExtra(ResultActivity.FOOD_NAME, label)
+            intent.putExtra(ResultActivity.FOOD_NAME, foodname)
             startActivity(intent)
             finish()
         }

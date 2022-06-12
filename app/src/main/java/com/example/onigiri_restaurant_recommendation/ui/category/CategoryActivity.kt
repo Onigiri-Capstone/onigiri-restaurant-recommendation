@@ -48,8 +48,6 @@ class CategoryActivity : AppCompatActivity() {
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val categoryName = foodCategory(intent.getStringExtra(CATEGORY_NAME))
-
         binding.swiperefreshcategory.setOnRefreshListener {
             binding.swiperefreshcategory.isRefreshing = false
         }
@@ -60,9 +58,12 @@ class CategoryActivity : AppCompatActivity() {
         createLocationRequest()
         createLocationCallback()
 
-        getLastLocation()
-
-        showRecyclerView()
+        homeViewModel.location.observe(this) {
+            lat = it.lat
+            lon = it.long
+            Log.d(TAG, "Location: $lat, $lon")
+            foodCategory(intent.getStringExtra(CATEGORY_NAME))
+        }
     }
 
     private fun setToolbar(categoryName: String?) {
@@ -113,6 +114,8 @@ class CategoryActivity : AppCompatActivity() {
             "Thai" -> foodcategory = "thailand"
         }
         categoryViewModel.setSearchRestaurant(foodcategory, lat, lon)
+        Log.d(TAG, "masukin $lat $lon")
+        showRecyclerView()
     }
 
     private fun showLoading(state: Boolean) {
