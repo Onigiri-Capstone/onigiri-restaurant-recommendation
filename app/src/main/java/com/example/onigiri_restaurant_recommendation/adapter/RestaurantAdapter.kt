@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.onigiri_restaurant_recommendation.data.local.entity.FavoriteRestaurantLocal
 import com.example.onigiri_restaurant_recommendation.data.remote.response.RestaurantSearchResponse
@@ -62,10 +63,11 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.MyViewHolder>()
                     rateRestaurant.text = rating.toString()
                     distance.text = "${"%.1f".format(range)} KM"
 
-                    Glide.with(itemView)
-                        .load(photo_url)
-                        .transform(RoundedCorners(20))
-                        .into(ivRestaurant)
+                    if(photo_url != "Tidak Tersedia") {
+                        Glide.with(itemView)
+                            .load(photo_url)
+                            .into(ivRestaurant)
+                    }
 
                     itemView.setOnClickListener {
 

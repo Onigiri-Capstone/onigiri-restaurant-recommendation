@@ -1,5 +1,6 @@
 package com.example.onigiri_restaurant_recommendation.data.remote.network
 
+import com.example.onigiri_restaurant_recommendation.data.remote.response.ErrorListRestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.data.remote.response.ListRestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.data.remote.response.ListRestaurantSearchResponse
 import com.example.onigiri_restaurant_recommendation.data.remote.response.RestaurantRecommendationResponse
@@ -21,6 +22,13 @@ interface ApiService {
         @Query("lat") lat: Double,
         @Query("long") long: Double
     ): Call<ListRestaurantDetailResponse>
+
+    @GET("main/details")
+    fun getErrorDetailRestaurant(
+        @Query("id") id: String,
+        @Query("lat") lat: Double,
+        @Query("long") long: Double
+    ): Call<ErrorListRestaurantDetailResponse>
 
     @GET("users/recommendation")
     fun getRestaurantRecommendation(

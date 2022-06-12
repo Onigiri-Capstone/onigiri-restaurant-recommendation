@@ -26,7 +26,7 @@ class HomeViewModel : ViewModel() {
     val listRestaurant: LiveData<List<RestaurantRecommendationResponse>> = _listRestaurant
 
     fun getRecommendation(lat: Double, long: Double, first: String, second: String) {
-        val client = ApiConfig.provideApiService().getRestaurantRecommendation(lat, long, first, second)
+        val client = ApiConfig.provideApiService().getRestaurantRecommendation(-6.175392, 106.827153, first, second)
         client.enqueue(object : Callback<List<RestaurantRecommendationResponse>> {
             override fun onResponse(
                 call: Call<List<RestaurantRecommendationResponse>>,

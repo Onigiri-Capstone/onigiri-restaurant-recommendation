@@ -1,4 +1,5 @@
 package com.example.onigiri_restaurant_recommendation.ui.detailrestaurant
+
 import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -32,6 +33,7 @@ import com.example.onigiri_restaurant_recommendation.ui.favorite.FavoriteViewMod
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
+
 class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailRestaurantBinding
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
@@ -60,10 +62,15 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 
         favoriteViewModel = ViewModelProvider(this, FavoriteRestaurantViewModelFactory(application))[FavoriteViewModel::class.java]
 
-
         handler = Handler(Looper.myLooper()!!)
         placeId = intent.getStringExtra(PLACE_ID)!!
-        searchtext = intent.getStringExtra(SEARCH_NAME)!!
+
+        searchtext = if(intent.getStringExtra(SEARCH_NAME) == null) {
+            ""
+        } else {
+            intent.getStringExtra(SEARCH_NAME)!!
+        }
+
         Log.e("onCreate: ", placeId)
         detailRestaurantViewModel.setDetailRestaurant(placeId, lat, lon)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -98,9 +105,11 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 dataRestaurant = "${it.name} ${it.formatted_address} ${it.url} "
                 tvName.text = it.name
 
-                Glide.with(applicationContext)
-                    .load(it.photo_url[0])
-                    .into(imgRestaurant)
+                if(it.photo_url.isNotEmpty()){
+                    Glide.with(applicationContext)
+                        .load(it.photo_url[0])
+                        .into(imgRestaurant)
+                }
 
                 rateRestaurant.text = it.rating.toString()
                 idTvRatingBar.rating = it.rating
@@ -113,7 +122,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 layoutpluscode.visibility = View.VISIBLE
                 pluscode.text = it?.plus_code?.compound_code
                 pluscode.setOnClickListener(this@DetailRestaurantActivity)
-                if (!it.opening_hours.weekday_text.isNullOrEmpty()){
+                if (!it.opening_hours?.weekday_text.isNullOrEmpty()){
                     layoutopratinghours.visibility = View.VISIBLE
                     operatingHour.text = opratioanlhour(it?.opening_hours?.weekday_text)
                 }
@@ -150,11 +159,15 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
     private fun insertFavoriteUser(it: RestaurantDetailResponse) {
+        var photo =""
+        if(it.photo_url.isNotEmpty()) {
+            photo = it.photo_url[0]
+        }
         val favRestaurant =
             FavoriteRestaurantLocal(
                 place_id = it.place_id,
                 name = it.name,
-                photo_url = it.photo_url[0],
+                photo_url = photo,
                 rating = it.rating,
                 lat = it.geometry.location.lat,
                 lng = it.geometry.location.lng,
