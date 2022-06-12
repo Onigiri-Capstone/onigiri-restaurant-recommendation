@@ -140,7 +140,6 @@ class ResultActivity : AppCompatActivity() {
 
                 binding.rvRestaurant.adapter = restaurantAdapter
 
-                Log.d(TAG, it.toString())
                 showLoading(false)
                 binding.rvRestaurant.isVisible = true
             }

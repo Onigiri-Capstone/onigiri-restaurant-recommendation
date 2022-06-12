@@ -17,7 +17,7 @@ data class RestaurantDetailResponse(
     val icon_mask_base_uri: String,
     val international_phone_number: String,
     val name: String,
-    val opening_hours: ListOpeningHoursReponse,
+    val opening_hours: ListOpeningHoursReponse?,
     val url: String,
     val photo_url: List<String>,
     val photos: List<ListPhotosResponse>,

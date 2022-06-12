@@ -51,6 +51,15 @@ class SurveyActivity : AppCompatActivity() {
                     updateUserProfile()
                     addUserFavoriteFood(checkString[0], checkString[1], checkString[2])
 
+                    Firebase.firebaseMessaging().subscribeToTopic("onigiri")
+                        .addOnCompleteListener { task ->
+                            var msg = "Subscribed"
+                            if (!task.isSuccessful) {
+                                msg = "Subscribe failed"
+                            }
+                            Log.d(TAG, msg)
+                        }
+
                     startActivity(Intent(this@SurveyActivity, MainActivity::class.java))
                     finish()
                 } else {
