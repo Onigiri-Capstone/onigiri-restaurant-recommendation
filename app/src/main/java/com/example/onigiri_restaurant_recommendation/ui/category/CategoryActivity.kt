@@ -32,7 +32,8 @@ class CategoryActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
-
+    private var lon: Double = 0.0
+    private var lat: Double = 0.0
 
     private val categoryViewModel: CategoryViewModel by viewModels()
     private val homeViewModel: HomeViewModel by viewModels()
@@ -40,15 +41,12 @@ class CategoryActivity : AppCompatActivity() {
     companion object {
         const val CATEGORY_NAME = "Category"
         const val TAG = "CategoryActivity"
-        const val LAT = 0
-        const val LNG = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val categoryName = foodCategory(intent.getStringExtra(CATEGORY_NAME))
 
         binding.swiperefreshcategory.setOnRefreshListener {
             binding.swiperefreshcategory.isRefreshing = false
@@ -60,9 +58,12 @@ class CategoryActivity : AppCompatActivity() {
         createLocationRequest()
         createLocationCallback()
 
-        getLastLocation()
-
-        showRecyclerView()
+        homeViewModel.location.observe(this) {
+            lat = it.lat
+            lon = it.long
+            Log.d(TAG, "Location: $lat, $lon")
+            foodCategory(intent.getStringExtra(CATEGORY_NAME))
+        }
     }
 
     private fun setToolbar(categoryName: String?) {
@@ -112,7 +113,9 @@ class CategoryActivity : AppCompatActivity() {
             "Middle East" -> foodcategory = "makanan_timur"
             "Thai" -> foodcategory = "thailand"
         }
-//        categoryViewModel.setSearchRestaurant(foodcategory, lat, lon)
+        categoryViewModel.setSearchRestaurant(foodcategory, lat, lon)
+        Log.d(TAG, "masukin $lat $lon")
+        showRecyclerView()
     }
 
     private fun showLoading(state: Boolean) {
