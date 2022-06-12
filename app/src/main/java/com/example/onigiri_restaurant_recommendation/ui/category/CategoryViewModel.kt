@@ -16,7 +16,7 @@ class CategoryViewModel: ViewModel() {
     val listRestaurant: LiveData<List<RestaurantSearchResponse>> = _listRestaurant
 
     fun setSearchRestaurant(search: String, lat: Double, long: Double) {
-        val client = ApiConfig.provideApiService().searchRestaurant(search, -6.1466133333334, 106.87937666666667)
+        val client = ApiConfig.provideApiService().searchRestaurant(search, lat, long)
         client.enqueue(object : Callback<ListRestaurantSearchResponse> {
             override fun onResponse(
                 call: Call<ListRestaurantSearchResponse>,
