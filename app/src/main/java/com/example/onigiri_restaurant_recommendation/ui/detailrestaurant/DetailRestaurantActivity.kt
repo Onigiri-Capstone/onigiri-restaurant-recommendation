@@ -130,7 +130,7 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
 //                favorite.setOnClickListener(this@DetailRestaurantActivity)
                 phoneCall.setOnClickListener(this@DetailRestaurantActivity)
                 setUpTransformer()
-
+                
                 myModelArrayList = ArrayList()
                 for (posisition in 1 until it.photo_url.size){
                     myModelArrayList.add(ImageModel(it.photo_url[posisition]) )
