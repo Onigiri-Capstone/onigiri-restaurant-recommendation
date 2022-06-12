@@ -188,11 +188,15 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     }
     private fun deleteFavoriteUser(it: RestaurantDetailResponse) {
 
+        var photo = ""
+        if(it.photo_url.isNotEmpty()) {
+            photo = it.photo_url[0]
+        }
         val favRestaurant =
             FavoriteRestaurantLocal(
                 place_id = it.place_id,
                 name = it.name,
-                photo_url = it.photo_url[0],
+                photo_url = photo,
                 rating = it.rating,
                 lat = it.geometry?.location?.lat,
                 lng = it.geometry?.location?.lng,

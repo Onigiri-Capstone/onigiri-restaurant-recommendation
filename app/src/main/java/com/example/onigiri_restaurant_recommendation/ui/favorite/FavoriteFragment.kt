@@ -37,9 +37,9 @@ class FavoriteFragment : Fragment() {
                     Log.d("TAG", "favoriteUserList loop: ${it[i]}")
                     val user = RestaurantSearchResponse(
                         place_id = it[i].place_id,
-                        name = it[i].name,
-                        photo_url = it[i].photo_url,
-                        rating = it[i].rating,
+                        name = it[i].name!!,
+                        photo_url = it[i].photo_url!!,
+                        rating = it[i].rating!!,
 
                         photos = listOf(),
                         geometry = ListGeometryResponse(
@@ -49,7 +49,7 @@ class FavoriteFragment : Fragment() {
                                 ListSouthwestResponse(0.0, 0.0)
                             )
                         ),
-                        vicinity = it[i].vicinity,
+                        vicinity = it[i].vicinity!!,
                         plus_code = ListPlusCodeResponse("", ""),
                         types = listOf(),
                         opening_hours = ListOpeningHoursReponse(true, listOf(), listOf())
