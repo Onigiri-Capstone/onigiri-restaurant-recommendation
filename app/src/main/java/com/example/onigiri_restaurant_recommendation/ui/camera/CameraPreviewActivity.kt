@@ -40,7 +40,7 @@ class CameraPreviewActivity : AppCompatActivity() {
             picture = rotateBitmap(BitmapFactory.decodeFile(myFile.path))
         }
         else if(myFILE != null){
-            picture = rotateBitmap(myFILE.bitmap)
+            picture = myFILE.bitmap
         }
 
 
@@ -71,7 +71,7 @@ class CameraPreviewActivity : AppCompatActivity() {
             }
 
             val intent = Intent(this@CameraPreviewActivity, ResultActivity::class.java)
-            intent.putExtra(ResultActivity.FOOD_NAME, foodname)
+            intent.putExtra(ResultActivity.FOOD_NAME, foodname.replace("_"," "))
             startActivity(intent)
             finish()
         }

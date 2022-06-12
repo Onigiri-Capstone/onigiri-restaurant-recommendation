@@ -56,7 +56,13 @@ class ResultActivity : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setFoodLabel()
+        homeViewModel.location.observe(this@ResultActivity) {
+            lat = it.lat
+            lon = it.long
+            Log.d(TAG, "Location: $lat, $lon")
+            setFoodLabel(lat,lon)
+        }
+
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -68,12 +74,6 @@ class ResultActivity : AppCompatActivity() {
 
         createLocationRequest()
         createLocationCallback()
-
-        homeViewModel.location.observe(this@ResultActivity) {
-            lat = it.lat
-            lon = it.long
-            Log.d(TAG, "Location: $lat, $lon")
-        }
 
 
         setToolbar()
@@ -92,7 +92,7 @@ class ResultActivity : AppCompatActivity() {
         }
 
 
-        setFoodLabel()
+
     }
 
     private fun setOnClickListener() {
@@ -136,9 +136,7 @@ class ResultActivity : AppCompatActivity() {
             resultViewModel.getSearchRestaurant().observe(this@ResultActivity) {
                 showEmpty(it.isEmpty())
                 restaurantAdapter.setData(it)
-
                 binding.rvRestaurant.adapter = restaurantAdapter
-
                 showLoading(false)
                 binding.rvRestaurant.isVisible = true
             }
@@ -174,7 +172,7 @@ class ResultActivity : AppCompatActivity() {
         startActivity(Intent(this@ResultActivity, MainActivity::class.java))
     }
 
-    private fun setFoodLabel(): Boolean {
+    private fun setFoodLabel(lat: Double, lon: Double): Boolean {
         val restaurantName = intent?.getStringExtra(FOOD_NAME)
         if (restaurantName.isNullOrEmpty()) {
             binding.search.requestFocus()
@@ -182,8 +180,8 @@ class ResultActivity : AppCompatActivity() {
 
             binding.search.setQuery(restaurantName, true)
 
-            resultViewModel.setSearchRestaurant(restaurantName, lat, lon)
-            Log.e("onQueryTextSubmit: ", restaurantName)
+            resultViewModel.setSearchRestaurant(restaurantName, lat,lon)
+            Log.e("onQueryTextSubmit: ", "$restaurantName ${lon} ${lon} ")
 
             showRecyclerView()
         }
