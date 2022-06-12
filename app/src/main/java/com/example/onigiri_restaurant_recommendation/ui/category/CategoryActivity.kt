@@ -48,8 +48,6 @@ class CategoryActivity : AppCompatActivity() {
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val categoryName = foodCategory(intent.getStringExtra(CATEGORY_NAME))
-
         binding.swiperefreshcategory.setOnRefreshListener {
             binding.swiperefreshcategory.isRefreshing = false
         }
@@ -60,7 +58,15 @@ class CategoryActivity : AppCompatActivity() {
         createLocationRequest()
         createLocationCallback()
 
+        homeViewModel.location.observe(this) {
+            lat = it.lat
+            lon = it.long
+            Log.d(TAG, "Location: $lat, $lon")
+        }
+
         getLastLocation()
+
+        foodCategory(intent.getStringExtra(CATEGORY_NAME))
 
         showRecyclerView()
     }
