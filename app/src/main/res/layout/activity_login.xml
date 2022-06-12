@@ -33,6 +33,7 @@
 
         <com.example.onigiri_restaurant_recommendation.ui.customview.MyEditText
             android:id="@+id/et_email"
+
             style="@style/field_text_input"
             android:paddingHorizontal="15dp"
             android:drawableStart="@drawable/ic_email"
@@ -51,6 +52,7 @@
             android:importantForAutofill="no" />
 
         <Button
+            android:clickable="false"
             style="@style/button_green"
             android:id="@+id/btn_login"
             android:layout_marginTop="39dp"
