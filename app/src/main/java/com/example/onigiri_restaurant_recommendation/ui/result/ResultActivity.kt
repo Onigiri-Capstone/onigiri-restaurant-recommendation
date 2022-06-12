@@ -64,7 +64,6 @@ class ResultActivity : AppCompatActivity() {
         favoriteViewModel.getAllFavoriteRestaurant()
             .observe(this@ResultActivity) {
                 restaurantAdapter.setDataRestaurantFav(it)
-
             }
 
         createLocationRequest()
