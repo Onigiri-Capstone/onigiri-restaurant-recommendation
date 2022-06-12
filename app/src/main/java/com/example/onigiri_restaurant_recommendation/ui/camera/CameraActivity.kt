@@ -181,6 +181,7 @@ class CameraActivity : AppCompatActivity() {
             val intent = Intent(this@CameraActivity, CameraPreviewActivity::class.java)
             intent.putExtra(CameraPreviewActivity.EXTRA_BITMAP, BitmapClass(bitmap))
             startActivity(intent)
+            onDestroy()
 
         }
     }

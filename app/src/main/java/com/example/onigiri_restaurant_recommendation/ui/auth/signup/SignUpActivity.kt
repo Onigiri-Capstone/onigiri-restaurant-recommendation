@@ -2,6 +2,7 @@ package com.example.onigiri_restaurant_recommendation.ui.auth.signup
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.onigiri_restaurant_recommendation.databinding.ActivitySignUpBinding
 import com.example.onigiri_restaurant_recommendation.model.User
@@ -12,9 +13,10 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
 
-    companion object{
+    companion object {
         private const val TAG = "SignupActivity"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -34,13 +36,18 @@ class SignUpActivity : AppCompatActivity() {
             val name = etName.text.toString()
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
+            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+                val user = User(name, email, password)
 
-            val user = User(name, email, password)
+                startActivity(
+                    Intent(this@SignUpActivity, SurveyActivity::class.java)
+                        .putExtra(SurveyActivity.DATA_USER, user)
+                )
+            } else {
+                Toast.makeText(this@SignUpActivity, "Input email and password", Toast.LENGTH_SHORT)
+                    .show()
+            }
 
-            startActivity(
-                Intent(this@SignUpActivity, SurveyActivity::class.java)
-                    .putExtra(SurveyActivity.DATA_USER, user)
-            )
         }
     }
 }
