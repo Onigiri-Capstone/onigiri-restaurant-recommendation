@@ -189,7 +189,7 @@ class CategoryActivity : AppCompatActivity() {
                             IntentSenderRequest.Builder(exception.resolution).build()
                         )
                     } catch (sendEx: IntentSender.SendIntentException) {
-                        Toast.makeText(this, sendEx.message, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this, sendEx.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
