@@ -28,6 +28,7 @@ class CategoryActivity : AppCompatActivity() {
 
     companion object {
         const val CATEGORY_NAME = "Category"
+        const val TAG = "CategoryActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +46,6 @@ class CategoryActivity : AppCompatActivity() {
         getMyLastLocation()
 
 //        categoryName?.let { categoryViewModel.setSearchRestaurant(it, lat, lon) }
-        categoryViewModel.setSearchRestaurant(categoryName, lat, lon)
 
         showRecyclerView()
     }
@@ -118,7 +118,7 @@ class CategoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun foodCategory(category: String?): String {
+    private fun foodCategory(category: String?){
         var foodcategory = ""
         when(category){
             "Sweets" -> foodcategory = "permen"
@@ -136,7 +136,7 @@ class CategoryActivity : AppCompatActivity() {
             "Middle East" -> foodcategory = "makanan_timur"
             "Thai" -> foodcategory = "thailand"
         }
-        return foodcategory
+        categoryViewModel.setSearchRestaurant(foodcategory, lat, lon)
     }
 
     private fun showLoading(state: Boolean) {
