@@ -137,6 +137,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     showEmpty(false)
                 }
                 Log.d(TAG, it.toString())
+                Log.e(TAG, "showRecyclerView: $it", )
                 recommendationAdapter.setData(it)
                 binding.rvRestaurant.adapter = recommendationAdapter
                 showLoading(false)
