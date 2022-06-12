@@ -216,6 +216,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 startActivity(
                     Intent(activity, CategoryActivity::class.java)
                         .putExtra(CategoryActivity.CATEGORY_NAME, resources.getString(R.string.sweets))
+                        .putExtra()
                 )
             }
             R.id.btn_rice -> {
