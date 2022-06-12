@@ -22,6 +22,7 @@ import com.example.onigiri_restaurant_recommendation.databinding.ActivityCategor
 import com.example.onigiri_restaurant_recommendation.ui.bottomsheet.NoLocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.home.HomeViewModel
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
+import com.example.onigiri_restaurant_recommendation.util.distanceInKm
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import java.util.concurrent.TimeUnit
@@ -61,6 +62,13 @@ class CategoryActivity : AppCompatActivity() {
         homeViewModel.location.observe(this) {
             lat = it.lat
             lon = it.long
+
+            if(distanceInKm(lat, lon, -6.420387913713653, 106.80529182196888) > 50) {
+                lat = -6.175392
+                lon = 106.827153
+                Toast.makeText(this, "You are outside JABODETABEK. Default location is on (Central Jakarta)", Toast.LENGTH_SHORT).show()
+            }
+
             Log.d(TAG, "Location: $lat, $lon")
             foodCategory(intent.getStringExtra(CATEGORY_NAME))
         }
