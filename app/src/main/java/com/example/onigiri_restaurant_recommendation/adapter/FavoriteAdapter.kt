@@ -39,10 +39,11 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.MyViewHolder>() {
                     AddressRestaurant.text = vicinity
                     rateRestaurant.text = rating.toString()
 
-                    Glide.with(itemView)
-                        .load(photo_url)
-                        .transform(RoundedCorners(20))
-                        .into(ivRestaurant)
+                    if(photo_url != "") {
+                        Glide.with(itemView)
+                            .load(photo_url)
+                            .into(ivRestaurant)
+                    }
 
                     itemView.setOnClickListener {
 

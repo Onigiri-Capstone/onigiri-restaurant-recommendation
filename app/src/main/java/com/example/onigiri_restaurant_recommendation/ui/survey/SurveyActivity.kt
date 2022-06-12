@@ -51,6 +51,15 @@ class SurveyActivity : AppCompatActivity() {
                     updateUserProfile()
                     addUserFavoriteFood(checkString[0], checkString[1], checkString[2])
 
+                    Firebase.firebaseMessaging().subscribeToTopic("onigiri")
+                        .addOnCompleteListener { task ->
+                            var msg = "Subscribed"
+                            if (!task.isSuccessful) {
+                                msg = "Subscribe failed"
+                            }
+                            Log.d(TAG, msg)
+                        }
+
                     startActivity(Intent(this@SurveyActivity, MainActivity::class.java))
                     finish()
                 } else {
@@ -64,8 +73,11 @@ class SurveyActivity : AppCompatActivity() {
 
         Firebase.firestoreInstance()
             .collection("token_fcm")
-            .document(Firebase.currentUser().uid)
-            .set(TokenFcm(token, Firebase.currentUser().uid))
+            .add(
+                hashMapOf(
+                    "token" to token
+                )
+            )
             .addOnSuccessListener {
                 Log.d(TAG, "Saved token $token")
             }
@@ -97,10 +109,6 @@ class SurveyActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error addUserFavoriteFood()", e)
             }
-    }
-
-    private fun updateUserData() {
-
     }
 
     private fun setCheckBox() {

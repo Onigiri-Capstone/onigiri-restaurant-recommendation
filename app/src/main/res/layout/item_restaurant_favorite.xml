@@ -26,10 +26,9 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_margin="13dp"
-                android:background="@drawable/photorestaurant"
+                android:src="@drawable/photorestaurant"
                 android:clipToOutline="true"
-                android:contentDescription="@string/foto_deskripsi"
-                android:src="@drawable/dummy_photo" />
+                android:contentDescription="@string/foto_deskripsi" />
 
 
             <ImageView

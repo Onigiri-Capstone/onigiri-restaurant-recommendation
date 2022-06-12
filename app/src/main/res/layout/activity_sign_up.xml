@@ -73,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="39dp"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@+id/form_field"
         app:layout_constraintStart_toStartOf="@+id/form_field"

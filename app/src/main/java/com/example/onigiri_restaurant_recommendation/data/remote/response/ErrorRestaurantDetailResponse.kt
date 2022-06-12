@@ -1,11 +1,11 @@
 package com.example.onigiri_restaurant_recommendation.data.remote.response
 
-data class ListRestaurantDetailResponse(
-    val results: RestaurantDetailResponse,
+data class ErrorListRestaurantDetailResponse(
+    val results: ErrorRestaurantDetailResponse,
     val app_reviews: List<String>
 )
 
-data class RestaurantDetailResponse(
+data class ErrorRestaurantDetailResponse(
     val address_components: List<ListAddressComponentsResponse>,
     val adr_address: String,
     val business_status: String,
@@ -17,9 +17,9 @@ data class RestaurantDetailResponse(
     val icon_mask_base_uri: String,
     val international_phone_number: String,
     val name: String,
-    val opening_hours: ListOpeningHoursReponse?,
+    val opening_hours: ListOpeningHoursReponse,
     val url: String,
-    val photo_url: List<String>,
+    val photo_url: String,
     val photos: List<ListPhotosResponse>,
     val place_id: String,
     val plus_code: ListPlusCodeResponse,
@@ -27,10 +27,4 @@ data class RestaurantDetailResponse(
     val rating: Float,
     val reference: String,
     val range: Double = 0.0
-)
-
-data class ListAddressComponentsResponse(
-    val long_name: String,
-    val short_name: String,
-    val types: List<String>
 )
