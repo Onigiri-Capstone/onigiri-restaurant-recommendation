@@ -48,9 +48,7 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val categoryName = foodCategory(intent.getStringExtra(CATEGORY_NAME))
-
 
         binding.swiperefreshcategory.setOnRefreshListener {
             binding.swiperefreshcategory.isRefreshing = false
@@ -114,7 +112,7 @@ class CategoryActivity : AppCompatActivity() {
             "Middle East" -> foodcategory = "makanan_timur"
             "Thai" -> foodcategory = "thailand"
         }
-        categoryViewModel.setSearchRestaurant(foodcategory, lat, lon)
+//        categoryViewModel.setSearchRestaurant(foodcategory, lat, lon)
     }
 
     private fun showLoading(state: Boolean) {
