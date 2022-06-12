@@ -116,7 +116,7 @@
         android:button="@null"
         android:paddingHorizontal="20dp"
         android:paddingVertical="4dp"
-        android:text="@string/meatball"
+        android:text="@string/coffee"
         android:textColor="@drawable/selector_radiobutton_survey_text"
         app:layout_constraintBottom_toBottomOf="@+id/id_chicken"
 
