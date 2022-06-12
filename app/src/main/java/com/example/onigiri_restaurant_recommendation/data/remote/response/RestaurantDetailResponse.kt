@@ -11,7 +11,7 @@ data class RestaurantDetailResponse(
     val business_status: String,
     val formatted_address: String,
     val formatted_phone_number: String,
-    val geometry: ListGeometryResponse,
+    val geometry: ListGeometryResponse?,
     val icon: String,
     val icon_background_color: String,
     val icon_mask_base_uri: String,

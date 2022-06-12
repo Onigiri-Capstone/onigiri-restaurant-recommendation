@@ -28,13 +28,13 @@ data class RestaurantSearchResponse (
 )
 
 data class ListGeometryResponse(
-    val location: ListLocationResponse,
+    val location: ListLocationResponse?,
     val viewport: ListViewportResponse,
 )
 
 data class ListLocationResponse(
-    val lat: Double=0.0,
-    val lng: Double=0.0
+    val lat: Double?=0.0,
+    val lng: Double?=0.0
 )
 
 data class ListViewportResponse(
