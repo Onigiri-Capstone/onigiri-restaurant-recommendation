@@ -47,6 +47,7 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val categoryName = foodCategory(intent.getStringExtra(CATEGORY_NAME))
 
         binding.swiperefreshcategory.setOnRefreshListener {
