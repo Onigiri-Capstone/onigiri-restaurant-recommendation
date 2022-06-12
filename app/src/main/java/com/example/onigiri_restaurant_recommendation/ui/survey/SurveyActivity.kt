@@ -64,6 +64,8 @@ class SurveyActivity : AppCompatActivity() {
                     finish()
                 } else {
                     Toast.makeText(this@SurveyActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@SurveyActivity, SignUpActivity::class.java))
+                    finish()
                 }
             }
     }

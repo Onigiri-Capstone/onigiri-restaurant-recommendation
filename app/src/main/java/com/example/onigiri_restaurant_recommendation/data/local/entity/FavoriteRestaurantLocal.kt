@@ -1,5 +1,6 @@
 package com.example.onigiri_restaurant_recommendation.data.local.entity
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,8 +8,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "favorite_restaurant")
 data class FavoriteRestaurantLocal(
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "place_id")
-    val place_id: String? = "",
+    val place_id: String = "",
 
     @ColumnInfo(name = "name")
     val name: String? = "",
