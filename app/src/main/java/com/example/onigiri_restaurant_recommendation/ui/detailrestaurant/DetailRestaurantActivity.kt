@@ -23,7 +23,6 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.bumptech.glide.Glide
 import com.example.onigiri_restaurant_recommendation.R
-import com.example.onigiri_restaurant_recommendation.adapter.ViewPagerImageSlide
 import com.example.onigiri_restaurant_recommendation.data.local.entity.FavoriteRestaurantLocal
 import com.example.onigiri_restaurant_recommendation.data.remote.response.RestaurantDetailResponse
 import com.example.onigiri_restaurant_recommendation.databinding.ActivityDetailRestaurantBinding
@@ -50,8 +49,6 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
     private var phonenumberRestaurant: String = ""
     private var latRestaurant: Double = 0.0
     private var dataRestaurant: String = ""
-
-//    private lateinit var  viewPager2: ViewPager2
 
     private var isFavorite = false
 
@@ -146,14 +143,6 @@ class DetailRestaurantActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 Log.e("setDetailRestaurant: ", myModelArrayList.size.toString())
 
-                val viewPagerAdapter = ViewPagerImageSlide()
-                viewPagerAdapter.setData(myModelArrayList)
-
-//                viewPager2.adapter = viewPagerAdapter
-//                viewPager2.offscreenPageLimit = 3
-//                viewPager2.clipToPadding = false
-//                viewPager2.clipChildren = false
-//                viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
                 nestedlist.visibility = View.VISIBLE
             }
         }

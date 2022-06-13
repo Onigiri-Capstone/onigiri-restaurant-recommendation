@@ -36,6 +36,7 @@ import com.example.onigiri_restaurant_recommendation.ui.home.category.CategoryBo
 import com.example.onigiri_restaurant_recommendation.ui.home.location.LocationBottomSheet
 import com.example.onigiri_restaurant_recommendation.ui.profile.ProfileActivity
 import com.example.onigiri_restaurant_recommendation.ui.result.ResultActivity
+import com.example.onigiri_restaurant_recommendation.util.distanceInKm
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.firebase.firestore.DocumentSnapshot
@@ -98,6 +99,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
             showGPSControl(it == null)
             lat = it.lat
             long = it.long
+
+            if(distanceInKm(lat, long, -6.420387913713653, 106.80529182196888) > 50) {
+                lat = -6.175392
+                long = 106.827153
+                address = geocoder.getFromLocation(lat, long, 1)[0].getAddressLine(0)
+                Toast.makeText(requireContext(), "You are outside JABODETABEK. Default location is on (Central Jakarta)", Toast.LENGTH_SHORT).show()
+            }
         }
 
         setOnClickListener()
@@ -267,8 +275,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     // ---------------------------------------LOCATION ---------------------------------------------
-
-
     private val REQUIRED_LOCATION_PERMISSIONS
             = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
