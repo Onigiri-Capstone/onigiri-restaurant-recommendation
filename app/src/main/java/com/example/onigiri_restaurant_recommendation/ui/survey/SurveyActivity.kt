@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.example.onigiri_restaurant_recommendation.R
 import com.example.onigiri_restaurant_recommendation.data.remote.network.Firebase
 import com.example.onigiri_restaurant_recommendation.databinding.ActivitySurveyBinding
@@ -44,34 +45,8 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun submitData() {
-        if (checkString.size == 0) {
-            val category = arrayOf("sweets",
-                "rice",
-                "meatball",
-                "chicken",
-                "drinks",
-                "coffee",
-                "seafood",
-                "western",
-                "noodle",
-                "chinese",
-                "indian",
-                "japanese",
-                "middle_east",
-                "thai",
-                "more")
-            for (i in 0..2){
-                checkString.add(category.random())
-            }
-        }
-        else if(checkString.size == 1){
-            checkString.add(checkString[0])
-            checkString.add(checkString[0])
-        }
-        else if(checkString.size == 2){
-            checkString.add(checkString[0])
-        }
-        else if(checkString.size == 3){
+        if(checkString.size == 3){
+            binding.loading.isVisible = true
             Firebase.authInstance().createUserWithEmailAndPassword(user.email, user.password)
                 .addOnCompleteListener(this@SurveyActivity) { task ->
                     if (task.isSuccessful) {
@@ -88,6 +63,7 @@ class SurveyActivity : AppCompatActivity() {
                                 Log.d(TAG, msg)
                             }
 
+                        binding.loading.isVisible = false
                         startActivity(Intent(this@SurveyActivity, MainActivity::class.java))
                         finish()
                     } else {
@@ -96,6 +72,8 @@ class SurveyActivity : AppCompatActivity() {
                         finish()
                     }
                 }
+        } else {
+            Toast.makeText(this, "Choose three and submit.", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -104,19 +82,21 @@ class SurveyActivity : AppCompatActivity() {
     private fun addTokenFcm() {
         val token = MessagingService().getToken()
 
-        Firebase.firestoreInstance()
-            .collection("token_fcm")
-            .add(
-                hashMapOf(
-                    "token" to token
+        if(token != "" || !token.isNullOrEmpty()) {
+            Firebase.firestoreInstance()
+                .collection("token_fcm")
+                .add(
+                    hashMapOf(
+                        "token" to token
+                    )
                 )
-            )
-            .addOnSuccessListener {
-                Log.d(TAG, "Saved token $token")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error", e)
-            }
+                .addOnSuccessListener {
+                    Log.d(TAG, "Saved token $token")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error", e)
+                }
+        }
     }
 
     private fun updateUserProfile() {
