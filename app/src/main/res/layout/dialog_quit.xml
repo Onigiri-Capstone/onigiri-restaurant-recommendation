@@ -12,11 +12,10 @@
         android:orientation="vertical"
         android:paddingVertical="30dp"
         android:paddingHorizontal="20dp"
-        android:background="@drawable/bg_dialog_quit"
+        style="@style/quit_dialog"
         >
 
         <TextView
-
             style="@style/list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
