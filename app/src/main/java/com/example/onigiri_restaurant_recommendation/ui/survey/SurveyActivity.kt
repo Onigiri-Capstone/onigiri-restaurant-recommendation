@@ -44,30 +44,61 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun submitData() {
-        Firebase.authInstance().createUserWithEmailAndPassword(user.email, user.password)
-            .addOnCompleteListener(this@SurveyActivity) { task ->
-                if (task.isSuccessful) {
-                    addTokenFcm()
-                    updateUserProfile()
-                    addUserFavoriteFood(checkString[0], checkString[1], checkString[2])
-
-                    Firebase.firebaseMessaging().subscribeToTopic("onigiri")
-                        .addOnCompleteListener { task ->
-                            var msg = "Subscribed"
-                            if (!task.isSuccessful) {
-                                msg = "Subscribe failed"
-                            }
-                            Log.d(TAG, msg)
-                        }
-
-                    startActivity(Intent(this@SurveyActivity, MainActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(this@SurveyActivity, "Failed", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@SurveyActivity, SignUpActivity::class.java))
-                    finish()
-                }
+        if (checkString.size == 0) {
+            val category = arrayOf("sweets",
+                "rice",
+                "meatball",
+                "chicken",
+                "drinks",
+                "coffee",
+                "seafood",
+                "western",
+                "noodle",
+                "chinese",
+                "indian",
+                "japanese",
+                "middle_east",
+                "thai",
+                "more")
+            for (i in 0..2){
+                checkString.add(category.random())
             }
+        }
+        else if(checkString.size == 1){
+            checkString.add(checkString[0])
+            checkString.add(checkString[0])
+        }
+        else if(checkString.size == 2){
+            checkString.add(checkString[0])
+        }
+        else if(checkString.size == 3){
+            Firebase.authInstance().createUserWithEmailAndPassword(user.email, user.password)
+                .addOnCompleteListener(this@SurveyActivity) { task ->
+                    if (task.isSuccessful) {
+                        addTokenFcm()
+                        updateUserProfile()
+                        addUserFavoriteFood(checkString[0], checkString[1], checkString[2])
+
+                        Firebase.firebaseMessaging().subscribeToTopic("onigiri")
+                            .addOnCompleteListener { task ->
+                                var msg = "Subscribed"
+                                if (!task.isSuccessful) {
+                                    msg = "Subscribe failed"
+                                }
+                                Log.d(TAG, msg)
+                            }
+
+                        startActivity(Intent(this@SurveyActivity, MainActivity::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(this@SurveyActivity, "Failed", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@SurveyActivity, SignUpActivity::class.java))
+                        finish()
+                    }
+                }
+        }
+
+
     }
 
     private fun addTokenFcm() {
@@ -100,7 +131,7 @@ class SurveyActivity : AppCompatActivity() {
         }
     }
 
-    private fun addUserFavoriteFood(first: String, second: String, third: String){
+    private fun addUserFavoriteFood(first: String, second: String, third: String) {
         Firebase.firestoreInstance()
             .collection("user_favorite")
             .document(Firebase.currentUser().uid)
